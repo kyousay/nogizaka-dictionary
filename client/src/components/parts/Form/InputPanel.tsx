@@ -55,16 +55,16 @@ interface props {
 const InputPanel: React.FC<props> = (props) => {
     
     const tab = props.tabIndex === 1 ? 2 : 1 
-    const initialValue = {name: '', password: ''}
+    const initialValue = {email: '', password: ''}
     const [value, setValue] = useState(initialValue)
     const submitForm = (e: React.FormEvent<HTMLElement>) => {
         e.preventDefault()
         const data = {
-            name: value.name,
+            email: value.email,
             password: value.password
         }
 
-        if(data.name === '' || data.password === '') {
+        if(data.email === '' || data.password === '') {
             alert('正しい値を入力してください。')
             return
         }else{
@@ -81,7 +81,7 @@ const InputPanel: React.FC<props> = (props) => {
     return(
         <>
             <Form onSubmit={(e : React.FormEvent<HTMLElement>) => submitForm(e)}>
-                <Input type="text" id = "form_name" placeholder="名前" value={value.name} onChange={(e) => setValue({...value, name: e.target.value})}/>
+                <Input type="text" id = "form_name" placeholder="メールアドレス" value={value.email} onChange={(e) => setValue({...value, email: e.target.value})}/>
                 <Input type="password" id ="form_password" placeholder="パスワード" value={value.password} onChange={(e) => setValue({...value, password: e.target.value})}/>
                 <Button styled={{width:"280",bgColor:"#bf87c1"}}>{props.main}</Button>
             </Form>

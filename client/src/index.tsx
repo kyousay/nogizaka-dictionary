@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'
 import { sagaMiddleWare } from './store'
-import rootSaga from './api/saga' 
+import rootSaga from './saga' 
 import App from './components/App';
 import store from './store'
 import { Provider } from 'react-redux'

@@ -2,7 +2,7 @@ import * as ActionType from './loginConstants'
 import { userState } from '../../reducers/userReducer'
 
 export interface DataType {
-    name: string
+    email: string
     password: string
 }
 

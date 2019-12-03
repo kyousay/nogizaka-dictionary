@@ -1,7 +1,8 @@
 "use strict"
 
 const mongoose = require("mongoose"),
-{ Schema } = require("mongoose");
+{ Schema } = require("mongoose"),
+passportLocalMongoose = require("passport-local-mongoose");
 
 let userSchema = new Schema(
     {
@@ -31,6 +32,10 @@ let userSchema = new Schema(
         },
 },{
     timestamps: true
+});
+
+userSchema.plugin(passportLocalMongoose, {
+    usernameField: "email"
 })
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("User", userSchema);

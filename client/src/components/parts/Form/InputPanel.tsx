@@ -81,8 +81,8 @@ const InputPanel: React.FC<props> = (props) => {
     return(
         <>
             <Form onSubmit={(e : React.FormEvent<HTMLElement>) => submitForm(e)}>
-                <Input type="text" id = "form_name" placeholder="メールアドレス" value={value.email} onChange={(e) => setValue({...value, email: e.target.value})}/>
-                <Input type="password" id ="form_password" placeholder="パスワード" value={value.password} onChange={(e) => setValue({...value, password: e.target.value})}/>
+                <Input type="email"  placeholder="メールアドレス" value={value.email} onChange={(e) => setValue({...value, email: e.target.value}) } />
+                <Input type="password" placeholder="パスワード" value={value.password} onChange={(e) => setValue({...value, password: e.target.value})} />
                 <Button styled={{width:"280",bgColor:"#bf87c1"}}>{props.main}</Button>
             </Form>
                 <Navi>または</Navi>

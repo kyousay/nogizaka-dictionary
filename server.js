@@ -46,7 +46,7 @@ app.use(
 app.use(express.json());
 
 //version 1.5.0からcookie-parserいらない
-app.use(cookieParser("nogizaka46_2011_8_21"));
+// app.use(cookieParser("nogizaka46_2011_8_21"));
 app.use(
     expressSession({
         secret:"nogizaka46_2011_8_21",

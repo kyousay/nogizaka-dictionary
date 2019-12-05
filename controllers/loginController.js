@@ -2,18 +2,18 @@
 
 const User = require("../models/user"),
     passport = require("passport"),
+    httpStatus = require("http-status-codes"),
     jsonWebToken = require("jsonwebtoken"),
     getUserParams = body => {
         return {
             email: body.email,
             password: body.password
         }
-    }
+    };
 
 module.exports = {
     create: (req, res, next) => {
         let newUser = new User(getUserParams(req.body));
-        console.log(req.body.password)
         User.register(newUser, req.body.password, (e, user) => {
             if(user) {
                 console.log(user)
@@ -25,28 +25,60 @@ module.exports = {
         })
     },
     login: (req, res, next) => {
-        passport.authenticate("local", (err, user) => {
+        passport.authenticate("local", (errors, user) => {
             if(user) {
                 let signedToken = jsonWebToken.sign(
                     {
                         data: user._id,
-                        exp: new Data().setData(new Data().getData() + 1)
+                        exp: new Date().setDate(new Date().getDate() + 1)
                     },
                     "secret_encoding_passphrase"
                 );
                 res.json({
                     success: true,
-                    message: "ログインに成功しました。",
                     token: signedToken,
-                    user: user,
+                    message: "ユーザー登録に成功しました。"
                 });
             } else {
                 res.json({
                     success: false,
-                    message: "Could not authenticate user."
+                    message: "ユーザー登録に失敗しました。"
                 });
-        }
+            }
         })(req, res, next);
     },
-    
-}
+    verifyJWT: (req, res, next) => {
+        let token = req.body.token;
+        console.log(token);
+        if(token) {
+            jsonWebToken.verify(token, "secret_encoding_passphrase", (error, payload) => {
+                if(payload) {
+                    User.findById(payload.data).then(user => {
+                        if(user) {
+                            next();
+                        } else {
+                            res.status(httpStatus.FORBIDDEN).json({
+                                error: true,
+                                message: "No User account found."
+                            });
+                        }
+                    });
+                } else {
+                    res.status(httpStatus.UNAUTHORIZED).json({
+                        error: true,
+                        message: "Cannot verify API token."
+                    });
+                    next();
+                }
+            });
+        } else {
+            res.status(httpStatus.UNAUTHORIZED).json({
+                error: true,
+                message: "Provide Token"
+            });
+        }
+    },
+    test: (req, res, next) => {
+        res.send("testクリア");
+    }
+};

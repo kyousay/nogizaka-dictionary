@@ -26,6 +26,9 @@ function* loginAcount(action : ReturnType<typeof LoginAction.loginAcount>) {
         const api = loginUserFactory();
         const result = yield call(api, userData, '/login/authenticate');
         alert(result.data.message);
+        console.log(result.data.token);
+        const result2 = yield call(api, result.data, '/login/test');
+        console.log(result2);
     }catch(error) {
         yield alert(error);
     }

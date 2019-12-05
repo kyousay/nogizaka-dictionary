@@ -26,10 +26,10 @@ let userSchema = new Schema(
             lowercase: true,
             unique: true,
         },
-        password: {
-            type: String,
-            required: true,
-        },
+        // password: {
+        //     type: String,
+        //     required: true,
+        // },
 },{
     timestamps: true
 });

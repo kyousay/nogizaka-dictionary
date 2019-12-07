@@ -48,8 +48,8 @@ module.exports = {
         })(req, res, next);
     },
     verifyJWT: (req, res, next) => {
-        let token = req.body.token;
-        console.log(token);
+        let token = req.headers.authorization;
+        console.log(token)
         if(token) {
             jsonWebToken.verify(token, "secret_encoding_passphrase", (error, payload) => {
                 if(payload) {
@@ -59,14 +59,14 @@ module.exports = {
                         } else {
                             res.status(httpStatus.FORBIDDEN).json({
                                 error: true,
-                                message: "No User account found."
+                                message: "ユーザーが見つかりません。新しくアカウントを作成するか、パスワードのリセットをお願いします。"
                             });
                         }
                     });
                 } else {
                     res.status(httpStatus.UNAUTHORIZED).json({
                         error: true,
-                        message: "Cannot verify API token."
+                        message: "正しく認証が行えませんでした。恐れ入りますが、ログインからやり直してください。"
                     });
                     next();
                 }

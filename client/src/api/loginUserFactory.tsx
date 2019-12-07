@@ -1,17 +1,21 @@
 import axios from 'axios'
 import {DataType} from '../actions/login/loginActions'
 
-interface ApiConfig {
+interface apiConfig {
     baseURL: string,
     timeout: number
 }
 
-const DEFAULT_API_CONFIG: ApiConfig = {
+interface optionConfig {
+    [k : string] : string | object | undefined
+}
+
+const DEFAULT_API_CONFIG: apiConfig = {
     baseURL: 'http://localhost:3000',
     timeout: 7000,
 };
 
-export const loginUserFactory = (optionConfig? : ApiConfig) => {
+export const loginUserFactory = (optionConfig? : optionConfig) => {
     const config = {
         ...DEFAULT_API_CONFIG,
         ...optionConfig

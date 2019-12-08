@@ -31,6 +31,7 @@
     "mongodb": "^3.3.5",
     "mongoose": "^5.7.12",
     "passport": "^0.4.0",
-    "passport-local-mongoose": "^5.0.1"
+    "passport-local-mongoose": "^5.0.1",
+    "styled-media-query": "^2.1.2"
   }
 }

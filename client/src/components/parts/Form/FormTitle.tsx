@@ -1,11 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
-
-const Title = styled.p`
-    font-size: 1.8rem;
-    text-align: center;
-    padding: 18px 0;
-`
+import Paragragh  from '../../Atoms/Paragragh'
+import Wrapper from '../../Atoms/Wrapper'
 
 interface props {
     title : string
@@ -13,7 +8,9 @@ interface props {
 
 const FormTitle: React.FC<props> = (props) => {
     return(
-        <Title> {props.title}</Title>
+        <Wrapper styled={{padding: '18px 0'}}>
+            <Paragragh styled={{font_size: '1.8rem', text_align: 'center'}}>{props.title}</Paragragh>
+        </Wrapper>
     )
 }
 

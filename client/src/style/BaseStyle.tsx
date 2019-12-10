@@ -10,8 +10,12 @@ export const GlobalStyle = createGlobalStyle`
     html * {
         box-sizing: border-box;
     }
-    a:hover {
+    a:hover, button:hover {
         opacity: 0.8;
         cursor: pointer;
+    }
+
+    a, button, input {
+        outline: none;
     }
 `

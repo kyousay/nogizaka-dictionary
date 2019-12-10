@@ -12,17 +12,19 @@ const InputElement = styled.input<InputProps>`
     font-size: ${props => props.styled.font_size};    
 `
 
-const InputPresenter: React.FC<InputProps> = ({
-    type = 'text',
-    name,
-    style,
-    ...props
-}) => {
-    return <InputElement type={type} name={name} styled={style} {...props}/>
-}
+/*
+<input>要素を直に作らないで関数のreturnにする理由は、
+・型制約をつけやすいこと
+
+*/
+
 
 const Input: React.FC<InputProps> = ({
+    type = 'text',
+    name,
+    styled,
+    onChange,
     ...props
-}) => <InputPresenter {...props}/>
+}) => <InputElement type={type} name={name} styled={styled} onChange={onChange} {...props}/>
 
 export default Input

@@ -1,35 +1,14 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import { Button } from '../../../style/commonStyle'
+import Button from '../../Atoms/Button'
 import { DataType } from '../../../actions/login/loginActions'
 import Input  from '../../Atoms/Input'
 import Wrapper from '../../Atoms/Wrapper'
+import {Line} from '../../Atoms/Paragragh'
 
 const Form = styled.form`
     margin: 0 auto;
     text-align: center;
-`
-
-const Navi = styled.p`
-    position: relative;
-    overflow: hidden;
-    width: 280px;
-    margin: 10px auto 0;
-    text-align: center;
-    font-size: 1.2rem;
-    &::before,&::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        width: 300px;
-        border-bottom: 1px solid #ccd0d5;
-    }
-    &::before {
-        right: 63%;
-    }
-    &::after {
-        left: 63%;
-    }
 `
 
 const inputStyle = {
@@ -77,17 +56,21 @@ const InputPanel: React.FC<props> = (props) => {
     return(
         <>
             <Form onSubmit={(e : React.FormEvent<HTMLElement>) => submitForm(e)}>
-                <Wrapper styled={{margin:'5px'}}>
+                <Wrapper styled={{margin:'10px'}}>
                     <Input type="email" placeholder="メールアドレス" value={value.email} onChange={(e : React.ChangeEvent<HTMLInputElement>) => setValue({...value, email:e.target.value})}
                     styled={{...inputStyle}} />
                 </Wrapper>
-                <Wrapper styled={{margin:'5px'}}>
+                <Wrapper styled={{margin:'10px'}}>
                     <Input type="password" placeholder="パスワード" value={value.password} onChange={(e : React.ChangeEvent<HTMLInputElement>) => setValue({...value, password:e.target.value})}
                     styled={{...inputStyle}} />
                 </Wrapper>
-                <Button styled={{width:"280",bgColor:"#bf87c1"}}>{props.main}</Button>
+                <Wrapper styled={{margin: '10px'}}>
+                    <Button styled={{width:"280px",bgColor:"#bf87c1",padding: '10px 0px'}}>{props.main}</Button>
+                </Wrapper>
             </Form>
-                <Navi>または</Navi>
+                <Wrapper styled={{margin: '20px 0 0 0', display:'flex', justify_content: 'center'}}>
+                    <Line styled={{lineWidth:'100px', wrapperWidth: '280px',text_align: 'center',font_size: '1.2rem'}}>または</Line>
+                </Wrapper>
                 <Wrapper styled={{margin: '20px', display:'flex', justify_content:'center', align_items: 'center'}}>
                     <Button styled={{bgColor:"#42b72a",padding: "10px 28px"}} onClick={() => props.tabChange(tab)}>{props.sub}</Button>
                 </Wrapper>

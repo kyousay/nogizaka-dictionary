@@ -1,5 +1,5 @@
 import React from 'react'
-import Paragragh  from '../../Atoms/Paragragh'
+import {Paragragh}  from '../../Atoms/Paragragh'
 import Wrapper from '../../Atoms/Wrapper'
 
 interface props {

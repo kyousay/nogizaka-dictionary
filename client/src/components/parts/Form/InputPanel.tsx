@@ -4,7 +4,7 @@ import Button from '../../Atoms/Button'
 import { DataType } from '../../../actions/login/loginActions'
 import Input  from '../../Atoms/Input'
 import Wrapper from '../../Atoms/Wrapper'
-import {Line} from '../../Atoms/Paragragh'
+import {LineParagragh} from '../../Atoms/Paragragh'
 
 const Form = styled.form`
     margin: 0 auto;
@@ -69,7 +69,7 @@ const InputPanel: React.FC<props> = (props) => {
                 </Wrapper>
             </Form>
                 <Wrapper styled={{margin: '20px 0 0 0', display:'flex', justify_content: 'center'}}>
-                    <Line styled={{lineWidth:'100px', wrapperWidth: '280px',text_align: 'center',font_size: '1.2rem'}}>または</Line>
+                    <LineParagragh styled={{lineWidth:'100px', wrapperWidth: '280px',text_align: 'center',font_size: '1.2rem'}}>または</LineParagragh>
                 </Wrapper>
                 <Wrapper styled={{margin: '20px', display:'flex', justify_content:'center', align_items: 'center'}}>
                     <Button styled={{bgColor:"#42b72a",padding: "10px 28px"}} onClick={() => props.tabChange(tab)}>{props.sub}</Button>

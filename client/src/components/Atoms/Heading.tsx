@@ -33,7 +33,9 @@ const HeadingContainer: React.FC<HeadingProps> = ({
 }
 
 const Heading: React.FC<HeadingProps> = props => (
-    <HeadingContainer presenter={(presenterProps : HeadingProps) => <HeadingPresenter {...presenterProps} />} {...props} />
+    <HeadingContainer 
+        presenter={(presenterProps : HeadingProps) => <HeadingPresenter {...presenterProps} />} 
+    {...props} />
 )
 
 export default Heading;

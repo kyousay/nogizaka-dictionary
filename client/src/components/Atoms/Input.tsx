@@ -1,8 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+import { ChangeEvent } from 'react';
+
+interface InputStyle {
+    [k: string] : string
+}
 
 interface InputProps {
-    [k: string]: any
+    styled: InputStyle
+    type: string
+    placeholder? : string
+    value?: string 
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 const InputElement = styled.input<InputProps>`
@@ -12,19 +21,10 @@ const InputElement = styled.input<InputProps>`
     font-size: ${props => props.styled.font_size};    
 `
 
-/*
-<input>要素を直に作らないで関数のreturnにする理由は、
-・型制約をつけやすいこと
-
-*/
-
-
-const Input: React.FC<InputProps> = ({
-    type = 'text',
-    name,
+const Input : React.FC<InputProps> = ({
     styled,
+    type,
     onChange,
-    ...props
-}) => <InputElement type={type} name={name} styled={styled} onChange={onChange} {...props}/>
+}) => <InputElement type={type} styled={styled} onChange={onChange}/>
 
 export default Input

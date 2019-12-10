@@ -1,8 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
+interface ElementStyle {
+    [k : string] : string
+}
+
 interface ParagraghProps {
-    [k : string] : any
+    styled: ElementStyle
+    children: String
 }
 
 const ParagraghElement = styled.p<ParagraghProps>`
@@ -11,7 +16,7 @@ const ParagraghElement = styled.p<ParagraghProps>`
     text-align: ${props => props.styled.text_align};
 `
 
-const AttachLineWrapper = styled.div<ParagraghProps>`
+const LineParagraghElement = styled(ParagraghElement)<ParagraghProps>`
         position: relative;
         overflow: hidden;
         width: ${props => props.styled.wrapperWidth};
@@ -31,14 +36,12 @@ const AttachLineWrapper = styled.div<ParagraghProps>`
         }
     `
 
-const Paragragh : React.FC<ParagraghProps> = ({
+export const Paragragh : React.FC<ParagraghProps> = ({
     styled,
     children,
-    ...props
-}) => <ParagraghElement styled={styled} {...props}>{children}</ParagraghElement>
+}) => <ParagraghElement styled={styled}>{children}</ParagraghElement>
 
-const ParagraghWidthLineFactory : React.FC<ParagraghProps> = props =>  <AttachLineWrapper {...props}>{props.presenter({...props})}</AttachLineWrapper>
-
-export const Line : React.FC<ParagraghProps> = props => ParagraghWidthLineFactory({presenter: Paragragh, ...props});
-
-export default Paragragh
+export const LineParagragh : React.FC<ParagraghProps> = ({
+    styled,
+    children,
+}) => <LineParagraghElement styled={styled}>{children}</LineParagraghElement>

@@ -16,8 +16,7 @@ const WrapperElement = styled.div<WrapperProps>`
 const Wrapper: React.FC<WrapperProps> = ({
     children,
     styled,
-    ...props
-}) => <WrapperElement styled={styled} {...props}>{children}</WrapperElement>
+}) => <WrapperElement styled={styled}>{children}</WrapperElement>
 
 
 export default Wrapper

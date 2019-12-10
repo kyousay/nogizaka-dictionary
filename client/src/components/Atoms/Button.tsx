@@ -1,11 +1,14 @@
-import React from 'react'
 import styled from 'styled-components'
 
-interface ButtonProps {
-    [k: string]: any
+interface ButtonStyle {
+    [k: string] : string
 }
 
-const ButtonElement = styled.button<ButtonProps>`
+interface ButtonProps {
+    styled: ButtonStyle
+}
+
+const Button = styled.button<ButtonProps>`
     font-size: 1.4rem;
     color: #fff;
     border: none;
@@ -14,12 +17,5 @@ const ButtonElement = styled.button<ButtonProps>`
     padding: ${props => props.styled.padding};
     background-color: ${props => props.styled.bgColor};
 `
-
-const Button : React.FC<ButtonProps> = ({
-    children,
-    onClick,
-    styled,
-    ...props
-}) => <ButtonElement styled={styled} onClick={onClick} {...props}>{children}</ButtonElement>
 
 export default Button

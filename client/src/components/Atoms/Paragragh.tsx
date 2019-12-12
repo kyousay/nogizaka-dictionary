@@ -1,22 +1,27 @@
-import React from 'react'
 import styled from 'styled-components'
 
-interface ElementStyle {
-    [k : string] : string
+interface Style {
+    font_size: '1.2rem' | '1.4rem' | '1.8rem' 
+    font_weight: 'normal' | 'bold'
+    text_align: 'left' | 'right' | 'center'
+    wrapperWidth: string
+    lineWidth: string
 }
+
+type ElementStyle = Partial<Style>
 
 interface ParagraghProps {
     styled: ElementStyle
-    children: String
+    children: string
 }
 
-const ParagraghElement = styled.p<ParagraghProps>`
+export const Paragragh = styled.p<ParagraghProps>`
     font-size: ${props => props.styled.font_size};
     font-weight: ${props => props.styled.font_weight};
     text-align: ${props => props.styled.text_align};
 `
 
-const LineParagraghElement = styled(ParagraghElement)<ParagraghProps>`
+export const LineParagragh = styled(Paragragh)<ParagraghProps>`
         position: relative;
         overflow: hidden;
         width: ${props => props.styled.wrapperWidth};
@@ -35,13 +40,3 @@ const LineParagraghElement = styled(ParagraghElement)<ParagraghProps>`
             left: 63%;
         }
     `
-
-export const Paragragh : React.FC<ParagraghProps> = ({
-    styled,
-    children,
-}) => <ParagraghElement styled={styled}>{children}</ParagraghElement>
-
-export const LineParagragh : React.FC<ParagraghProps> = ({
-    styled,
-    children,
-}) => <LineParagraghElement styled={styled}>{children}</LineParagraghElement>

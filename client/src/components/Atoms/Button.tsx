@@ -1,11 +1,15 @@
 import styled from 'styled-components'
 
 interface ButtonStyle {
-    [k: string] : string
+    width: string
+    padding: string
+    bgColor: string
 }
 
+type ElementStyle = Partial<ButtonStyle>
+
 interface ButtonProps {
-    styled: ButtonStyle
+    styled: ElementStyle
 }
 
 const Button = styled.button<ButtonProps>`

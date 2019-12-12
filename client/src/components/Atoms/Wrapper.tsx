@@ -1,8 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 
+interface Style {
+    display: 'flex' | 'block'
+    align_items: 'center' | 'left' | 'right'
+    justify_content: 'center' | 'space-between' | 'space-around'
+    padding: string
+    margin: string
+}
+
+type ElementStyle = Partial<Style>
+
 interface WrapperProps {
-    [k : string] : any
+    styled: ElementStyle
+    children: React.ReactNode | string
 }
 
 const WrapperElement = styled.div<WrapperProps>`

@@ -1,30 +1,23 @@
-import React from 'react'
 import styled from 'styled-components'
-import { ChangeEvent } from 'react';
 
-interface InputStyle {
-    [k: string] : string
+interface Style {
+    width: string
+    padding: string
+    border: string
+    font_size: '1.2rem' | '1.4rem' | '1.8rem'
 }
+
+type ElementStyle = Partial<Style>
 
 interface InputProps {
-    styled: InputStyle
-    type: string
-    placeholder? : string
-    value?: string 
-    onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+    styled: ElementStyle
 }
 
-const InputElement = styled.input<InputProps>`
+const Input = styled.input<InputProps>`
     width: ${props => props.styled.width};
     padding: ${props => props.styled.padding};
     border: ${props => props.styled.border};
     font-size: ${props => props.styled.font_size};    
 `
-
-const Input : React.FC<InputProps> = ({
-    styled,
-    type,
-    onChange,
-}) => <InputElement type={type} styled={styled} onChange={onChange}/>
 
 export default Input

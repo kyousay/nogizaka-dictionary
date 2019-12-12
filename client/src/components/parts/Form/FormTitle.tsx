@@ -1,5 +1,5 @@
 import React from 'react'
-import {Paragragh}  from '../../Atoms/Paragragh'
+import {Heading3}  from '../../Atoms/Heading'
 import Wrapper from '../../Atoms/Wrapper'
 
 interface props {
@@ -9,7 +9,7 @@ interface props {
 const FormTitle: React.FC<props> = (props) => {
     return(
         <Wrapper styled={{padding: '18px 0'}}>
-            <Paragragh styled={{font_size: '1.8rem', text_align: 'center'}}>{props.title}</Paragragh>
+            <Heading3 styled={{font_size: '1.8rem', text_align: 'center'}}>{props.title}</Heading3>
         </Wrapper>
     )
 }

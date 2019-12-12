@@ -1,41 +1,24 @@
-import React from 'react'
-// import styled from 'styled-components'
+import styled from 'styled-components'
 
-//作成途中
-//使用禁止
+interface HeadingStyle {
+    font_size: '1.2rem' | '1.4rem' | '1.8rem'
+    font_weight: 'normal' | 'bold'
+    text_align: 'left' | 'right' | 'center'
+}
 
+type ElementStyle = Partial<HeadingStyle>
 
 interface HeadingProps {
-    [k : string] : any
+    styled: ElementStyle
 }
 
-//extendするためのbaseスタイル
+const Heading = styled.h1<HeadingProps>`
+    font-size: ${props => props.styled.font_size};
+    font-weight: ${props => props.styled.font_weight};
+    text-align: ${props => props.styled.text_align};
+`
 
-const HeadingPresenter: React.FC<HeadingProps> = ({
-    tag: Tag,
-    children,
-    ...props
-}) => {
-    console.log(Tag);
-    return <Tag {...props}>{children}</Tag>
-}
-
-const HeadingContainer: React.FC<HeadingProps> = ({
-    presenter,
-    level,
-    children,
-    ...props
-}) => {
-    //levelが4以上、１未満にならないようにするための記述
-    level = Math.max(1, Math.min(4, level));
-    const tag = `Heading${level}`
-    return presenter({tag, children, ...props})
-}
-
-const Heading: React.FC<HeadingProps> = props => (
-    <HeadingContainer 
-        presenter={(presenterProps : HeadingProps) => <HeadingPresenter {...presenterProps} />} 
-    {...props} />
-)
-
-export default Heading;
+export const Heading1 = Heading.withComponent('h1');
+export const Heading2 = Heading.withComponent('h2');
+export const Heading3 = Heading.withComponent('h3');
+export const Heading4 = Heading.withComponent('h4');

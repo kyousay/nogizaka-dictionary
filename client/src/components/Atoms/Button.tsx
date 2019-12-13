@@ -7,7 +7,7 @@ interface ButtonStyle {
     bgColor: string
 }
 
-type ElementStyle = Partial<ButtonStyle & Pick<constantStyle, 'font_size'>>
+export type ElementStyle = Partial<ButtonStyle & Pick<constantStyle, 'font_size'>>
 
 interface ButtonProps {
     styled: ElementStyle

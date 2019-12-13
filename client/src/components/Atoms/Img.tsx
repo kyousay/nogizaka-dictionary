@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-interface elementStyle {
+export interface elementStyle {
     width: string,
     height: string
 }

@@ -6,7 +6,7 @@ interface Style {
     margin: string
 }
 
-type ElementStyle = Partial<Style & Pick<constantStyle, 'display' | 'align_items' | 'justify_content'>>
+export type ElementStyle = Partial<Style & Pick<constantStyle, 'display' | 'align_items' | 'justify_content'>>
 
 interface WrapperProps {
     styled: ElementStyle

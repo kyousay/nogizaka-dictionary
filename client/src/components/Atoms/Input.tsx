@@ -7,7 +7,7 @@ interface Style {
     border: string
 }
 
-type ElementStyle = Partial<Style & Pick<constantStyle, 'font_size'>>
+export type ElementStyle = Partial<Style & Pick<constantStyle, 'font_size'>>
 
 interface InputProps {
     styled: ElementStyle

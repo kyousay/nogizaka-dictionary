@@ -3,7 +3,7 @@ import { Dispatch } from 'redux'
 import { DataType } from '../../../actions/login/loginActions'
 import { userState } from '../../../reducers/userReducer'
 import * as userAction from '../../../actions/login/loginActions'
-import InputPanel from '../../../components/parts/Form/InputPanel'
+import FormPanel from '../../../components/Organisms/Form/FormPanel'
 
 const mapStateToProps = (user : userState) => user
 
@@ -16,4 +16,4 @@ const mapDispatchToProps = (dispatch : Dispatch)  => ({
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(InputPanel)
+export default connect(mapStateToProps, mapDispatchToProps)(FormPanel)

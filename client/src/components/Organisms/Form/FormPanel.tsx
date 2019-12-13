@@ -1,0 +1,85 @@
+import React,{ useState } from 'react'
+import styled from 'styled-components'
+import Wrapper from '../../Atoms/Wrapper'
+import {Heading3} from '../../Atoms/Heading'
+import { DataType } from '../../../actions/login/loginActions'
+import {LineParagragh} from '../../Atoms/Paragragh'
+import Button from '../../Atoms/Button'
+import FormM from '../../Molecules/form/FormM'
+
+const LoginPanel = styled.div`
+    margin: 80px auto;
+    width: 396px;
+    padding 22px 108px 26px;
+    background-color: #fff;
+    box-sizing: unset;
+`
+interface props {
+    createAcount: (data: DataType) => void
+    loginAcount: (data: DataType) => void
+}
+
+const FormPanel: React.FC<props> = (props) => {
+
+    const [tabIndex, tabChange] = useState(1)
+
+    const title = tabIndex === 1 ? "乃木坂46にログイン" : "新しいアカウントを作成"
+    const buttonText = tabIndex === 1 ? {main:"ログイン",sub:"新しいアカウントを作成"} : {main:"アカウント作成",sub:"乃木坂46にログイン"}
+    const tab = tabIndex === 1 ? 2 : 1 
+    const initialValue = {email: '', password: ''}
+    const [value, setValue] = useState(initialValue)
+    const submitHandler = (e: React.FormEvent<HTMLElement>) => {
+        e.preventDefault()
+        const data = {
+            email: value.email,
+            password: value.password
+        }
+
+        if(data.email === '' || data.password === '') {
+            alert('正しい値を入力してください。')
+            return
+        }else{
+            if(tabIndex === 1){
+                props.loginAcount(data)
+                setValue(initialValue)
+            }else{
+                props.createAcount(data)
+                setValue(initialValue)
+            }
+        }
+    }
+
+    const FormMProps = {
+        input1: {
+            type: 'email' as 'email',
+            value: value.email,
+            placeholder: 'メールアドレス',
+            onChangeHandler: (e : React.ChangeEvent<HTMLInputElement>)  => setValue({...value, email: e.target.value})
+        },
+        input2: {
+            type: 'password' as 'password',
+            value: value.password,
+            placeholder: 'パスワード',
+            onChangeHandler: (e : React.ChangeEvent<HTMLInputElement>)  => setValue({...value, password: e.target.value})
+        },
+        buttonText: buttonText.main,
+        submitHandler: submitHandler,
+    }
+
+    return(
+        <LoginPanel>
+            <Wrapper styled={{padding: '18px 0'}}>
+                <Heading3 styled={{font_size: '1.8rem', text_align: 'center'}}>{title}</Heading3>
+            </Wrapper>
+            <FormM {...FormMProps} />
+            <Wrapper styled={{margin: '20px 0 0 0', display:'flex', justify_content: 'center'}}>
+                <LineParagragh styled={{lineWidth:'100px', wrapperWidth: '280px',text_align: 'center',font_size: '1.2rem'}}>または</LineParagragh>
+            </Wrapper>
+            <Wrapper styled={{margin: '20px', display:'flex', justify_content:'center', align_items: 'center'}}>
+                <Button styled={{bgColor:"#42b72a",padding: "10px 28px"}} onClick={() => tabChange(tab)}>{buttonText.sub}</Button>
+            </Wrapper>
+        </LoginPanel>
+    )
+}
+
+export default FormPanel

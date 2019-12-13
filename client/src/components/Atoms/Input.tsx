@@ -1,13 +1,13 @@
 import styled from 'styled-components'
+import constantStyle from '../../style/styleModel'
 
 interface Style {
     width: string
     padding: string
     border: string
-    font_size: '1.2rem' | '1.4rem' | '1.8rem'
 }
 
-type ElementStyle = Partial<Style>
+type ElementStyle = Partial<Style & Pick<constantStyle, 'font_size'>>
 
 interface InputProps {
     styled: ElementStyle

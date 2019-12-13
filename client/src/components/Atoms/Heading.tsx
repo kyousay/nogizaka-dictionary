@@ -1,12 +1,7 @@
 import styled from 'styled-components'
+import constantStyle from '../../style/styleModel'
 
-interface HeadingStyle {
-    font_size: '1.2rem' | '1.4rem' | '1.8rem'
-    font_weight: 'normal' | 'bold'
-    text_align: 'left' | 'right' | 'center'
-}
-
-type ElementStyle = Partial<HeadingStyle>
+type ElementStyle = Partial<Pick<constantStyle, 'font_size' |'font_weight' | 'text_align'>>
 
 interface HeadingProps {
     styled: ElementStyle

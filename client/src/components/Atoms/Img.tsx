@@ -5,11 +5,11 @@ interface elementStyle {
     height: string
 }
 
-interface Props{
+interface ImgProps{
     styled: elementStyle
 }
 
-export const Img = styled.img<Props>`
+export const Img = styled.img<ImgProps>`
     width: ${props => props.styled.width};
     height: ${props => props.styled.height};
 `

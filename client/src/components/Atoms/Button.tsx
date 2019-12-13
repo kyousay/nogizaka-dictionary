@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import constantStyle from '../../style/styleModel'
 
 interface ButtonStyle {
     width: string
@@ -6,14 +7,14 @@ interface ButtonStyle {
     bgColor: string
 }
 
-type ElementStyle = Partial<ButtonStyle>
+type ElementStyle = Partial<ButtonStyle & Pick<constantStyle, 'font_size'>>
 
 interface ButtonProps {
     styled: ElementStyle
 }
 
 const Button = styled.button<ButtonProps>`
-    font-size: 1.4rem;
+    font-size: ${props => props.styled.font_size? props.styled.font_size : '1.4rem'};
     color: #fff;
     border: none;
     border-radius: 3px;

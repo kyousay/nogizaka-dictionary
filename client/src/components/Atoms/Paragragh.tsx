@@ -1,14 +1,12 @@
 import styled from 'styled-components'
+import constantStyle from '../../style/styleModel'
 
 interface Style {
-    font_size: '1.2rem' | '1.4rem' | '1.8rem' 
-    font_weight: 'normal' | 'bold'
-    text_align: 'left' | 'right' | 'center'
     wrapperWidth: string
     lineWidth: string
 }
 
-type ElementStyle = Partial<Style>
+type ElementStyle = Partial<Style & Pick<constantStyle, 'font_size' | 'font_weight' | 'text_align'>>
 
 interface ParagraghProps {
     styled: ElementStyle

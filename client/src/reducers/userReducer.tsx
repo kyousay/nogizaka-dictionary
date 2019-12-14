@@ -3,7 +3,6 @@ import { LoginAction } from '../actions/login/loginActions'
 import * as ActionType from '../actions/login/loginConstants'
 
 const initialState = {
-    name: '',
     nickName: '',
     favoriteMembers: [{}],
     login: false,
@@ -17,6 +16,11 @@ const UserReducer : Reducer<userState, LoginAction> = (state : userState = initi
             return {
                 ...state,
                 ...action.payload
+            }
+        case ActionType.CHANGE_USER_ISLOGIN :
+            return {
+                ...state,
+                login: action.payload.isLogin
             }
         default : 
             return state

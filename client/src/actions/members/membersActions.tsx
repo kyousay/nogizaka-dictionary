@@ -3,7 +3,7 @@ import * as ActionType from './membersConstants'
 
 export const addMembers = (members : membersState) => ({
     type: ActionType.ADD as typeof ActionType.ADD,
-    payload: { ...members }
+    payload: {...members} 
 })
 
 export type MembersAction = 

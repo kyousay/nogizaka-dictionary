@@ -1,14 +1,28 @@
-import React from 'react'
-import Header from '../parts/Header/LoginHeader'
-import FormPanel from '../../cotainers/Organisms/form/FormPanel'
+import React, {useEffect} from 'react'
+import LoginHeader from '../Organisms/Header/LoginHeader'
+import LoginForm from '../../cotainers/Organisms/form/LoginForm'
+import {userState} from '../../reducers/userReducer'
+import {withRouter, RouteComponentProps} from 'react-router'
 
-const Login : React.FC = () => {
+interface PageProps extends RouteComponentProps {
+    user: userState
+    isStorageToken: (props: {isLogin: boolean}) => void
+}
+
+const Login : React.FC<PageProps> = (props) => {
+    useEffect(() => {
+        const isStorageToken = localStorage.getItem('ticket')? true : false
+        if(props.user.login || isStorageToken === true) {
+            props.isStorageToken({isLogin:isStorageToken})
+            props.history.push('/top')
+        }
+    })
     return(
         <>
-            <Header />
-            <FormPanel />
+            <LoginHeader />
+            <LoginForm />
         </>
     )
 }
 
-export default Login
+export default withRouter(Login)

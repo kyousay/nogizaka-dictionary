@@ -1,4 +1,7 @@
 import styled from 'styled-components'
+import mediaQuery from 'styled-media-query'
+
+export const mediaMobile = mediaQuery.lessThan("medium")
 
 interface FlexBoxProps {
     styled: {

@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import constantStyle from '../../style/styleModel'
+import {mediaMobile} from '../../style/commonStyle'
 
 interface Style {
-    wrapperWidth: string
-    lineWidth: string
+    [k: string] : string
 }
 
 export type ElementStyle = Partial<Style & Pick<constantStyle, 'font_size' | 'font_weight' | 'text_align'>>
@@ -37,4 +37,12 @@ export const LineParagragh = styled(Paragragh)<ParagraghProps>`
         &::after {
             left: 63%;
         }
-    `
+`
+
+export const withSPStyle = (Component : typeof LineParagragh, spStyle: Style) => {
+    return styled(Component)`
+      ${mediaMobile`
+        ${spStyle}
+      `};
+    `;
+};

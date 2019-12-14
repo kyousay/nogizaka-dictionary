@@ -6,6 +6,10 @@ export interface DataType {
     password: string
 }
 
+export interface UserIsLogin {
+    isLogin: boolean
+}
+
 export const createAcount = (data : DataType) => ({
     type: ActionType.CREATE_ACOUNT as typeof ActionType.CREATE_ACOUNT,
     payload: {
@@ -27,7 +31,13 @@ export const setUserData = (data : userState) => ({
     }
 })
 
+export const changeUserIsLogin = (isLogin : Pick<UserIsLogin,'isLogin'>) => ({
+    type: ActionType.CHANGE_USER_ISLOGIN as typeof ActionType.CHANGE_USER_ISLOGIN,
+    payload: isLogin
+})
+
 export type LoginAction =
     |ReturnType<typeof createAcount>
     |ReturnType<typeof loginAcount>
     |ReturnType<typeof setUserData>
+    |ReturnType<typeof changeUserIsLogin>

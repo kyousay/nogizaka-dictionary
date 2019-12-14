@@ -1,13 +1,12 @@
 import styled from 'styled-components'
 import constantStyle from '../../style/styleModel'
+import {mediaMobile} from '../../style/commonStyle'
 
 interface ButtonStyle {
-    width: string
-    padding: string
-    bgColor: string
+    [k : string] : string
 }
 
-export type ElementStyle = Partial<ButtonStyle & Pick<constantStyle, 'font_size'>>
+export type ElementStyle = Partial<ButtonStyle & Pick<constantStyle, 'font_size' | 'bgColor'>>
 
 interface ButtonProps {
     styled: ElementStyle
@@ -22,5 +21,13 @@ const Button = styled.button<ButtonProps>`
     padding: ${props => props.styled.padding};
     background-color: ${props => props.styled.bgColor};
 `
+
+export const withSPStyle = (Component : typeof Button, spStyle: ElementStyle) => {
+    return styled(Component)`
+      ${mediaMobile`
+        ${spStyle}
+      `};
+    `;
+};
 
 export default Button

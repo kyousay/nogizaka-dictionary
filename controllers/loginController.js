@@ -16,10 +16,8 @@ module.exports = {
         let newUser = new User(getUserParams(req.body));
         User.register(newUser, req.body.password, (e, user) => {
             if(user) {
-                console.log(user)
                 res.send("ユーザーが新規に登録されました。ログインしてください。")
             }else{
-                console.log(e);
                 res.send(`${e.name}: ${e.message}`)
             }
         })
@@ -37,12 +35,13 @@ module.exports = {
                 res.json({
                     success: true,
                     token: signedToken,
-                    message: "ユーザー登録に成功しました。"
+                    user: user,
+                    message: "ユーザー認証に成功しました。"
                 });
             } else {
                 res.json({
                     success: false,
-                    message: "ユーザー登録に失敗しました。"
+                    message: "ユーザー認証に失敗しました。"
                 });
             }
         })(req, res, next);

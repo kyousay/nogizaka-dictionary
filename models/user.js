@@ -6,30 +6,17 @@ passportLocalMongoose = require("passport-local-mongoose");
 
 let userSchema = new Schema(
     {
-        // name: {
-        //     first: {
-        //         type: String,
-        //         trim: true
-        //     },
-        //     last: {
-        //         type: String,
-        //         trim: true,
-        //     }
-        // },
-        // nickName: {
-        //     type: String,
-        //     trim: true,
-        // },
+        nickName: {
+            type: String,
+            trim: true,
+            max: 10
+        },
         email: {
             type: String,
             required: true,
             lowercase: true,
             unique: true,
         },
-        // password: {
-        //     type: String,
-        //     required: true,
-        // },
 },{
     timestamps: true
 });

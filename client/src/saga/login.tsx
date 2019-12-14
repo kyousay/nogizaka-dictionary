@@ -1,7 +1,7 @@
 import 
     { 
-        // all,  fork, put, 
-        call, takeLatest} 
+        // all,  fork, 
+        put, call, takeLatest} 
 from 'redux-saga/effects'
 import * as Action from '../actions/login/loginConstants'
 import * as LoginAction from '../actions/login/loginActions'
@@ -25,8 +25,12 @@ function* loginAcount(action : ReturnType<typeof LoginAction.loginAcount>) {
     try {
         const api = loginUserFactory();
         const result = yield call(api, userData, '/login/authenticate');
+        console.log(result);
         alert(result.data.message);
-
+        if(result.data.success) {
+            yield localStorage.setItem('ticket',result.data.token);
+            yield put(LoginAction.changeUserIsLogin({isLogin:true}))
+        }
         //jwt認証テスト
         // const apiTest = loginUserFactory({headers: {Authorization : `${result.data.token}`}});
         // const result2 = yield call(apiTest, result.data, '/login/test');

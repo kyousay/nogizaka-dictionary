@@ -9,7 +9,6 @@ import {StateValue} from '../../../reducers'
 
 
 const TopHeader: React.FC<StateValue> = (props) => {
-    console.log(props)
     const [searchWord , changeSearchWord] = useState('')
     const userName = props.nickName? props.nickName : '新参者'
 

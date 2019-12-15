@@ -47,7 +47,7 @@ const Card: React.FC<Member> = props => (
         <Wrapper styled={{margin: '16px 0 0 0', text_align: 'center'}}>
             <Paragragh styled={{font_size: '1.2rem', color: '#231815'}}>{props.name[0]}</Paragragh>
             <Wrapper styled={{margin: '8px 0 0 0'}}>
-                <Txt styled={{color: '#888888', font_size: '1.0rem'}}>{props.name[1]}</Txt>
+                <Txt styled={{color: '#888888', font_size: '1.0rem'}}>{props.segment}</Txt>
             </Wrapper>
         </Wrapper>
     </Box>

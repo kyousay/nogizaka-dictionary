@@ -10,7 +10,7 @@ const initialState  = {
             img: image,
             name: ['秋元真夏','manatsu akimoto'],
             sailium: ['blue', 'red'],
-            segment: '3',
+            segment: '3期生',
             dateOfBirth : '1992年6月19日',
             blod: 'O型',
             height: '170',

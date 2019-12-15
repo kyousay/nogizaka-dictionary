@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Hash : React.FC<Props> = props => {
-    const segmentArray = new Array(props.segment + "期生")
+    const segmentArray = new Array(props.segment)
     const hashArray = segmentArray.concat(props.hash)
     return(
         <>

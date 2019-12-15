@@ -1,6 +1,7 @@
 import React from 'react'
 import {Member} from '../../../reducers/MembersReducer'
 import styled from 'styled-components'
+import {Paragragh} from '../../Atoms/Paragragh'
 import Wrapper from '../../Atoms/Wrapper'
 import Img from '../../Atoms/Img'
 import Txt from '../../Atoms/Txt'
@@ -43,8 +44,8 @@ const Box = styled(Wrapper)<BoxProps>`
 const Card: React.FC<Member> = props => ( 
     <Box styled={{color1: props.sailium[0], color2: props.sailium[1]}}>
         <Img src={props.img} styled={{width: '140px', height: '140px'}}/>
-        <Wrapper styled={{margin: '16px 0 0 0', text_align: 'center',font_size: '1.2rem', color: '#231815'}}>
-            <p>{props.name[0]}</p>
+        <Wrapper styled={{margin: '16px 0 0 0', text_align: 'center'}}>
+            <Paragragh styled={{font_size: '1.2rem', color: '#231815'}}>{props.name[0]}</Paragragh>
             <Wrapper styled={{margin: '8px 0 0 0'}}>
                 <Txt styled={{color: '#888888', font_size: '1.0rem'}}>{props.name[1]}</Txt>
             </Wrapper>

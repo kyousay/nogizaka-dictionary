@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
-import TableList from '../../../components/parts/Table/TableList'
+import TableList from '../../../components/Organisms/Table/TableList'
+
 import { State } from '../../../reducers'
 
 const mapStateToProps = (state : State)  =>  ({

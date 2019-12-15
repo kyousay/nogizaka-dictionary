@@ -6,11 +6,10 @@ interface Style {
     [k :string] : string
 }
 
-export type ElementStyle = Partial<Style & Pick<constantStyle, 'display' | 'align_items' | 'justify_content' | 'flex_direction' | 'flex_wrap' |'bgColor'>>
+export type ElementStyle = Partial<Style & Pick<constantStyle, 'display' | 'align_items' | 'justify_content' | 'flex_direction' | 'flex_wrap' | 'bgColor' | 'text_align'>>
 
 interface WrapperProps {
     styled: ElementStyle
-    icon ?: Style
 }
 
 const Wrapper = styled.div<WrapperProps>`
@@ -35,7 +34,7 @@ const Wrapper = styled.div<WrapperProps>`
     bottom: ${props => props.styled.bottom};
     transform: ${props => props.styled.transform};
     z-index: ${props => props.styled.z_index};
-
+    text-align: ${props => props.styled.text_align};
 `
 
 export const withSPStyle = (Component : typeof Wrapper, spStyle: Style) => {

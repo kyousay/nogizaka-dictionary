@@ -1,20 +1,31 @@
 import React from 'react'
+import styled from 'styled-components'
 import Wrapper from '../../Atoms/Wrapper'
 import Txt from '../../Atoms/Txt'
 import {Paragragh} from '../../Atoms/Paragragh'
 
+const TxtRowWrapper = styled(Wrapper)`
+    &:first-of-type {
+        padding-top: 12px;
+        border-top: 1px solid #D8D8D8;
+    }
+    &:not(:first-of-type) {
+        margin-top: 12px;
+    }
+`
+
 interface Props {
     title: string
     content: string
-    //stringliteraltypesで宣言できると良い
-    title_width: string
 }
 
 const TxtRowSection : React.FC<Props> = props => (
-        <Wrapper styled={{display: 'flex'}}>
-            <Paragragh styled={{width: props.title_width ,color: '#767676', font_size: '1.2rem'}}>{props.title}</Paragragh>
+        <TxtRowWrapper styled={{display: 'flex'}}>
+            <Wrapper styled={{width: '108px'}}>
+                <Paragragh styled={{color: '#767676', font_size: '1.2rem'}}>{props.title}</Paragragh>
+            </Wrapper>
             <Txt styled={{font_size: '1.4rem'}}>{props.content}</Txt>
-        </Wrapper>
+        </TxtRowWrapper>
 )
 
 export default TxtRowSection

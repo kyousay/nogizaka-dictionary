@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import Wrapper from '../../Atoms/Wrapper'
 import Txt from '../../Atoms/Txt'
 
-const HashTxt = styled(Txt)`
-    border-radius: 3px;
+const HashBox = styled(Wrapper)`
+    border-radius: 3px
 `
 
 interface Props {
@@ -20,9 +20,9 @@ const Hash : React.FC<Props> = props => {
         {
             hashArray.map((hash,index)=> {
                 return(
-                    <Wrapper styled={{padding: '10px', margin: '0 4px 5px 0', bgColor: '#bf87c1'}} key={index}>
-                        <HashTxt styled={{color: '#fff', font_weight: 'bold'}}>{hash}</HashTxt>
-                    </Wrapper>
+                    <HashBox styled={{padding: '10px', margin: '0 4px 5px 0', bgColor: '#bf87c1', display:'inline-block', border_radius: '3px'}} key={index}>
+                        <Txt styled={{color: '#fff', font_weight: 'bold'}}>{hash}</Txt>
+                    </HashBox>
                 )
         })}
         </>

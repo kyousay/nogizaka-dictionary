@@ -10,7 +10,6 @@ export type ElementStyle = Partial<Style & Pick<constantStyle, 'font_size' | 'fo
 
 interface ParagraghProps {
     styled: ElementStyle
-    children: string
 }
 
 export const Paragragh = styled.p<ParagraghProps>`

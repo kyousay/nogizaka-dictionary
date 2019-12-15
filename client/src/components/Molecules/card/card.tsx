@@ -1,9 +1,9 @@
 import React from 'react'
-import { Member } from '../../../reducers/MembersReducer'
+import {Member} from '../../../reducers/MembersReducer'
 import styled from 'styled-components'
 import Wrapper from '../../Atoms/Wrapper'
 import Img from '../../Atoms/Img'
-import anonymous from '../../../style/img/anonymous.png'
+import Txt from '../../Atoms/Txt'
 
 interface BoxProps {
     styled: {
@@ -39,19 +39,15 @@ const Box = styled(Wrapper)<BoxProps>`
         opacity: 0.7;
     }
 `
-const SegmentText = styled.span`
-    display: block;
-    margin-top: 8px;
-    color: #888888;
-    font-size: 1.1rem;
-`
 
 const Card: React.FC<Member> = props => ( 
-    <Box styled={{color1: props.color1, color2: props.color2}}>
+    <Box styled={{color1: props.sailium[0], color2: props.sailium[1]}}>
         <Img src={props.img} styled={{width: '140px', height: '140px'}}/>
         <Wrapper styled={{margin: '16px 0 0 0', text_align: 'center',font_size: '1.2rem', color: '#231815'}}>
             <p>{props.name[0]}</p>
-            <Wrapper styled={{margin: '8px 0 0 0', color: '#888888', font_size: '1.0rem'}}>{props.text}</Wrapper>
+            <Wrapper styled={{margin: '8px 0 0 0'}}>
+                <Txt styled={{color: '#888888', font_size: '1.0rem'}}>{props.name[1]}</Txt>
+            </Wrapper>
         </Wrapper>
     </Box>
 )

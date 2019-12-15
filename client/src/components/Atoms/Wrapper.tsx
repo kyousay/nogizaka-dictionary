@@ -6,10 +6,11 @@ interface Style {
     [k :string] : string
 }
 
-export type ElementStyle = Partial<Style & Pick<constantStyle, 'display' | 'align_items' | 'justify_content' | 'flex_direction' | 'bgColor'>>
+export type ElementStyle = Partial<Style & Pick<constantStyle, 'display' | 'align_items' | 'justify_content' | 'flex_direction' | 'flex_wrap' |'bgColor'>>
 
 interface WrapperProps {
     styled: ElementStyle
+    icon ?: Style
 }
 
 const Wrapper = styled.div<WrapperProps>`
@@ -17,6 +18,7 @@ const Wrapper = styled.div<WrapperProps>`
     align-items: ${props => props.styled.align_items};
     justify-content: ${props => props.styled.justify_content};
     flex-direction: ${props => props.styled.flex_direction};
+    flex-wrap: ${props => props.styled.flex_wrap};
     max-width: ${props => props.styled.max_width};
     min-width: ${props => props.styled.min_width};
     width: ${props => props.styled.width};
@@ -26,6 +28,14 @@ const Wrapper = styled.div<WrapperProps>`
     background-color: ${props => props.styled.bgColor};
     padding: ${props => props.styled.padding};
     margin: ${props => props.styled.margin};
+    position: ${props => props.styled.position};
+    top: ${props => props.styled.top};
+    left: ${props => props.styled.left};
+    right: ${props => props.styled.right};
+    bottom: ${props => props.styled.bottom};
+    transform: ${props => props.styled.transform};
+    z-index: ${props => props.styled.z_index};
+
 `
 
 export const withSPStyle = (Component : typeof Wrapper, spStyle: Style) => {

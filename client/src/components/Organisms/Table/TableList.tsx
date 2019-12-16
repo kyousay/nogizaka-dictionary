@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Card from '../../Molecules/card/Card'
-import ZoomCard from '../../Molecules/card/ZoomCard'
+import Card from '../../Molecules/Card/Card'
+import ZoomCard from '../../Molecules/Card/ZoomCard'
 import Wrapper from '../../Atoms/Wrapper'
 import { StateValue as Props} from '../../../reducers'
 import { membersState } from '../../../reducers/MembersReducer'

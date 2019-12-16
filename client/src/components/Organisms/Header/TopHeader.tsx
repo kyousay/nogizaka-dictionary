@@ -1,5 +1,5 @@
 import React,{ useState } from 'react'
-import SearchPanel from '../../Molecules/header/SerchPanel'
+import SearchPanel from '../../Molecules/Header/SerchPanel'
 import Wrapper from '../../Atoms/Wrapper'
 import Img from '../../Atoms/Img'
 import {Paragragh} from '../../Atoms/Paragragh'

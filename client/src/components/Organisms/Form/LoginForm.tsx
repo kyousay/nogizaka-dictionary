@@ -5,7 +5,7 @@ import {Heading3} from '../../Atoms/Heading'
 import { DataType } from '../../../actions/login/loginActions'
 import {LineParagragh} from '../../Atoms/Paragragh'
 import Button from '../../Atoms/Button'
-import FormM from '../../Molecules/form/FormM'
+import FormM from '../../Molecules/Form/FormM'
 
 const outerWrapperStyle ={
     margin: "80px auto",

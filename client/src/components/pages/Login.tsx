@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import LoginHeader from '../Organisms/Header/LoginHeader'
-import LoginForm from '../../cotainers/Organisms/form/LoginForm'
+import LoginForm from '../../cotainers/Organisms/Form/LoginForm'
 import {userState} from '../../reducers/userReducer'
 import {withRouter, RouteComponentProps} from 'react-router'
 

@@ -4,28 +4,24 @@ import Wrapper from '../../Atoms/Wrapper'
 import Txt from '../../Atoms/Txt'
 import {Paragragh} from '../../Atoms/Paragragh'
 
-const TxtRowWrapper = styled(Wrapper)`
-    &:first-of-type {
-        padding-top: 12px;
-        border-top: 1px solid #D8D8D8;
-    }
-    &:not(:first-of-type) {
-        margin-top: 12px;
-    }
-`
-
 interface Props {
     title: string
     content: string
+    margin?: string
+    width?: string 
+    padding?: string 
+    border_top?: string
+    titleSize: '1.2rem' | '1.4rem'
+    subSize: '1.2rem' | '1.4rem'
 }
 
 const TxtRowSection : React.FC<Props> = props => (
-        <TxtRowWrapper styled={{display: 'flex'}}>
-            <Wrapper styled={{width: '108px'}}>
-                <Paragragh styled={{color: '#767676', font_size: '1.2rem'}}>{props.title}</Paragragh>
+        <Wrapper styled={{display: 'flex', margin: props.margin, padding: props.padding, border_top: props.border_top}}>
+            <Wrapper styled={{width: props.width}}>
+                <Paragragh styled={{color: '#767676', font_size: props.titleSize}}>{props.title}</Paragragh>
             </Wrapper>
-            <Txt styled={{font_size: '1.4rem'}}>{props.content}</Txt>
-        </TxtRowWrapper>
+            <Txt styled={{font_size: props.subSize}}>{props.content}</Txt>
+        </Wrapper>
 )
 
 export default TxtRowSection

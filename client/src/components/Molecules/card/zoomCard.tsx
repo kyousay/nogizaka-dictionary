@@ -42,6 +42,8 @@ const HashWrapper = styled(Wrapper)`
     overflow-Y: scroll
 `
 
+const TxtSection = styled(TxtRowSection)``
+
 interface zoomCardProps {
     zoomOutHandler : () => void
     name: string[]
@@ -65,9 +67,12 @@ const ZoomCard : React.FC<Props> = props => (
                 </Paragragh>
             </Wrapper>
             <Wrapper styled={{margin: '17px 0 0 0'}}>
-                <TxtRowSection title={"生年月日"} content={props.dateOfBirth} />
-                <TxtRowSection title={"血液型"} content={props.blod} />
-                <TxtRowSection title={"身長"} content={`${props.height}cm`} />
+                <TxtRowSection title={"生年月日"} content={props.dateOfBirth} 
+                titleSize={'1.2rem'} subSize={'1.4rem'} width={'108px'} padding={'12px 0 0 0'} border_top={'1px solid #D8D8D8'}/>
+                <TxtRowSection title={"血液型"} content={props.blod} 
+                titleSize={'1.2rem'} subSize={'1.4rem'} margin={'17px 0 0'} width={'108px'}/>
+                <TxtRowSection title={"身長"} content={`${props.height}cm`} 
+                titleSize={'1.2rem'} subSize={'1.4rem'} margin={'17px 0 0'} width={'108px'}/>
             </Wrapper>
             <HashWrapper styled={{wrap:"wrap", margin: '15px 0 0 0', max_height: '50px'}}>
                 <Hash hash={props.hash} segment={props.segment}/>

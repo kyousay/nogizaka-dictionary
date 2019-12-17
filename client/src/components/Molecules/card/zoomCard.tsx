@@ -35,11 +35,11 @@ const contentStyle = {
 
 const WeakTxt = styled(Txt)`
     display: inline-block;
-    margin-left: 12px
+    margin-left: 12px;
 `
 
 const HashWrapper = styled(Wrapper)`
-    overflow-Y: scroll
+    overflow-Y: scroll;
 `
 
 interface zoomCardProps {

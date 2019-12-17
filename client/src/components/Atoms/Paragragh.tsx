@@ -6,7 +6,7 @@ interface Style {
     [k: string] : string
 }
 
-export type ElementStyle = Partial<Style & Pick<constantStyle, 'font_size' | 'font_weight' | 'text_align'>>
+export type ElementStyle = Partial<Style & Pick<constantStyle, 'font_size' | 'font_weight' | 'text_align' >>
 
 interface ParagraghProps {
     styled: ElementStyle

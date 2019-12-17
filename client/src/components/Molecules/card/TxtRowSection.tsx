@@ -15,12 +15,12 @@ interface Props {
 }
 
 const TxtRowSection : React.FC<Props> = props => (
-        <Wrapper styled={{display: 'flex', margin: props.margin, padding: props.padding, border_top: props.border_top}}>
-            <Wrapper styled={{width: props.width}}>
-                <Paragragh styled={{color: '#767676', font_size: props.titleSize}}>{props.title}</Paragragh>
-            </Wrapper>
-            <Txt styled={{font_size: props.subSize}}>{props.content}</Txt>
+    <Wrapper styled={{display: 'flex', margin: props.margin, padding: props.padding, border_top: props.border_top}}>
+        <Wrapper styled={{width: props.width}}>
+            <Paragragh styled={{color: '#767676', font_size: props.titleSize}}>{props.title}</Paragragh>
         </Wrapper>
+        <Txt styled={{font_size: props.subSize}}>{props.content}</Txt>
+    </Wrapper>
 )
 
 export default TxtRowSection

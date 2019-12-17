@@ -16,7 +16,7 @@ export const Txt = styled.span<SpanProps>`
     font-size: ${props => props.styled.font_size};
     font-weight: ${props => props.styled.font_weight};
     text-align: ${props => props.styled.text_align};
-    color: ${props => props.styled.color}
+    color: ${props => props.styled.color};
 `
 
 export const withSPStyle = (Component : typeof Txt, spStyle: Style) => {

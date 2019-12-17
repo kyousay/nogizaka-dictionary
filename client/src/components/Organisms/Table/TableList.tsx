@@ -21,13 +21,9 @@ const ListTable: React.FC<Props> = (props) => {
         setZoom(newZoom)
     }
 
-    // useEffect(() => {
-    //     props.getMembers()
-    // },[])
-
     let element
     if(members.length > 0){
-        element = <UnOrderdList styled={{justify: "center", wrap: "wrap", padding: '60px 200px'}}>
+        element = <UnOrderdList styled={{justify: "center", wrap: "wrap", max_width: '830px', margin: '60px auto 0 auto' }}>
                             {members.map((member,index) => {
                                 return(
                                     <li key={index} onClick={() => {setState(member);setZoom(true)}}>

@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import Wrapper from '../../Atoms/Wrapper'
 import Txt from '../../Atoms/Txt'
 import {Paragragh} from '../../Atoms/Paragragh'

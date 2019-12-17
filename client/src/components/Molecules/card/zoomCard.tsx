@@ -42,8 +42,6 @@ const HashWrapper = styled(Wrapper)`
     overflow-Y: scroll
 `
 
-const TxtSection = styled(TxtRowSection)``
-
 interface zoomCardProps {
     zoomOutHandler : () => void
     name: string[]

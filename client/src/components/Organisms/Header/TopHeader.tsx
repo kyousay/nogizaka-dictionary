@@ -16,9 +16,15 @@ const ImgBoxWrapper = styled(Wrapper)`
     }
 `
 
+const ShadowWrapper = styled(Wrapper)`
+    box-shadow: 0px 0px 5px -2px #000000;
+`
+
 const section = {
     title: ['ニックネーム', 'ひとこと', '生年月日'],
-    text: ['新参者', 'こんにちは', '1992年6月19日']
+    text: ['新参者', 'こんにちは', '1992年6月19日'],
+    // margin: ['0', '15px 0 0 0', '15px 0 0 0'],
+    padding: ['20px', '20px', '20px']
 }
 
 const TopHeader: React.FC<StateValue> = (props) => {
@@ -39,11 +45,12 @@ const TopHeader: React.FC<StateValue> = (props) => {
                 onMouseEnter={() => changeHoverStateHandler(true)}
                 onMouseLeave={() => changeHoverStateHandler(false)}>
                     <ImgBox src={icon} width={'50px'} font_size={'1.2rem'} description={userName}/>
+                    
                     {
                         isHover ?
-                    <Wrapper styled={{position: 'absolute', right: '10px', bgColor: "#fff", width: '315px', text_align: 'center'}}>
-                        <BalloonCard　section={section}></BalloonCard>
-                    </Wrapper>
+                        <ShadowWrapper styled={{position: 'absolute', right: '10px', bgColor: "#fff", width: '315px', text_align: 'center'}}>
+                            <BalloonCard　section={section}></BalloonCard>
+                        </ShadowWrapper>
                                 : null
                     }
                 </ImgBoxWrapper>

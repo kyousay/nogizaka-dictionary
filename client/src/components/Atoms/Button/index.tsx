@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import constantStyle from '../../style/styleModel'
-import {mediaMobile} from '../../style/commonStyle'
+import constantStyle from '../../../style/styleModel'
+import {mediaMobile} from '../../../style/commonStyle'
 
 interface ButtonStyle {
     [k : string] : string

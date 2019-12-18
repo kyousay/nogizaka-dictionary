@@ -1,8 +1,8 @@
 import React,{ useState } from 'react'
 import styled from 'styled-components'
 import SearchPanel from '../../Molecules/Header/SerchPanel'
+import TxtRowSection from '../../Molecules/Card/TxtRowSection'
 import ImgBox from '../../Molecules/Header/ImgBox'
-import BalloonCard from '../../Molecules/Header/BalloonCard'
 import Wrapper from '../../Atoms/Wrapper'
 import Img from '../../Atoms/Img'
 import logo from '../../../style/img/logo.jpg'
@@ -20,21 +20,19 @@ const ShadowWrapper = styled(Wrapper)`
     box-shadow: 0px 0px 5px -2px #000000;
 `
 
-const section = {
-    title: ['ニックネーム', 'ひとこと', '生年月日'],
-    text: ['新参者', 'こんにちは', '1992年6月19日'],
-    // margin: ['0', '15px 0 0 0', '15px 0 0 0'],
-    padding: ['20px', '20px', '20px']
-}
-
 const TopHeader: React.FC<StateValue> = (props) => {
     const [searchWord, changeSearchWord] = useState('')
     const [isHover, changeHover] = useState(false)
+    const [isClick, changeClick] = useState(false)
     const userName = props.nickName? props.nickName : '新参者'
 
-    const changeHoverStateHandler = (prop: boolean) => {
-        changeHover(prop)
+    const changeHoverStateHandler = (boo: boolean) => {
+        changeHover(boo)
     }
+
+    const changeClickStateHandler = (boo: boolean) => {
+        changeClick(boo)
+    } 
 
     return(
         <Wrapper styled={{display:'flex', align_items:"center", justify_content:"space-between", bgColor:'#fff', padding: '0px 20px'}}>
@@ -48,10 +46,17 @@ const TopHeader: React.FC<StateValue> = (props) => {
                     
                     {
                         isHover ?
-                        <ShadowWrapper styled={{position: 'absolute', right: '10px', bgColor: "#fff", width: '315px', text_align: 'center'}}>
-                            <BalloonCard　section={section}></BalloonCard>
-                        </ShadowWrapper>
-                                : null
+                            <ShadowWrapper styled={{position: 'absolute', right: '10px', bgColor: "#fff", width: '315px', text_align: 'center'}}>
+                                <Wrapper styled={{position: 'relative' ,padding: '20px'}}>
+                                    <TxtRowSection  width={'96px'} padding={'20px'} titleSize={'1.2rem'} subSize={'1.4rem'}
+                                    title={'ニックネーム'} content={'新参者'} />
+                                    <TxtRowSection width={'96px'} padding={'20px'} titleSize={'1.2rem'} subSize={'1.4rem'} 
+                                    title={'ひとこと'} content={'こんにちは'} />
+                                    <TxtRowSection width={'96px'} padding={'20px'} titleSize={'1.2rem'} subSize={'1.4rem'}
+                                    title={'称号'} content={'新参者'} />
+                                </Wrapper>
+                            </ShadowWrapper>
+                                    : null
                     }
                 </ImgBoxWrapper>
             </Wrapper>

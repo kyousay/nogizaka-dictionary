@@ -8,15 +8,15 @@ export interface Base {
     content: string
 }
 
-export interface Style {
-    margin?: string
-    width?: string 
-    padding?: string 
-    border_top?: string
-    color? : string
+export type Style  = Partial<{
+    margin: string
+    width: string 
+    padding: string 
+    border_top: string
+    color: string
     titleSize: '1.2rem' | '1.4rem'
     subSize: '1.2rem' | '1.4rem'
-}
+}>
 
 type Props = Base & Style
 

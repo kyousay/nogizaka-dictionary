@@ -30,7 +30,8 @@ const TopHeader: React.FC<StateValue> = (props) => {
         changeClick(boo)
     }
     
-    const HoverCardProps = [{
+    const HoverCardProps = {
+        sections: [{
             title: 'ニックネーム',
             content: userName
         },{
@@ -39,7 +40,25 @@ const TopHeader: React.FC<StateValue> = (props) => {
         },{
             title: '称号',
             content: '新参者'
-        }]
+        }],
+        TxtRowSectionStyle: {
+            titleSize: '1.2rem', 
+            subSize: '1.4rem',
+            padding: '20px',
+            color: '#787878',
+            width: '96px'
+        } as const,
+        wrapperStyle: {
+            position: 'absolute',
+            right: '10px',
+            bgColor: '#fff',
+            width: '315px',
+            padding: '20px'
+        } as const
+        // button: {
+
+        // }
+    }
 
     return(
         <Wrapper styled={{display:'flex', align_items:"center", justify_content:"space-between", bgColor:'#fff', padding: '0px 20px'}}>
@@ -54,7 +73,7 @@ const TopHeader: React.FC<StateValue> = (props) => {
                     {
                         isHover ?
                             
-                                <HoverCard />
+                                <HoverCard {...HoverCardProps}/>
                                     : null
                     }
                 </ImgBoxWrapper>

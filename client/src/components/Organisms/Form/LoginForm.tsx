@@ -11,7 +11,7 @@ const outerWrapperStyle ={
     margin: "80px auto",
     width: "396px",
     padding: "22px 108px 26px",
-    bgColor: "#fff" as '#fff',
+    bgColor: "#fff" as const,
 }
 
 const OuterWrapperElement = styled(Wrapper)`

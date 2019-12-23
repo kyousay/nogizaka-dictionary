@@ -1,7 +1,7 @@
 import React from 'react'
-import Wrapper from '../../Atoms/Wrapper'
-import Txt from '../../Atoms/Txt'
-import {Paragragh} from '../../Atoms/Paragragh'
+import Wrapper from '../Atoms/Wrapper'
+import Txt from '../Atoms/Txt'
+import {Paragragh} from '../Atoms/Paragragh'
 
 export interface Base {
     title: string
@@ -20,7 +20,7 @@ export type Style  = Partial<{
 
 type Props = Base & Style
 
-const TxtRowSection : React.FC<Props> = props => (
+const TxtRow : React.FC<Props> = props => (
     <Wrapper styled={{display: 'flex', margin: props.margin, padding: props.padding, border_top: props.border_top}}>
         <Wrapper styled={{width: props.width}}>
             <Paragragh styled={{color: props.color, font_size: props.titleSize}}>{props.title}</Paragragh>
@@ -29,4 +29,4 @@ const TxtRowSection : React.FC<Props> = props => (
     </Wrapper>
 )
 
-export default TxtRowSection
+export default TxtRow

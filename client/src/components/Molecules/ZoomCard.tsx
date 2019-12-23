@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import Img from '../../Atoms/Img'
-import {Paragragh} from '../../Atoms/Paragragh'
-import Wrapper from '../../Atoms/Wrapper'
-import Txt from '../../Atoms/Txt'
-import TxtRowSection from './TxtRowSection'
-import dummy from '../../../style/img/anonymous.png'
-import { Member } from '../../../reducers/MembersReducer'
-import close from '../../../style/img/close.png'
+import Img from '../Atoms/Img'
+import {Paragragh} from '../Atoms/Paragragh'
+import Wrapper from '../Atoms/Wrapper'
+import Txt from '../Atoms/Txt'
+import TxtRowSection from './TxtRow'
+import dummy from '../../style/img/anonymous.png'
+import { Member } from '../../reducers/MembersReducer'
+import close from '../../style/img/close.png'
 import Hash from './Hash'
 
 const zoomFieldStyle = {
@@ -42,12 +42,12 @@ const HashWrapper = styled(Wrapper)`
     overflow-Y: scroll;
 `
 
-interface zoomCardProps {
+interface ZoomCardProps {
     zoomOutHandler : () => void
     name: string[]
 }
 
-export type Props = Member & zoomCardProps
+export type Props = Member & ZoomCardProps
 
 const ZoomCard : React.FC<Props> = props => (
     <Wrapper styled={{...zoomFieldStyle}} onClick={props.zoomOutHandler}>

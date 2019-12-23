@@ -1,7 +1,7 @@
 import React from 'react'
-import Wrapper from '../../Atoms/Wrapper'
-import Input from '../../Atoms/Input'
-import Button from '../../Atoms/Button'
+import Wrapper from '../Atoms/Wrapper'
+import Input from '../Atoms/Input'
+import Button from '../Atoms/Button'
 
 const inputStyle = {
     width: "200px",

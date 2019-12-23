@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import Button from '../../Atoms/Button'
-import Input from '../../Atoms/Input'
-import Wrapper from '../../Atoms/Wrapper'
+import Button from '../Atoms/Button'
+import Input from '../Atoms/Input'
+import Wrapper from '../Atoms/Wrapper'
 
 const Form = styled.form`
     margin: 0 auto;

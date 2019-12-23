@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Card from '../../Molecules/Card/Card'
-import ZoomCard from '../../Molecules/Card/ZoomCard'
+import MembersCard from '../../Molecules/MembersCard'
+import ZoomCard from '../../Molecules/ZoomCard'
 import Wrapper from '../../Atoms/Wrapper'
 import { StateValue as Props} from '../../../reducers'
 import { membersState } from '../../../reducers/MembersReducer'
@@ -27,7 +27,7 @@ const ListTable: React.FC<Props> = (props) => {
                             {members.map((member,index) => {
                                 return(
                                     <li key={index} onClick={() => {setState(member);setZoom(true)}}>
-                                        <Card {...member}/>
+                                        <MembersCard {...member}/>
                                     </li>
                                 )
                             })}

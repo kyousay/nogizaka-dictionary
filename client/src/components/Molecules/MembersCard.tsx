@@ -1,10 +1,10 @@
 import React from 'react'
-import {Member} from '../../../reducers/MembersReducer'
+import {Member} from '../../reducers/MembersReducer'
 import styled from 'styled-components'
-import {Paragragh} from '../../Atoms/Paragragh'
-import Wrapper from '../../Atoms/Wrapper'
-import Img from '../../Atoms/Img'
-import Txt from '../../Atoms/Txt'
+import {Paragragh} from '../Atoms/Paragragh'
+import Wrapper from '../Atoms/Wrapper'
+import Img from '../Atoms/Img'
+import Txt from '../Atoms/Txt'
 
 interface BoxProps {
     styled: {
@@ -41,7 +41,7 @@ const Box = styled(Wrapper)<BoxProps>`
     }
 `
 
-const Card: React.FC<Member> = props => ( 
+const MembersCard: React.FC<Member> = props => ( 
     <Box styled={{color1: props.sailium[0], color2: props.sailium[1]}}>
         <Img src={props.img} styled={{width: '140px', height: '140px'}}/>
         <Wrapper styled={{margin: '16px 0 0 0', text_align: 'center'}}>
@@ -53,4 +53,4 @@ const Card: React.FC<Member> = props => (
     </Box>
 )
 
-export default Card
+export default MembersCard

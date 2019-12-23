@@ -5,13 +5,13 @@ import {Heading3} from '../../Atoms/Heading'
 import { DataType } from '../../../actions/login/loginActions'
 import {LineParagragh} from '../../Atoms/Paragragh'
 import Button from '../../Atoms/Button/'
-import FormM from '../../Molecules/Form/FormM'
+import FormM from '../../Molecules/FormM'
 
 const outerWrapperStyle ={
     margin: "80px auto",
     width: "396px",
     padding: "22px 108px 26px",
-    bgColor: "#fff" as const,
+    bgColor: "#fff" as "#fff",
 }
 
 const OuterWrapperElement = styled(Wrapper)`

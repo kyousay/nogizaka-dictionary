@@ -9,6 +9,4 @@ export default interface constantStyle {
     flex_direction: 'column' | 'row' | 'column-reverse' | 'row-reverse'
     flex_wrap: 'wrap' | 'wrap-reverse'
     bgColor: "#fff" | '#F9F9F9' | '#DB7093' | '#42b72a' | "#bf87c1" | '#812990' | 'rgba(0,0,0,0.7)'
-    // color
-    // border_color
 }

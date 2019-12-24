@@ -23,7 +23,7 @@ const UserEditCard: React.FC<Props> = props => (
         <InputSections {...props.InputSectionsProps} />
         { props.button !== undefined ?
             <Wrapper styled={{margin: props.button.margin}}>
-                <Button　 styled={{width: props.button.width, padding: props.button.padding, bgColor: props.button.bgColor}} onClick={props.clickHandler}>{props.buttonTxt}</Button>
+                <Button styled={{width: props.button.width, padding: props.button.padding, bgColor: props.button.bgColor}} onClick={props.clickHandler}>{props.buttonTxt}</Button>
             </Wrapper>
                 :   null
         }

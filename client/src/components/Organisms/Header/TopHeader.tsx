@@ -8,7 +8,7 @@ import Wrapper from '../../Atoms/Wrapper'
 import Img from '../../Atoms/Img'
 import logo from '../../../style/img/logo.jpg'
 import icon from '../../../style/img/user_icon.png'
-import {StateValue} from '../../../reducers'
+import {userState} from '../../../reducers/userReducer'
 
 const ImgBoxWrapper = styled(Wrapper)`
     cursor: pointer;
@@ -43,23 +43,22 @@ const buttonStyle = {
 }
 
 const inputStyle = {
-    width: '100%',
-    padding: '10px',
+    width: '100px',
     border_radius: '3px',
-    border: '1px solid #812990',
-    font_size: '1.2rem' as '1.2rem'
+    border: '1px solid ##F9F9F9',
+    font_size: '1.4rem' as '1.4rem'
 }
 
-const TopHeader: React.FC<StateValue> = props => {
+const TopHeader: React.FC<userState> = props => {
     const [searchWord, changeSearchWord] = useState('')
     const [isHover, changeHover] = useState(false)
     const [isClick, changeClick] = useState(false)
     const [userState, changeUserState] = useState({
         nickName: props.nickName,
-        message: '',
-        rank: ''
+        message: props.message,
+        rank: props.rank
     })
-    const userName = props.nickName? props.nickName : '新参者'
+    console.log(userState)
 
     const changeClickStateHandler = (state: boolean) => {
         var newState = state ? false : true
@@ -78,15 +77,15 @@ const TopHeader: React.FC<StateValue> = props => {
         TxtRowSectionsProps:{
             sections: [{
                 title: 'ニックネーム',
-                content: userName
+                content: userState.nickName
             },{
                 title: 'ひとこと',
-                content: 'こんにちは',
+                content: userState.message,
             },{
                 title: '称号',
-                content: 'アンダー'
+                content: userState.rank
             }],
-            TxtStyle: TxtStyle
+            TxtStyle
         },
         wrapperStyle: wrapperStyle,
         button: buttonStyle,
@@ -98,22 +97,32 @@ const TopHeader: React.FC<StateValue> = props => {
         InputSectionsProps : {
             inputs: [
                 {
-                    vaule: userState.nickName,
+                    value: userState.nickName,
+                    title: 'ニックネーム',
                     onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...userState,nickName: e.target.value})
                 },
                 {
-                    vaule: userState.message,
+                    value: userState.message,
+                    title: 'ひとこと',
                     onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...userState,message: e.target.value})
                 },
                 {
-                    vaule: userState.rank,
+                    value: userState.rank,
+                    title: '称号',
                     onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...userState,rank: e.target.value})
                 },
             ],
             InputStyle: inputStyle,
+            paragraghStyle: {
+                font_size: '1.2rem',
+                color: '#787878',
+                width: '98px'
+            } as const,
             wrapperStyle: {
-                margin: '20px'
-            }
+                padding: '15px',
+                display: 'flex',
+                align_items: 'center'
+            } as const
         },
         wrapperStyle:wrapperStyle,
         button: buttonStyle,
@@ -129,7 +138,7 @@ const TopHeader: React.FC<StateValue> = props => {
                 <ImgBoxWrapper styled={{margin: '0 0 0 20px', position: 'relative'}} 
                 onMouseEnter={() => changeHoverStateHandler(true)}
                 onMouseLeave={() => changeHoverStateHandler(false)}>
-                    <ImgBox src={icon} width={'50px'} font_size={'1.2rem'} description={userName}/>
+                    <ImgBox src={icon} width={'50px'} font_size={'1.2rem'} description={props.nickName}/>
                     
                     {
                         isHover ?

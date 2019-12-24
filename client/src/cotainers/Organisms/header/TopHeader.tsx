@@ -1,7 +1,11 @@
 import { connect } from 'react-redux'
-import { StateValue } from '../../../reducers'
+import { State } from '../../../reducers'
 import TopHeader from '../../../components/Organisms/Header/TopHeader'
 
-const mapStateToProps = (state : StateValue) => state
+const mapStateToProps = ({user} : State) => {
+    return {
+        ...user   
+    }
+}
 
 export default connect(mapStateToProps, {})(TopHeader)

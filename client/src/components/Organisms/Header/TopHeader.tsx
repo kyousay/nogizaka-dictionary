@@ -43,10 +43,12 @@ const buttonStyle = {
 }
 
 const inputStyle = {
-    width: '100px',
+    width: '146px',
     border_radius: '3px',
-    border: '1px solid ##F9F9F9',
-    font_size: '1.4rem' as '1.4rem'
+    border: 'none',
+    bgColor: '#EAEAEA' as '#EAEAEA',
+    padding: '10px 12px',
+    font_size: '1.2rem' as '1.2rem'
 }
 
 const TopHeader: React.FC<userState> = props => {
@@ -99,16 +101,19 @@ const TopHeader: React.FC<userState> = props => {
                 {
                     value: userState.nickName,
                     title: 'ニックネーム',
+                    maxLength: 60 as 60,
                     onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...userState,nickName: e.target.value})
                 },
                 {
                     value: userState.message,
                     title: 'ひとこと',
+                    maxLength: 60 as 60,
                     onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...userState,message: e.target.value})
                 },
                 {
                     value: userState.rank,
                     title: '称号',
+                    maxLength: 60 as 60,
                     onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...userState,rank: e.target.value})
                 },
             ],

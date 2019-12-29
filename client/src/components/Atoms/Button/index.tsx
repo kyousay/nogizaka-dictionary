@@ -14,8 +14,8 @@ interface ButtonProps {
 
 const Button = styled.button<ButtonProps>`
     font-size: ${props => props.styled.font_size? props.styled.font_size : '1.4rem'};
-    color: #fff;
-    border: none;
+    color: ${props => props.styled.color? props.styled.color : '#fff'};
+    border: ${props => props.styled.border? props.styled.border: 'none'};
     border-radius: 3px;
     width: ${props => props.styled.width};
     padding: ${props => props.styled.padding};

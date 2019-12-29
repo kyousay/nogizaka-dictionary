@@ -66,11 +66,11 @@ const ZoomCard : React.FC<Props> = props => (
             </Wrapper>
             <Wrapper styled={{margin: '17px 0 0 0'}}>
                 <TxtRowSection title={"生年月日"} content={props.dateOfBirth} 
-                color={"#787878"} titleSize={'1.2rem'} subSize={'1.4rem'} width={'108px'} padding={'12px 0 0 0'} border_top={'1px solid #D8D8D8'}/>
+                titleStyle={{color: '#787878', font_size: '1.2rem', width: '108px'}} contentStyle={{font_size:'1.4rem'}} wrapperStyle={{padding: '12px 0 0 0', border_top: '1px solid #D8D8D8'}}/>
                 <TxtRowSection title={"血液型"} content={props.blod} 
-                color={"#787878"} titleSize={'1.2rem'} subSize={'1.4rem'} margin={'17px 0 0'} width={'108px'}/>
+                titleStyle={{color: '#787878', font_size: '1.2rem', width: '108px'}} contentStyle={{font_size:'1.4rem'}} wrapperStyle={{margin: '17px 0 0'}}/>
                 <TxtRowSection title={"身長"} content={`${props.height}cm`} 
-                color={"#787878"} titleSize={'1.2rem'} subSize={'1.4rem'} margin={'17px 0 0'} width={'108px'}/>
+                titleStyle={{color: '#787878', font_size: '1.2rem', width: '108px'}} contentStyle={{font_size:'1.4rem'}} wrapperStyle={{margin: '17px 0 0'}}/>
             </Wrapper>
             <HashWrapper styled={{wrap:"wrap", margin: '15px 0 0 0', max_height: '50px'}}>
                 <Hash hash={props.hash} segment={props.segment}/>

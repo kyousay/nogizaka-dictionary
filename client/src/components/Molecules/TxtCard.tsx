@@ -10,7 +10,7 @@ const ShadowWrapper = styled(Wrapper)`
 
 interface Props {
     TxtRowSectionsProps : TxtRowSectionProps
-    wrapperStyle?: WrapperStyle
+    cardStyle?: WrapperStyle
     button?: ButtonStyle
     buttonTxt?: string
     clickHandler?: React.MouseEventHandler<HTMLButtonElement>
@@ -18,8 +18,8 @@ interface Props {
 
 
 
-const UserCard: React.FC<Props> = props => (
-    <ShadowWrapper styled={{...props.wrapperStyle}}>
+const TxtCard: React.FC<Props> = props => (
+    <ShadowWrapper styled={{...props.cardStyle}}>
         <TxtRowSections {...props.TxtRowSectionsProps} />
         {   
             props.button !== undefined ?
@@ -31,4 +31,4 @@ const UserCard: React.FC<Props> = props => (
     </ShadowWrapper>
 )
 
-export default UserCard
+export default TxtCard

@@ -1,8 +1,8 @@
 import React,{ useState } from 'react'
 import styled from 'styled-components'
 import SearchPanel from '../../Molecules/SerchPanel'
-import UserCard from '../../Molecules/UserCard'
-import UserEditCard from '../../Molecules/UserEditCard'
+import TxtCard from '../../Molecules/TxtCard'
+import InputCard from '../../Molecules/InputCard'
 import ImgBox from '../../Molecules/ImgBox'
 import Wrapper from '../../Atoms/Wrapper'
 import Img from '../../Atoms/Img'
@@ -17,7 +17,7 @@ const ImgBoxWrapper = styled(Wrapper)`
     }
 `
 
-const wrapperStyle = {
+const cardStyle = {
     position: 'absolute',
     right: '10px',
     bgColor: '#fff' as '#fff',
@@ -25,20 +25,19 @@ const wrapperStyle = {
     padding: '20px'
 }
 
-const TxtStyle = {
-    titleSize: '1.2rem' as '1.2rem', 
-    subSize: '1.4rem' as '1.4rem',
-    padding: '20px',
-    color: '#787878',
-    width: '96px',
+const TxtRowSectionStyle = {
+    titelStyle: {font_size: '1.2rem' as '1.2rem', color: '#787878'}, 
+    titleWrapperStyle: {width: '96px'},
+    contentStyle: {font_size: '1.4rem' as '1.4rem'},
+    wrapperStyle: {padding: '20px'},
 }
 
 const buttonStyle = {
     font_size: '1.4rem' as '1.4rem',
     color: '#fff',
     width: '100%',
-    padding: '10px',
     margin: '20px',
+    padding: '10px',
     bgColor: '#812990' as '#812990',
 }
 
@@ -79,19 +78,21 @@ const TopHeader: React.FC<userState> = props => {
         TxtRowSectionsProps:{
             sections: [{
                 title: 'ニックネーム',
-                content: userState.nickName
+                content: userState.nickName,
+                ...TxtRowSectionStyle,
             },{
                 title: 'ひとこと',
                 content: userState.message,
+                ...TxtRowSectionStyle,
             },{
                 title: '称号',
-                content: userState.rank
+                content: userState.rank,
+                ...TxtRowSectionStyle,
             }],
-            TxtStyle
         },
-        wrapperStyle: wrapperStyle,
+        cardStyle: cardStyle,
         button: buttonStyle,
-        buttonTxt: 'プロフィール編集',
+        buttonTxt: 'プロフィールを編集する',
         clickHandler: () => changeClickStateHandler(isClick)
     }
 
@@ -129,10 +130,21 @@ const TopHeader: React.FC<userState> = props => {
                 align_items: 'center'
             } as const
         },
-        wrapperStyle:wrapperStyle,
-        button: buttonStyle,
-        buttonTxt: '編集確定',
-        clickHandler: () => changeClickStateHandler(isClick)
+        cardStyle:cardStyle,
+        buttons: [
+            {
+                buttonWrapperStyle: {margin: '20px'},
+                buttonStyle: {...buttonStyle, margin:'0'},
+                buttonTxt: '変更を保存する',
+                clickHandler: () => changeClickStateHandler(isClick)
+            },
+            {
+                buttonWrapperStyle: {margin: '20px'},
+                buttonStyle: {...buttonStyle,bgColor: '#FFFFFF' as '#FFFFFF', margin: '0', color: '#0000000', border: '1px solid #000000'},
+                buttonTxt: 'キャンセル',
+                clickHandler: () => changeClickStateHandler(isClick)
+            }
+        ]
     }
 
     return(
@@ -149,9 +161,9 @@ const TopHeader: React.FC<userState> = props => {
                         isHover ?
                             isClick?
 
-                            <UserEditCard {...UserEditCardProps} />
+                            <InputCard {...UserEditCardProps} />
 
-                            :<UserCard {...UserCardProps}/>
+                            :<TxtCard {...UserCardProps}/>
                             
                         : null
                     }

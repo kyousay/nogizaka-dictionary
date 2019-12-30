@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import Wrapper ,{ElementStyle as WrapperStyle}from '../Atoms/Wrapper'
 import Txt, {ElementStyle as ContentStyle} from '../Atoms/Txt'
 import {Paragragh, ElementStyle as TitleStyle} from '../Atoms/Paragragh'
@@ -12,13 +13,18 @@ export interface Props  {
     contentStyle?: ContentStyle 
 }
 
+const TxtRowWrapper = styled(Wrapper)`
+    border-top: ${props => props.styled.border_top}
+`
+
+
 const TxtRow : React.FC<Props> = props => (
-    <Wrapper styled={{...props.wrapperStyle,display: 'flex'}}>
+    <TxtRowWrapper styled={{...props.wrapperStyle,display: 'flex'}}>
         <Wrapper styled={{...props.titleWrapperStyle}}>
             <Paragragh styled={{...props.titleStyle}}>{props.title}</Paragragh>
         </Wrapper>
         <Txt styled={{...props.contentStyle}}>{props.content}</Txt>
-    </Wrapper>
+    </TxtRowWrapper>
 )
 
 export default TxtRow

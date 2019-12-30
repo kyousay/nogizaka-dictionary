@@ -4,7 +4,7 @@ import Img from '../Atoms/Img'
 import {Paragragh} from '../Atoms/Paragragh'
 import Wrapper from '../Atoms/Wrapper'
 import Txt from '../Atoms/Txt'
-import TxtRow from './TxtRow'
+import TxtRowSections from './TxtRowSections'
 import dummy from '../../style/img/anonymous.png'
 import { Member } from '../../reducers/MembersReducer'
 import close from '../../style/img/close.png'
@@ -42,6 +42,19 @@ const HashWrapper = styled(Wrapper)`
     overflow-Y: scroll;
 `
 
+const TxtRowSectionsStyle = {
+    titleStyle: {
+        color: '#787878', 
+        font_size: '1.2rem' as '1.2rem', 
+    },
+    titleWrapperStyle: {
+        width: '108px'
+    },
+    contentStyle: {
+        font_size: '1.4rem' as '1.4rem'
+    },
+}
+
 interface ZoomCardProps {
     zoomOutHandler : () => void
     name: string[]
@@ -49,7 +62,30 @@ interface ZoomCardProps {
 
 export type Props = Member & ZoomCardProps
 
-const ZoomCard : React.FC<Props> = props => (
+const ZoomCard : React.FC<Props> = props => {
+    const TxtRowSectionsProps = {
+        sections: [
+            {
+                title: "生年月日",
+                content: props.dateOfBirth,
+                ...TxtRowSectionsStyle,
+                wrapperStyle: {border_top: '1px solid #D8D8D8', padding: '12px 0 0 0'}
+            },
+            {
+                title: "血液型",
+                content: props.blod,
+                ...TxtRowSectionsStyle,
+                wrapperStyle: {margin: '17px 0 0'}
+            },
+            {
+                title: "身長",
+                content: `${props.height}cm`,
+                ...TxtRowSectionsStyle,
+                wrapperStyle: {margin: '17px 0 0'}
+            },
+        ]
+    }
+    return (
     <Wrapper styled={{...zoomFieldStyle}} onClick={props.zoomOutHandler}>
         <Wrapper styled={{...contentStyle}}>
             <Wrapper styled={{position: 'absolute', top: '-30px', right: '-50px'}} onClick={props.zoomOutHandler}>
@@ -65,18 +101,13 @@ const ZoomCard : React.FC<Props> = props => (
                 </Paragragh>
             </Wrapper>
             <Wrapper styled={{margin: '17px 0 0 0'}}>
-                <TxtRow title={"生年月日"} content={props.dateOfBirth} 
-                titleStyle={{color: '#787878', font_size: '1.2rem' as '1.2rem', width: '108px'}} contentStyle={{font_size:'1.4rem'}} wrapperStyle={{padding: '12px 0 0 0', border_top: '1px solid #D8D8D8'}}/>
-                <TxtRow title={"血液型"} content={props.blod} 
-                titleStyle={{color: '#787878', font_size: '1.2rem' as '1.2rem', width: '108px'}} contentStyle={{font_size:'1.4rem'}} wrapperStyle={{margin: '17px 0 0'}}/>
-                <TxtRow title={"身長"} content={`${props.height}cm`} 
-                titleStyle={{color: '#787878', font_size: '1.2rem' as '1.2rem', width: '108px'}} contentStyle={{font_size:'1.4rem'}} wrapperStyle={{margin: '17px 0 0'}}/>
+                <TxtRowSections {...TxtRowSectionsProps} />
             </Wrapper>
             <HashWrapper styled={{wrap:"wrap", margin: '15px 0 0 0', max_height: '50px'}}>
                 <Hash hash={props.hash} segment={props.segment}/>
             </HashWrapper>
         </Wrapper>
     </Wrapper>
-)
+)}
 
 export default ZoomCard

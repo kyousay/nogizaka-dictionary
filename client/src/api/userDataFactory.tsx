@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {DataType} from '../actions/login/loginActions'
+import { userProfile } from '../components/Organisms/Header/TopHeader'
 
 interface apiConfig {
     baseURL: string,
@@ -15,17 +15,19 @@ const DEFAULT_API_CONFIG: apiConfig = {
     timeout: 7000,
 };
 
-export const loginUserFactory = (optionConfig? : optionConfig) => {
+export const userDataFactory = (optionConfig? : optionConfig) => {
+    const token = localStorage.getItem("ticket")
     const config = {
         ...DEFAULT_API_CONFIG,
         ...optionConfig,
+        headers: {Authorization: token}
     };
 
     const instance = axios.create(config);
 
-    const loginUser = async (data: DataType, url: string) => {
+    const userAxios = async (data: userProfile, url: string) => {
         try {
-            const response = await instance.post(`${url}`, data);
+            const response = await instance.put(`${url}`, data);
 
             if(response.status !== 200) {
                 throw new Error(`Server Error`);
@@ -35,5 +37,5 @@ export const loginUserFactory = (optionConfig? : optionConfig) => {
             throw err;
         }
     };
-    return loginUser
+    return userAxios
 }

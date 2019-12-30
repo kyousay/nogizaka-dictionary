@@ -4,7 +4,7 @@ import Img from '../Atoms/Img'
 import {Paragragh} from '../Atoms/Paragragh'
 import Wrapper from '../Atoms/Wrapper'
 import Txt from '../Atoms/Txt'
-import TxtRowSection from './TxtRow'
+import TxtRow from './TxtRow'
 import dummy from '../../style/img/anonymous.png'
 import { Member } from '../../reducers/MembersReducer'
 import close from '../../style/img/close.png'
@@ -65,12 +65,12 @@ const ZoomCard : React.FC<Props> = props => (
                 </Paragragh>
             </Wrapper>
             <Wrapper styled={{margin: '17px 0 0 0'}}>
-                <TxtRowSection title={"生年月日"} content={props.dateOfBirth} 
-                titleStyle={{color: '#787878', font_size: '1.2rem', width: '108px'}} contentStyle={{font_size:'1.4rem'}} wrapperStyle={{padding: '12px 0 0 0', border_top: '1px solid #D8D8D8'}}/>
-                <TxtRowSection title={"血液型"} content={props.blod} 
-                titleStyle={{color: '#787878', font_size: '1.2rem', width: '108px'}} contentStyle={{font_size:'1.4rem'}} wrapperStyle={{margin: '17px 0 0'}}/>
-                <TxtRowSection title={"身長"} content={`${props.height}cm`} 
-                titleStyle={{color: '#787878', font_size: '1.2rem', width: '108px'}} contentStyle={{font_size:'1.4rem'}} wrapperStyle={{margin: '17px 0 0'}}/>
+                <TxtRow title={"生年月日"} content={props.dateOfBirth} 
+                titleStyle={{color: '#787878', font_size: '1.2rem' as '1.2rem', width: '108px'}} contentStyle={{font_size:'1.4rem'}} wrapperStyle={{padding: '12px 0 0 0', border_top: '1px solid #D8D8D8'}}/>
+                <TxtRow title={"血液型"} content={props.blod} 
+                titleStyle={{color: '#787878', font_size: '1.2rem' as '1.2rem', width: '108px'}} contentStyle={{font_size:'1.4rem'}} wrapperStyle={{margin: '17px 0 0'}}/>
+                <TxtRow title={"身長"} content={`${props.height}cm`} 
+                titleStyle={{color: '#787878', font_size: '1.2rem' as '1.2rem', width: '108px'}} contentStyle={{font_size:'1.4rem'}} wrapperStyle={{margin: '17px 0 0'}}/>
             </Wrapper>
             <HashWrapper styled={{wrap:"wrap", margin: '15px 0 0 0', max_height: '50px'}}>
                 <Hash hash={props.hash} segment={props.segment}/>

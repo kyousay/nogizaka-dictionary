@@ -3,6 +3,7 @@ import { LoginAction } from '../actions/login/loginActions'
 import * as ActionType from '../actions/login/loginConstants'
 
 const initialState = {
+    id: '',
     nickName: '新参者',
     message: 'こんにちは。',
     rank: 'アンダー',

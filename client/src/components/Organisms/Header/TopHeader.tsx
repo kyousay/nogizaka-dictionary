@@ -50,16 +50,24 @@ const inputStyle = {
     font_size: '1.2rem' as '1.2rem'
 }
 
-const TopHeader: React.FC<userState> = props => {
+export interface userProfile {
+    nickName: string
+    message: string
+    rank: string
+}
+
+type Props = userState & {upDate: (props: userProfile) => void}
+
+const TopHeader: React.FC<Props> = props => {
     const [searchWord, changeSearchWord] = useState('')
     const [isHover, changeHover] = useState(false)
     const [isClick, changeClick] = useState(false)
-    const [userState, changeUserState] = useState({
+    let initialUserState = {
         nickName: props.nickName,
         message: props.message,
         rank: props.rank
-    })
-    console.log(userState)
+    }
+    const [userState, changeUserState] = useState<userProfile>(initialUserState)
 
     const changeClickStateHandler = (state: boolean) => {
         var newState = state ? false : true
@@ -72,6 +80,10 @@ const TopHeader: React.FC<userState> = props => {
     }
     const changeInputValueHandler = (state : typeof userState) => {
         changeUserState(state)
+    }
+
+    const upDateUserData = (userState : userProfile) => {
+        props.upDate(userState)
     }
     
     const UserCardProps = {
@@ -102,7 +114,7 @@ const TopHeader: React.FC<userState> = props => {
                 {
                     value: userState.nickName,
                     title: 'ニックネーム',
-                    maxLength: 60 as 60,
+                    maxLength: 10 as 10,
                     onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...userState,nickName: e.target.value})
                 },
                 {
@@ -114,7 +126,7 @@ const TopHeader: React.FC<userState> = props => {
                 {
                     value: userState.rank,
                     title: '称号',
-                    maxLength: 60 as 60,
+                    maxLength: 10 as 10,
                     onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...userState,rank: e.target.value})
                 },
             ],
@@ -136,13 +148,20 @@ const TopHeader: React.FC<userState> = props => {
                 buttonWrapperStyle: {margin: '20px'},
                 buttonStyle: {...buttonStyle, margin:'0'},
                 buttonTxt: '変更を保存する',
-                clickHandler: () => changeClickStateHandler(isClick)
+                clickHandler: () => {
+                    upDateUserData(userState);
+                    initialUserState = userState;
+                    changeClickStateHandler(isClick);
+                }
             },
             {
                 buttonWrapperStyle: {margin: '20px'},
                 buttonStyle: {...buttonStyle,bgColor: '#FFFFFF' as '#FFFFFF', margin: '0', color: '#0000000', border: '1px solid #000000'},
                 buttonTxt: 'キャンセル',
-                clickHandler: () => changeClickStateHandler(isClick)
+                clickHandler: () => {
+                    changeClickStateHandler(isClick);
+                    changeUserState(initialUserState);
+                }
             }
         ]
     }
@@ -154,7 +173,10 @@ const TopHeader: React.FC<userState> = props => {
                 <SearchPanel value={searchWord} changeHandler={(e : React.ChangeEvent<HTMLInputElement>) => changeSearchWord(e.target.value)}/>
                 <ImgBoxWrapper styled={{margin: '0 0 0 20px', position: 'relative'}} 
                 onMouseEnter={() => changeHoverStateHandler(true)}
-                onMouseLeave={() => changeHoverStateHandler(false)}>
+                onMouseLeave={() => {
+                    changeHoverStateHandler(false);
+                    changeUserState(initialUserState);
+                }}>
                     <ImgBox src={icon} width={'50px'} font_size={'1.2rem'} description={props.nickName}/>
                     
                     {

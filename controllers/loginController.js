@@ -30,12 +30,17 @@ module.exports = {
                         data: user._id,
                         exp: new Date().setDate(new Date().getDate() + 1)
                     },
-                    "secret_encoding_passphrase"
+                    "effort_thanks_smile"
                 );
                 res.json({
                     success: true,
                     token: signedToken,
-                    user: user,
+                    user: {
+                        id: user._id,
+                        nickName: user.nickName,
+                        message: user.message,
+                        rank: user.rank
+                    },
                     message: "ユーザー認証に成功しました。"
                 });
             } else {
@@ -48,9 +53,8 @@ module.exports = {
     },
     verifyJWT: (req, res, next) => {
         let token = req.headers.authorization;
-        console.log(token)
         if(token) {
-            jsonWebToken.verify(token, "secret_encoding_passphrase", (error, payload) => {
+            jsonWebToken.verify(token, "effort_thanks_smile", (error, payload) => {
                 if(payload) {
                     User.findById(payload.data).then(user => {
                         if(user) {

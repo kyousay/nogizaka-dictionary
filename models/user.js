@@ -11,6 +11,16 @@ let userSchema = new Schema(
             trim: true,
             max: 10
         },
+        message: {
+            type: String,
+            trim: true,
+            max: 60
+        },
+        rank: {
+            type: String,
+            trim: true,
+            max: 10
+        },
         email: {
             type: String,
             required: true,

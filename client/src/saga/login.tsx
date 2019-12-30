@@ -29,12 +29,9 @@ function* loginAcount(action : ReturnType<typeof LoginAction.loginAcount>) {
         alert(result.data.message);
         if(result.data.success) {
             yield localStorage.setItem('ticket',result.data.token);
+            yield put(LoginAction.setUserData({...result.data.user}))
             yield put(LoginAction.changeUserIsLogin({isLogin:true}))
         }
-        //jwt認証テスト
-        // const apiTest = loginUserFactory({headers: {Authorization : `${result.data.token}`}});
-        // const result2 = yield call(apiTest, result.data, '/login/test');
-        // console.log(result2);
     }catch(error) {
         yield alert(error);
     }

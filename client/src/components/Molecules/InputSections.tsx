@@ -9,7 +9,7 @@ export interface Props {
         title?: string
         value?: string | undefined
         type?: 'text' | 'email' | 'password'
-        maxLength?: 60
+        maxLength?: 10 | 60
         placeholder?: string
         onChangeHandler?: React.ChangeEventHandler<HTMLInputElement>
     }[]

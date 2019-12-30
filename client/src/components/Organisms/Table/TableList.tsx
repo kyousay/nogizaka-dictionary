@@ -7,6 +7,8 @@ import { membersState } from '../../../reducers/MembersReducer'
 
 const UnOrderdList = Wrapper.withComponent('ul')
 
+const ListItem = Wrapper.withComponent('li')
+
 const ListTable: React.FC<Props> = (props) => {
 
     const [ zoom, setZoom ] = useState(false)
@@ -26,9 +28,9 @@ const ListTable: React.FC<Props> = (props) => {
         element = <UnOrderdList styled={{justify: "center", wrap: "wrap", max_width: '830px', margin: '60px auto 0 auto' }}>
                             {members.map((member,index) => {
                                 return(
-                                    <li key={index} onClick={() => {setState(member);setZoom(true)}}>
+                                    <ListItem key={index} onClick={() => {setState(member);setZoom(true)}} styled={{display: 'inline-block'}}>
                                         <MembersCard {...member}/>
-                                    </li>
+                                    </ListItem>
                                 )
                             })}
                     </UnOrderdList>

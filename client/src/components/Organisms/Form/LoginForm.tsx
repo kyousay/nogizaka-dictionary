@@ -5,7 +5,7 @@ import {Heading3} from '../../Atoms/Heading'
 import { DataType } from '../../../actions/login/loginActions'
 import {LineParagragh} from '../../Atoms/Paragragh'
 import Button from '../../Atoms/Button/'
-import FormM from '../../Molecules/FormM'
+import Form from '../../Molecules/Form'
 
 const outerWrapperStyle ={
     margin: "80px auto",
@@ -17,6 +17,13 @@ const outerWrapperStyle ={
 const OuterWrapperElement = styled(Wrapper)`
     box-sizing: unset;
 `
+
+const inputStyle = {
+    font_size: '1.4rem' as '1.4rem', 
+    padding: '5px 8px', 
+    width: '280px',
+    border: '1px solid #dddfe2'
+}
 
 const spStyle = {
     width: '100%',
@@ -65,20 +72,36 @@ const LoginForm: React.FC<props> = (props) => {
         }
     }
 
-    const FormMProps = {
-        input1: {
-            type: 'email' as 'email',
-            value: value.email,
-            placeholder: 'メールアドレス',
-            onChangeHandler: (e : React.ChangeEvent<HTMLInputElement>)  => setValue({...value, email: e.target.value})
+    const FormProps = {
+        inputsProps: {
+            inputs: [
+                {
+                    type: 'email' as 'email',
+                    value: value.email,
+                    placeholder: 'メールアドレス',
+                    inputStyle,
+                    inputWrapperStyle: {margin: '10px'},
+                    onChangeHandler: (e : React.ChangeEvent<HTMLInputElement>)  => setValue({...value, email: e.target.value})
+                },
+                {
+                    type: 'password' as 'password',
+                    value: value.password,
+                    placeholder: 'パスワード',
+                    inputStyle,
+                    inputWrapperStyle: {margin: '10px'},
+                    onChangeHandler: (e : React.ChangeEvent<HTMLInputElement>)  => setValue({...value, password: e.target.value})
+                },
+            ]
         },
-        input2: {
-            type: 'password' as 'password',
-            value: value.password,
-            placeholder: 'パスワード',
-            onChangeHandler: (e : React.ChangeEvent<HTMLInputElement>)  => setValue({...value, password: e.target.value})
+        buttonsProps: {
+            buttons: [
+                {
+                    buttonWrapperStyle: {margin: '10px 0 0 0'},
+                    buttonStyle: {width:"280px",bgColor:"#bf87c1" as "#bf87c1",padding: '10px 0px'},
+                    buttonTxt: buttonText.main,
+                }
+            ]
         },
-        buttonText: buttonText.main,
         submitHandler: submitHandler,
     }
 
@@ -87,7 +110,7 @@ const LoginForm: React.FC<props> = (props) => {
             <Wrapper styled={{padding: '18px 0'}}>
                 <Heading3 styled={{font_size: '1.8rem', text_align: 'center'}}>{title}</Heading3>
             </Wrapper>
-            <FormM {...FormMProps} />
+            <Form {...FormProps} />
             <Wrapper styled={{margin: '20px 0 0 0', display:'flex', justify_content: 'center'}}>
                 <LineParagragh styled={{lineWidth:'100px', wrapperWidth: '280px',text_align: 'center',font_size: '1.2rem'}}>または</LineParagragh>
             </Wrapper>

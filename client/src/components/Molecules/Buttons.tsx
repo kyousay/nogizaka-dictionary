@@ -7,7 +7,7 @@ export interface Props {
         buttonWrapperStyle: WrapperStyle
         buttonStyle: ButtonStyle
         buttonTxt: string
-        clickHandler: React.MouseEventHandler<HTMLButtonElement>
+        clickHandler?: React.MouseEventHandler<HTMLButtonElement>
     }[] 
 }
 

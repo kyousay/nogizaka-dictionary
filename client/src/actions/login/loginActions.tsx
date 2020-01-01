@@ -11,28 +11,28 @@ export interface UserIsLogin {
 }
 
 export const createAcount = (data : DataType) => ({
-    type: ActionType.CREATE_ACOUNT as typeof ActionType.CREATE_ACOUNT,
+    type: ActionType.LOGIN_CREATE_ACOUNT as typeof ActionType.LOGIN_CREATE_ACOUNT,
     payload: {
         ...data
     }
 })
 
 export const loginAcount = (data: DataType) => ({
-    type: ActionType.LOGIN_ACOUNT as typeof ActionType.LOGIN_ACOUNT,
+    type: ActionType.LOGIN_USER_ACOUNT as typeof ActionType.LOGIN_USER_ACOUNT,
     payload: {
         ...data
     }
 })
 
 export const setUserData = (data : userState) => ({
-    type: ActionType.SET_USERDATA as typeof ActionType.SET_USERDATA,
+    type: ActionType.LOGIN_SET_USERDATA as typeof ActionType.LOGIN_SET_USERDATA,
     payload: {
         ...data
     }
 })
 
 export const changeUserIsLogin = (isLogin : Pick<UserIsLogin,'isLogin'>) => ({
-    type: ActionType.CHANGE_USER_ISLOGIN as typeof ActionType.CHANGE_USER_ISLOGIN,
+    type: ActionType.LOGIN_CHANGE_USER_ISLOGIN as typeof ActionType.LOGIN_CHANGE_USER_ISLOGIN,
     payload: isLogin
 })
 

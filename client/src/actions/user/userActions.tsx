@@ -8,5 +8,13 @@ export const upDateUserData = (data : userProfile) => ({
     }
 })
 
-export type LoginAction = 
+export const setUserData = (data : userProfile) => ({
+    type: ActionType.USER_SET_USERDATA as typeof ActionType.USER_SET_USERDATA,
+    payload: {
+        ...data
+    }
+})
+
+export type UserAction = 
     | ReturnType<typeof upDateUserData>
+    | ReturnType<typeof setUserData>

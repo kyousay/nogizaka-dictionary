@@ -39,6 +39,6 @@ function* loginAcount(action : ReturnType<typeof LoginAction.loginAcount>) {
 
 
 export default function* loginActions() {
-    yield takeLatest (Action.CREATE_ACOUNT, createAcount)
-    yield takeLatest (Action.LOGIN_ACOUNT, loginAcount)
+    yield takeLatest (Action.LOGIN_CREATE_ACOUNT, createAcount)
+    yield takeLatest (Action.LOGIN_USER_ACOUNT, loginAcount)
 }

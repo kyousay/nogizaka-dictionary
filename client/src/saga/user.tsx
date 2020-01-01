@@ -1,7 +1,7 @@
 import 
     { 
         // all,  fork, 
-        call, takeLatest} 
+        put, call, takeLatest} 
 from 'redux-saga/effects'
 import * as Action from '../actions/user/userConstants'
 import * as userAction from '../actions/user/userActions'
@@ -13,7 +13,13 @@ function* upDateUserData(action : ReturnType<typeof userAction.upDateUserData>){
     try{
         const api = userDataFactory();
         const result = yield call(api, userData, '/user/update')
-        console.log(result)
+        const data : typeof userData = result.data
+        const props = {
+            nickName: data.nickName,
+            message: data.message,
+            rank: data.rank
+        }
+        yield put(userAction.setUserData({...props}))
     }catch(error) {
         yield alert(error)
     }

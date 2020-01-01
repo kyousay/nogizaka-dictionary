@@ -1,4 +1,4 @@
-import React, { HtmlHTMLAttributes, InputHTMLAttributes } from 'react'
+import React from 'react'
 import Input, {ElementStyle as InputStyle} from '../Atoms/Input'
 import Wrapper, {ElementStyle as WrapperStyle} from '../Atoms/Wrapper'
 
@@ -6,7 +6,6 @@ interface Inputs{
     inputStyle: InputStyle
     inputWrapperStyle: WrapperStyle
     props: React.InputHTMLAttributes<HTMLInputElement>
-    // onChangeHandler: (event:React.ChangeEvent<HTMLInputElement>) => void 
 }
 
 export interface Props {

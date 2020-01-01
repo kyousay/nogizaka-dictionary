@@ -77,20 +77,25 @@ const LoginForm: React.FC<props> = (props) => {
         inputsProps: {
             inputs: [
                 {
-                    type: 'email' as 'email',
-                    value: value.email,
-                    placeholder: 'メールアドレス',
                     inputStyle,
                     inputWrapperStyle: {margin: '10px'},
-                    onChangeHandler: (e : React.ChangeEvent<HTMLInputElement>)  => setValue({...value, email: e.target.value})
+                    props: {
+                        type: 'email',
+                        value: value.email,
+                        placeholder: 'メールアドレス',
+                        onChange: (e : React.ChangeEvent<HTMLInputElement>)  => setValue({...value, email: e.target.value})
+                    }
                 },
                 {
-                    type: 'password' as 'password',
-                    value: value.password,
-                    placeholder: 'パスワード',
+                    
                     inputStyle,
                     inputWrapperStyle: {margin: '10px'},
-                    onChangeHandler: (e : React.ChangeEvent<HTMLInputElement>)  => setValue({...value, password: e.target.value})
+                    props: {
+                        type: 'password',
+                        value: value.password,
+                        placeholder: 'パスワード',
+                        onChange: (e : React.ChangeEvent<HTMLInputElement>)  => setValue({...value, password: e.target.value})
+                    }
                 },
             ]
         },

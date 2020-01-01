@@ -112,22 +112,29 @@ const TopHeader: React.FC<Props> = props => {
         InputSectionsProps : {
             inputs: [
                 {
-                    value: userState.nickName,
                     title: 'ニックネーム',
-                    maxLength: 10 as 10,
-                    onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...userState,nickName: e.target.value})
+                    props: {
+                        maxLength: 10,
+                        value: userState.nickName,
+                        onChange: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...userState,nickName: e.target.value})
+                    }
+                    
                 },
                 {
-                    value: userState.message,
                     title: 'ひとこと',
-                    maxLength: 60 as 60,
-                    onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...userState,message: e.target.value})
+                    props: {
+                        value: userState.message,
+                        maxLength: 60,
+                        onChange: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...userState,message: e.target.value})
+                    }
                 },
                 {
-                    value: userState.rank,
                     title: '称号',
-                    maxLength: 10 as 10,
-                    onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...userState,rank: e.target.value})
+                    props: {
+                        value: userState.rank,
+                        maxLength: 10,
+                        onChange: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...userState,rank: e.target.value})
+                    }
                 },
             ],
             InputStyle: inputStyle,

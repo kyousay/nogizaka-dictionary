@@ -2,19 +2,23 @@ import React, {useEffect} from 'react'
 import LoginHeader from '../Organisms/Header/LoginHeader'
 import LoginForm from '../../cotainers/Organisms/Form/LoginForm'
 import {userState} from '../../reducers/userReducer'
-import {withRouter, RouteComponentProps} from 'react-router'
+import useReactRouter from 'use-react-router'
+// import {withRouter, RouteComponentProps} from 'react-router'
 
-interface PageProps extends RouteComponentProps {
+interface PageProps {
     user: userState
     isStorageToken: (props: {isLogin: boolean}) => void
 }
 
 const Login : React.FC<PageProps> = (props) => {
+    const { history, location, match } = useReactRouter()
     useEffect(() => {
         const isStorageToken = localStorage.getItem('ticket')? true : false
         if(props.user.login || isStorageToken === true) {
             props.isStorageToken({isLogin:isStorageToken})
-            props.history.push('/top')
+            history.push('/top')
+            console.log(location)
+            console.log(match)
         }
     })
     return(
@@ -25,4 +29,4 @@ const Login : React.FC<PageProps> = (props) => {
     )
 }
 
-export default withRouter(Login)
+export default Login

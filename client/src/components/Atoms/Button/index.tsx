@@ -6,7 +6,7 @@ interface ButtonStyle {
     [k : string] : string
 }
 
-export type ElementStyle = Partial<ButtonStyle & Pick<constantStyle, 'font_size' | 'bgColor'>>
+export type ElementStyle = Partial<ButtonStyle & Pick<constantStyle, 'font_size' | 'font_weight' | 'bgColor'>>
 
 interface ButtonProps {
     styled: ElementStyle
@@ -14,6 +14,7 @@ interface ButtonProps {
 
 const Button = styled.button<ButtonProps>`
     font-size: ${props => props.styled.font_size? props.styled.font_size : '1.4rem'};
+    font-weight: ${props => props.styled.font_weight};
     color: ${props => props.styled.color? props.styled.color : '#fff'};
     border: ${props => props.styled.border? props.styled.border: 'none'};
     border-radius: 3px;

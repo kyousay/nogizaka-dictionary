@@ -22,7 +22,8 @@ const inputStyle = {
     font_size: '1.4rem' as '1.4rem', 
     padding: '5px 8px', 
     width: '280px',
-    border: '1px solid #dddfe2'
+    border: '1px solid #dddfe2',
+    border_radius: '3px'
 }
 
 const spStyle = {

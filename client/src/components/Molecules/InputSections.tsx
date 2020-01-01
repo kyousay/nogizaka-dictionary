@@ -8,9 +8,11 @@ export interface Props {
     inputs: {
         title?: string
         value?: string | undefined
-        type?: 'text' | 'email' | 'password'
+        type?: 'text' | 'email' | 'password' | 'file'
+        name?: string
         maxLength?: 10 | 60
         placeholder?: string
+        props?: React.InputHTMLAttributes<HTMLInputElement>
         onChangeHandler?: React.ChangeEventHandler<HTMLInputElement>
     }[]
     paragraghStyle?: ParagraghStyle
@@ -29,7 +31,9 @@ const InputSections : React.FC<Props> = (props) => (
             props.inputs.map((input, index) => (
                 <Wrapper styled={{...props.wrapperStyle}} key={index}>
                     <InputTitle styled={{...props.paragraghStyle}}>{input.title}</InputTitle>
-                    <Input type={input.type ? input.type : 'text'} styled={{...props.InputStyle}} value={input.value} onChange={input.onChangeHandler} placeholder={input.placeholder} maxLength={input.maxLength}/>
+                    <Input type={input.type ? input.type : 'text'} styled={{...props.InputStyle}} value={input.value} 
+                    onChange={input.onChangeHandler} placeholder={input.placeholder} maxLength={input.maxLength}
+                    name={input.name} {...input.props}/>
                 </Wrapper>
             ))
         }

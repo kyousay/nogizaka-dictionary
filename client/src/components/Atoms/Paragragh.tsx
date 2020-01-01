@@ -16,6 +16,7 @@ export const Paragragh = styled.p<ParagraghProps>`
     font-size: ${props => props.styled.font_size};
     font-weight: ${props => props.styled.font_weight};
     text-align: ${props => props.styled.text_align};
+    padding: ${props => props.styled.padding};
     color: ${props => props.styled.color};
 `
 

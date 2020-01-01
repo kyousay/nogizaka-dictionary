@@ -11,12 +11,12 @@ const App: React.FC = () => {
     <>
       <GlobalStyle />
       <Wrapper styled={{bgColor:'#F9F9F9',min_height:"100vh"}}>
-      <Switch>
-        <Route path='/login' component={Login} />
-        <Route path="/top" component={Top} />
-        <Route path="/admin" component={Admin} />
-        <Redirect to="/login" />
-      </Switch>
+        <Switch>
+          <Route path='/login' component={Login} />
+          <Route path="/top" component={Top} />
+          <Route path="/admin" component={Admin} />
+          <Redirect to="/login" />
+        </Switch>
       </Wrapper>
     </>
   )

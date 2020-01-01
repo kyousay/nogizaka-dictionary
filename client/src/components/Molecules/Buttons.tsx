@@ -8,6 +8,7 @@ export interface Props {
         buttonStyle: ButtonStyle
         buttonTxt: string
         clickHandler?: React.MouseEventHandler<HTMLButtonElement>
+        props?: React.ButtonHTMLAttributes<HTMLButtonElement>
     }[] 
 }
 
@@ -16,7 +17,7 @@ const Buttons : React.FC<Props> = props => (
         {
             props.buttons.map((button,index) => (
                 <Wrapper key={index} styled={{...button.buttonWrapperStyle}}>
-                    <Button styled={{...button.buttonStyle}} onClick={button.clickHandler}>{button.buttonTxt}</Button>
+                    <Button styled={{...button.buttonStyle}} onClick={button.clickHandler} {...button.props}>{button.buttonTxt}</Button>
                 </Wrapper>
             ))
         }

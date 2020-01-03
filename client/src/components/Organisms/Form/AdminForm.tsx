@@ -5,6 +5,7 @@ import InputSections from '../../Molecules/InputSections'
 import Buttons from '../../Molecules/Buttons'
 import defaultImage from '../../../style/img/defaultImg.jpg'
 import { userState } from '../../../reducers/userReducer'
+import useReactRouter from 'use-react-router'
 
 const wrapperStyle = {
     width: '320px', 
@@ -55,6 +56,7 @@ export type MemberState = typeof initialState
 type Props = userState & {upload: (data: MemberState) => void}
 
 const AdminForm: React.FC<Props> = props => {
+    const {history} = useReactRouter()
     const [memberState, memberChange] = useState<MemberState>(initialState)
 
     const fileSetHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,6 +99,10 @@ const AdminForm: React.FC<Props> = props => {
             ...memberState,
         }
         props.upload(postData)
+    }
+
+    const changeUrl = () => {
+        history.push("/admin/update")
     }
 
     const InputSectionsProps = {
@@ -198,7 +204,14 @@ const AdminForm: React.FC<Props> = props => {
     const ButtonsProps = {
         buttons: [
             {
-                buttonTxt: 'アップロード',
+                buttonTxt: 'メンバー登録',
+            },
+            {
+                buttonTxt: 'メンバー情報更新ページへ',
+                buttonStyle: {
+                    bgColor: '#42b72a' as '#42b72a'
+                },
+                clickHandler: changeUrl
             }
         ],
         baseButtonWrapperStyle: {margin: '30px 0 0'},

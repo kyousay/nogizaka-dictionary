@@ -11,7 +11,7 @@ const FormElement = styled.form`
 export interface Props {
     inputsProps: InputsProps
     buttonsProps: ButtonsProps
-    submitHandler?: (e: React.FormEvent<HTMLElement>) => void
+    submitHandler?: (e: React.FormEvent<HTMLFormElement>) => void
 }
 
 const Form: React.FC<Props> = (props) => {

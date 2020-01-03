@@ -15,8 +15,8 @@ module.exports = {
 
     internalServerError: (error, req, res, next) => {
         let errorCode = httpStatus.INTERNAL_SERVER_ERROR;
-        res.status(errorCode);
-        res.send(`${errorCode} | Sorry, our application is experiencing a problem!`)
+        res.sendStatus(errorCode);
+        res.sendStatus(`${errorCode} | Sorry, our application is experiencing a problem!`)
     }
 
 

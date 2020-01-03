@@ -52,7 +52,7 @@ const LoginForm: React.FC<props> = (props) => {
         tabChange(tab)
     } 
 
-    const submitHandler = (e: React.FormEvent<HTMLElement>) => {
+    const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const data = {
             email: value.email,
@@ -77,8 +77,6 @@ const LoginForm: React.FC<props> = (props) => {
         inputsProps: {
             inputs: [
                 {
-                    inputStyle,
-                    inputWrapperStyle: {margin: '10px'},
                     props: {
                         type: 'email',
                         value: value.email,
@@ -87,9 +85,6 @@ const LoginForm: React.FC<props> = (props) => {
                     }
                 },
                 {
-                    
-                    inputStyle,
-                    inputWrapperStyle: {margin: '10px'},
                     props: {
                         type: 'password',
                         value: value.password,
@@ -97,7 +92,11 @@ const LoginForm: React.FC<props> = (props) => {
                         onChange: (e : React.ChangeEvent<HTMLInputElement>)  => setValue({...value, password: e.target.value})
                     }
                 },
-            ]
+            ],
+            baseStyle: {
+                inputStyle,
+                inputWrapperStyle: {margin: '10px'},
+            }
         },
         buttonsProps: {
             buttons: [

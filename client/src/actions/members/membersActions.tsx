@@ -1,8 +1,8 @@
-import { membersState } from '../../reducers/MembersReducer'
+import { MemberState } from '../../components/Organisms/Form/AdminForm'
 import * as ActionType from './membersConstants'
 
-export const addMembers = (members : membersState) => ({
-    type: ActionType.ADD as typeof ActionType.ADD,
+export const addMembers = (members : MemberState) => ({
+    type: ActionType.MEMBERS_MEMBER_ADD as typeof ActionType.MEMBERS_MEMBER_ADD,
     payload: {...members} 
 })
 

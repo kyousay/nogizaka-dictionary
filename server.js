@@ -41,11 +41,11 @@ app.use(express.static(path.join(__dirname, "client/build")));
 
 app.use(
     express.urlencoded({
-        extended: false
+        extended: false,
     })
 );
 
-app.use(express.json());
+app.use(express.json({limit: '10mb'}));
 
 //version 1.5.0からcookie-parserいらない
 // app.use(cookieParser("nogizaka46_2011_8_21"));

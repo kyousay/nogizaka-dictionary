@@ -25,13 +25,6 @@ export type Member = typeof initialState.members[0]
 
 const MembersReducer : Reducer<MembersState, MembersAction> = (state : MembersState = initialState, action : MembersAction) => {
     switch(action.type) {
-        case ActionType.ADD :
-            const membersArray = state.members
-            const newMembersArray = membersArray.concat(action.payload)
-            return {
-                ...state,
-                members: newMembersArray
-            } 
         default : 
             return state
     }

@@ -8,10 +8,13 @@ export interface Props {
     inputs: {
         title?: string
         props?: React.InputHTMLAttributes<HTMLInputElement>
+        inputStyle?: InputStyle
+        inputTitleStyle?: ParagraghStyle
+        wrapperStyle?: WrapperStyle
     }[]
-    paragraghStyle?: ParagraghStyle
-    InputStyle?: InputStyle
-    wrapperStyle?: WrapperStyle
+    baseInputTitleStyle?: ParagraghStyle
+    baseInputStyle?: InputStyle
+    baseWrapperStyle?: WrapperStyle
 }
 
 const InputTitle = styled(Paragragh)`
@@ -23,9 +26,9 @@ const InputSections : React.FC<Props> = (props) => (
     <React.Fragment>
         {
             props.inputs.map((input, index) => (
-                <Wrapper styled={{...props.wrapperStyle}} key={index}>
-                    <InputTitle styled={{...props.paragraghStyle}}>{input.title}</InputTitle>
-                    <Input styled={{...props.InputStyle}} {...input.props}/>
+                <Wrapper styled={{...props.baseWrapperStyle, ...input.wrapperStyle}} key={index}>
+                    <InputTitle styled={{...props.baseInputTitleStyle, ...input.inputTitleStyle}}>{input.title}</InputTitle>
+                    <Input styled={{...props.baseInputStyle, ...input.inputStyle}} {...input.props}/>
                 </Wrapper>
             ))
         }

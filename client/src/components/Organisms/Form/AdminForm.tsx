@@ -3,6 +3,7 @@ import Wrapper from '../../Atoms/Wrapper'
 import Img from '../../Atoms/Img'
 import Form from '../../Molecules/Form'
 import defaultImage from '../../../style/img/defaultImg.jpg'
+import { userState } from '../../../reducers/userReducer'
 
 const wrapperStyle = {
     width: '320px', 
@@ -14,7 +15,8 @@ const inputStyle = {
     padding: '5px 8px', 
     width: '280px',
     border: '1px solid #dddfe2',
-    border_radius: '3px'
+    border_radius: '3px',
+    bgColor: '#fff' as '#fff'
 }
 
 const inputWrapperStyle = {
@@ -30,31 +32,25 @@ const buttonStyle = {
     bgColor: '#bf87c1' as '#bf87c1'
 }
 
-interface memberState {
-    image: string
-    name: string[]
-    sailium: string[]
-    segment: string
-    dateOfBirth: string
-    blod: string
-    height: string
-    hash: string[]
+const initialState = {
+    image: '',
+    name: ['', ''],
+    sailium: ['', ''],
+    segment: '',
+    dateOfBirth : '',
+    blod: '',
+    height: '',
+    hash:[''],
 }
 
-const AdminForm = () => {
-    const [memberState, memberChange] = useState<memberState>({
-        image: '',
-        name: ['', ''],
-        sailium: ['', ''],
-        segment: '',
-        dateOfBirth : '',
-        blod: '',
-        height: '',
-        hash:['']
-    })
-    
+export type MemberState = typeof initialState
+
+type Props = userState & {upload: (data: MemberState) => void}
+
+const AdminForm: React.FC<Props> = props => {
+    const [memberState, memberChange] = useState<MemberState>(initialState)
+
     const fileSetHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(event.target.files);
         if(event.target.files !== null && event.target.files.length > 0) {
             let file = event.target.files[0]
             let fileReader = new FileReader()
@@ -88,95 +84,102 @@ const AdminForm = () => {
         })
     }
 
-    const submitHandler = (event: React.FormEvent<HTMLElement>) => {
+    const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        const postData = {
+            ...memberState,
+        }
+        props.upload(postData)
     }
 
     const formProps = {
         inputsProps: {
             inputs: [
                 {
-                    inputStyle,
-                    inputWrapperStyle,
                     props: {
                         accept: '.png,.jpg,.jpeg',
                         placeholder: 'Image',
-                        type: 'file' as 'file',
+                        type: 'file',
                         name: 'image',
+                        required: true,
                         onChange: fileSetHandler,
                     },
                 },
                 {
-                    inputStyle,
-                    inputWrapperStyle,
                     props: {
                         placeholder: 'names *arguments2',
-                        type: 'text' as 'text',
+                        type: 'text',
                         name: 'name',
+                        value: memberState.name,
+                        required: true,
                         onChange: setArrayHandler,
                     }
                 },
                 {
-                    inputStyle,
-                    inputWrapperStyle,
                     props: {
                         placeholder: 'sailium',
-                        type: 'text' as 'text',
+                        type: 'text',
                         name: 'sailium',
+                        value: memberState.sailium,
+                        required: true,
                         onChange: setArrayHandler,
                     }
                 },
                 {
-                    inputStyle,
-                    inputWrapperStyle,
                     props: {
                         placeholder: 'segment',
-                        type: 'text' as 'text',
+                        type: 'text',
                         name: 'segment',
+                        value: memberState.segment,
+                        required: true,
                         onChange: setStringHandler,
                     }
                 },
                 {
-                    inputStyle,
-                    inputWrapperStyle,
                     props: {
                         placeholder: 'dateOfBirth',
-                        type: 'text' as 'text',
+                        type: 'text',
                         name: 'dateOfBirth',
+                        value: memberState.dateOfBirth,
+                        required: true,
                         onChange: setStringHandler,
                     }
                 },
                 {
-                    inputStyle,
-                    inputWrapperStyle,
                     props: {
                         placeholder: 'blodType',
-                        type: 'text' as 'text',
+                        type: 'text',
                         name: 'blod',
+                        value: memberState.blod,
+                        required: true,
                         onChange: setStringHandler,
                     }
                 },
                 {
-                    inputStyle,
-                    inputWrapperStyle,
                     props: {
                         placeholder: 'height',
-                        type: 'text' as 'text',
+                        type: 'text',
                         name: 'height',
+                        value: memberState.height,
+                        required: true,
                         onChange: setStringHandler,
                     }
                 },
                 {
-                    inputStyle,
-                    inputWrapperStyle,
                     props: {
                         placeholder: 'hash',
-                        type: 'text' as 'text',
+                        type: 'text',
                         name: 'hash',
+                        value: memberState.hash,
+                        required: true,
                         onChange: setArrayHandler,
                     }
                 },
-            ]
+            ],
+            baseStyle: {
+                inputStyle,
+                inputWrapperStyle,
+            }
         },
         buttonsProps: {
             buttons: [
@@ -184,11 +187,6 @@ const AdminForm = () => {
                     buttonWrapperStyle: {margin: '30px 0 0 0'},
                     buttonStyle,
                     buttonTxt: 'メンバーを登録',
-                },
-                {
-                    buttonWrapperStyle: {margin: '20px 0 0 0'},
-                    buttonStyle: {...buttonStyle, bgColor: '#42b72a' as '#42b72a'},
-                    buttonTxt: 'メンバー情報を更新',
                 },
             ]
         },

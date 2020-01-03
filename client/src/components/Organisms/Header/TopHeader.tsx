@@ -59,6 +59,7 @@ export interface userProfile {
 type Props = userState & {upDate: (props: userProfile) => void}
 
 const TopHeader: React.FC<Props> = props => {
+    console.log(props);
     const [searchWord, changeSearchWord] = useState('')
     const [isHover, changeHover] = useState(false)
     const [isClick, changeClick] = useState(false)
@@ -137,13 +138,13 @@ const TopHeader: React.FC<Props> = props => {
                     }
                 },
             ],
-            InputStyle: inputStyle,
-            paragraghStyle: {
+            baseInputStyle: inputStyle,
+            baseInputTitleStyle: {
                 font_size: '1.2rem',
                 color: '#787878',
                 width: '98px'
             } as const,
-            wrapperStyle: {
+            baseWrapperStyle: {
                 padding: '15px',
                 display: 'flex',
                 align_items: 'center'

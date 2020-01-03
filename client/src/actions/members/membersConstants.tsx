@@ -1,3 +1,1 @@
-export const ADD = 'ADD'
-export const DECREMENT = 'DECREMENT'
-export const INCREMENT = 'INCREMENT'
+export const MEMBERS_MEMBER_ADD = 'MEMBERS_MEMBER_ADD'

@@ -5,6 +5,7 @@ import * as ActionUserType from '../actions/user/userConstants'
 import { UserAction } from '../actions/user/userActions'
 
 const initialState = {
+    id: '',
     nickName: '新参者',
     message: 'こんにちは。',
     rank: 'アンダー',

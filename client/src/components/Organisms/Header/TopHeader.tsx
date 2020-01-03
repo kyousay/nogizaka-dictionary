@@ -151,27 +151,28 @@ const TopHeader: React.FC<Props> = props => {
             } as const
         },
         cardStyle:cardStyle,
-        buttons: [
-            {
-                buttonWrapperStyle: {margin: '20px'},
-                buttonStyle: {...buttonStyle, margin:'0'},
-                buttonTxt: '変更を保存する',
-                clickHandler: () => {
-                    upDateUserData(userState);
-                    initialUserState = userState;
-                    changeClickStateHandler(isClick);
+        ButtonsProps : {
+            buttons: [
+                {
+                    buttonStyle: {...buttonStyle, margin:'0'},
+                    buttonTxt: '変更を保存する',
+                    clickHandler: () => {
+                        upDateUserData(userState);
+                        initialUserState = userState;
+                        changeClickStateHandler(isClick);
+                    }
+                },
+                {
+                    buttonStyle: {...buttonStyle,bgColor: '#FFFFFF' as '#FFFFFF', margin: '0', color: '#0000000', border: '1px solid #000000'},
+                    buttonTxt: 'キャンセル',
+                    clickHandler: () => {
+                        changeClickStateHandler(isClick);
+                        changeUserState(initialUserState);
+                    }
                 }
-            },
-            {
-                buttonWrapperStyle: {margin: '20px'},
-                buttonStyle: {...buttonStyle,bgColor: '#FFFFFF' as '#FFFFFF', margin: '0', color: '#0000000', border: '1px solid #000000'},
-                buttonTxt: 'キャンセル',
-                clickHandler: () => {
-                    changeClickStateHandler(isClick);
-                    changeUserState(initialUserState);
-                }
-            }
-        ]
+            ],
+            baseButtonWrapperStyle: {margin: '20px'},
+        }
     }
 
     return(

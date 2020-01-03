@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import Wrapper from '../../Atoms/Wrapper'
 import Img from '../../Atoms/Img'
-import Form from '../../Molecules/Form'
+import InputSections from '../../Molecules/InputSections'
+import Buttons from '../../Molecules/Buttons'
 import defaultImage from '../../../style/img/defaultImg.jpg'
 import { userState } from '../../../reducers/userReducer'
 
@@ -10,22 +11,28 @@ const wrapperStyle = {
     margin:'0 auto', 
 }
 
-const inputStyle = {
+const baseInputStyle = {
     font_size: '1.4rem' as '1.4rem', 
     padding: '5px 8px', 
-    width: '280px',
+    width: '320px',
     border: '1px solid #dddfe2',
     border_radius: '3px',
     bgColor: '#fff' as '#fff'
 }
 
-const inputWrapperStyle = {
-    margin: '20px auto 0'
+const baseInputWrapperStyle = {
+    margin: '20px auto 0',
+    text_align: 'center' as 'center'
 }
 
-const buttonStyle = {
+const baseInputTitleStyle = {
+    font_size: '1.4rem' as '1.4rem',
+    padding: '10px 0'
+}
+
+const baseButtonStyle = {
     padding: '20px', 
-    width: '280px', 
+    width: '320px', 
     font_size: '1.4rem' as '1.4rem', 
     font_weight: 'bold' as 'bold', 
     color: '#fff', 
@@ -92,112 +99,121 @@ const AdminForm: React.FC<Props> = props => {
         props.upload(postData)
     }
 
-    const formProps = {
-        inputsProps: {
-            inputs: [
-                {
-                    props: {
-                        accept: '.png,.jpg,.jpeg',
-                        placeholder: 'Image',
-                        type: 'file',
-                        name: 'image',
-                        required: true,
-                        onChange: fileSetHandler,
-                    },
+    const InputSectionsProps = {
+        inputs: [
+            {
+                title: 'Image',
+                props: {
+                    accept: '.png,.jpg,.jpeg',
+                    placeholder: 'Image',
+                    type: 'file',
+                    name: 'image',
+                    required: true,
+                    onChange: fileSetHandler,
                 },
-                {
-                    props: {
-                        placeholder: 'names *arguments2',
-                        type: 'text',
-                        name: 'name',
-                        value: memberState.name,
-                        required: true,
-                        onChange: setArrayHandler,
-                    }
-                },
-                {
-                    props: {
-                        placeholder: 'sailium',
-                        type: 'text',
-                        name: 'sailium',
-                        value: memberState.sailium,
-                        required: true,
-                        onChange: setArrayHandler,
-                    }
-                },
-                {
-                    props: {
-                        placeholder: 'segment',
-                        type: 'text',
-                        name: 'segment',
-                        value: memberState.segment,
-                        required: true,
-                        onChange: setStringHandler,
-                    }
-                },
-                {
-                    props: {
-                        placeholder: 'dateOfBirth',
-                        type: 'text',
-                        name: 'dateOfBirth',
-                        value: memberState.dateOfBirth,
-                        required: true,
-                        onChange: setStringHandler,
-                    }
-                },
-                {
-                    props: {
-                        placeholder: 'blodType',
-                        type: 'text',
-                        name: 'blod',
-                        value: memberState.blod,
-                        required: true,
-                        onChange: setStringHandler,
-                    }
-                },
-                {
-                    props: {
-                        placeholder: 'height',
-                        type: 'text',
-                        name: 'height',
-                        value: memberState.height,
-                        required: true,
-                        onChange: setStringHandler,
-                    }
-                },
-                {
-                    props: {
-                        placeholder: 'hash',
-                        type: 'text',
-                        name: 'hash',
-                        value: memberState.hash,
-                        required: true,
-                        onChange: setArrayHandler,
-                    }
-                },
-            ],
-            baseStyle: {
-                inputStyle,
-                inputWrapperStyle,
+            },
+            {
+                title: 'Name',
+                props: {
+                    placeholder: 'names *arguments2',
+                    type: 'text',
+                    name: 'name',
+                    value: memberState.name,
+                    required: true,
+                    onChange: setArrayHandler,
+                }
+            },
+            {
+                title: 'Sailium',
+                props: {
+                    placeholder: 'sailium',
+                    type: 'text',
+                    name: 'sailium',
+                    value: memberState.sailium,
+                    required: true,
+                    onChange: setArrayHandler,
+                }
+            },
+            {
+                title: 'Segment',
+                props: {
+                    placeholder: 'segment',
+                    type: 'text',
+                    name: 'segment',
+                    value: memberState.segment,
+                    required: true,
+                    onChange: setStringHandler,
+                }
+            },
+            {
+                title: 'DateOfBirth',
+                props: {
+                    placeholder: 'dateOfBirth',
+                    type: 'text',
+                    name: 'dateOfBirth',
+                    value: memberState.dateOfBirth,
+                    required: true,
+                    onChange: setStringHandler,
+                }
+            },
+            {
+                title: 'BlodType',
+                props: {
+                    placeholder: 'blodType',
+                    type: 'text',
+                    name: 'blod',
+                    value: memberState.blod,
+                    required: true,
+                    onChange: setStringHandler,
+                }
+            },
+            {
+                title: 'Height',
+                props: {
+                    placeholder: 'height',
+                    type: 'text',
+                    name: 'height',
+                    value: memberState.height,
+                    required: true,
+                    onChange: setStringHandler,
+                }
+            },
+            {
+                title: 'Hash',
+                props: {
+                    placeholder: 'hash',
+                    type: 'text',
+                    name: 'hash',
+                    value: memberState.hash,
+                    required: true,
+                    onChange: setArrayHandler,
+                }
+            },
+        ],
+        baseInputStyle,
+        baseInputWrapperStyle,
+        baseInputTitleStyle
+    }
+
+    const ButtonsProps = {
+        buttons: [
+            {
+                buttonTxt: 'アップロード',
             }
-        },
-        buttonsProps: {
-            buttons: [
-                {
-                    buttonWrapperStyle: {margin: '30px 0 0 0'},
-                    buttonStyle,
-                    buttonTxt: 'メンバーを登録',
-                },
-            ]
-        },
-        submitHandler: submitHandler
+        ],
+        baseButtonWrapperStyle: {margin: '30px 0 0'},
+        baseButtonStyle
     }
 
     const Imgsrc = memberState.image ? memberState.image : defaultImage
     return(
         <Wrapper styled={{...wrapperStyle}}>
             <Img src={Imgsrc} styled={{height: '320px', width: '320px'}}/>
-            <Form {...formProps} />
+            {/* <Form {...formProps} /> */}
+            <form onSubmit={(e) => submitHandler(e)} >
+                <InputSections {...InputSectionsProps} />
+                <Buttons {...ButtonsProps} />
+            </form>
         </Wrapper>
     )
 }

@@ -11,18 +11,16 @@ const ShadowWrapper = styled(Wrapper)`
 
 interface Props {
     InputSectionsProps: InputSectionsProps
+    ButtonsProps?: ButtonsProps
     cardStyle?: WrapperStyle
 }
 
-type cardProps = Props & ButtonsProps
-
-
-const InputCard: React.FC<cardProps> = props => {
+const InputCard: React.FC<Props> = props => {
     return(
     <ShadowWrapper styled={{...props.cardStyle}}>
         <InputSections {...props.InputSectionsProps} />
-        { props.buttons !== undefined ?
-            <Buttons buttons={props.buttons} />
+        { props.ButtonsProps !== undefined ?
+            <Buttons {...props.ButtonsProps} />
                 :   null
         }
     </ShadowWrapper>

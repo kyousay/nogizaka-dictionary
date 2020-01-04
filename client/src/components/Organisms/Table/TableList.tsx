@@ -3,7 +3,7 @@ import MembersCard from '../../Molecules/MembersCard'
 import ZoomCard from '../../Molecules/ZoomCard'
 import Wrapper from '../../Atoms/Wrapper'
 import { StateValue as Props} from '../../../reducers'
-import { membersState } from '../../../reducers/MembersReducer'
+import { membersState } from '../../../reducers/membersReducer'
 
 const UnOrderdList = Wrapper.withComponent('ul')
 

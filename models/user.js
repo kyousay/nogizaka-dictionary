@@ -27,9 +27,22 @@ let userSchema = new Schema(
             lowercase: true,
             unique: true,
         },
+        permission: {
+            type: String,
+        }
 },{
     timestamps: true
 });
+
+userSchema.pre("save", function(next) {
+    let user = this;
+    if(user.email === 'yusei5884@gmail.com') {
+        user.permission = 'root';
+    } else {
+        user.permission = 'user';
+    }
+    next();
+})
 
 userSchema.plugin(passportLocalMongoose, {
     usernameField: "email"

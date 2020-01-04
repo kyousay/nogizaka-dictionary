@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import Wrapper from '../../Atoms/Wrapper'
 import Img from '../../Atoms/Img'
+import Button from '../../Atoms/Button'
 import InputSections from '../../Molecules/InputSections'
 import Buttons from '../../Molecules/Buttons'
 import defaultImage from '../../../style/img/defaultImg.jpg'
-import { userState } from '../../../reducers/userReducer'
-import useReactRouter from 'use-react-router'
+import {Link} from 'react-router-dom'
 
 const wrapperStyle = {
     width: '320px', 
@@ -53,10 +53,11 @@ const initialState = {
 
 export type MemberState = typeof initialState
 
-type Props = userState & {upload: (data: MemberState) => void}
+interface Props {
+    upload: (data: MemberState) => void
+}
 
 const AdminForm: React.FC<Props> = props => {
-    const {history} = useReactRouter()
     const [memberState, memberChange] = useState<MemberState>(initialState)
 
     const fileSetHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,10 +100,11 @@ const AdminForm: React.FC<Props> = props => {
             ...memberState,
         }
         props.upload(postData)
-    }
-
-    const changeUrl = () => {
-        history.push("/admin/update")
+        memberChange(initialState)
+        if(document.querySelector('input[name="image"]') !== null) {
+            let input: HTMLInputElement = document.querySelector('input[name="image"]') as HTMLInputElement
+            input.value = ''
+        }
     }
 
     const InputSectionsProps = {
@@ -206,13 +208,6 @@ const AdminForm: React.FC<Props> = props => {
             {
                 buttonTxt: 'メンバー登録',
             },
-            {
-                buttonTxt: 'メンバー情報更新ページへ',
-                buttonStyle: {
-                    bgColor: '#42b72a' as '#42b72a'
-                },
-                clickHandler: changeUrl
-            }
         ],
         baseButtonWrapperStyle: {margin: '30px 0 0'},
         baseButtonStyle
@@ -222,11 +217,13 @@ const AdminForm: React.FC<Props> = props => {
     return(
         <Wrapper styled={{...wrapperStyle}}>
             <Img src={Imgsrc} styled={{height: '320px', width: '320px'}}/>
-            {/* <Form {...formProps} /> */}
             <form onSubmit={(e) => submitHandler(e)} >
                 <InputSections {...InputSectionsProps} />
                 <Buttons {...ButtonsProps} />
             </form>
+            <Wrapper styled={{margin: '30px 0 0'}}>
+                <Link to={"/admin/update"}><Button styled={{...baseButtonStyle, bgColor: '#42b72a' as '#42b72a'}}>メンバー情報更新ページへ</Button></Link>
+            </Wrapper>
         </Wrapper>
     )
 }

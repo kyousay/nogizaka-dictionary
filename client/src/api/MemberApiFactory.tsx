@@ -1,14 +1,18 @@
-import axios, { AxiosRequestConfig, Method } from 'axios'
+import axios, { Method } from 'axios'
 import {MemberState} from '../components/Organisms/Form/AdminForm'
 
 interface optionConfig {
     [k : string] : string | object | undefined
 }
 
-type HTTPMethods = Pick<AxiosRequestConfig, 'method'>
+interface apiOption {
+    method: Method,
+    url: string, 
+    data?: MemberState,
+}
 
 const DEFAULT_API_CONFIG = {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3000/member',
     timeout: 7000,
 };
 
@@ -22,12 +26,10 @@ export const MemberApiFactory = (optionConfig? : optionConfig) => {
 
     const instance = axios.create(config);
 
-    const MemberApiConnector = async (method : Method ,data: MemberState, url: string) => {
+    const MemberApiConnector = async (apiOption: apiOption) => {
         try {
             const response = await instance({
-                method: method,
-                url: `${url}`, 
-                data: data,
+                ...apiOption
             });
 
             if(response.status !== 200) {

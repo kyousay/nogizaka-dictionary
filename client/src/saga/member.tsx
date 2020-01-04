@@ -12,9 +12,29 @@ function* addMembers(action : ReturnType<typeof MembersAction.addMembers>){
     
     try{
         const api = MemberApiFactory();
-        const result = yield call(api, 'post', memberData, '/member/upload')
-        const data : typeof memberData = result.data
-        console.log(data)
+        const apiOption = {
+            method: 'post' as 'post', 
+            data: memberData, 
+            url: '/upload'
+        }
+        const result = yield call(api, apiOption)
+        const data = result.data
+        alert(`${data.message}`)
+    }catch(error) {
+        yield alert(error)
+    }
+}
+
+function* getAllMembers(){
+    try{
+        const api = MemberApiFactory();
+        const apiOption = {
+            method: 'get' as 'get',
+            url: '/members'
+        }
+        const result = yield call(api, apiOption)
+        const data = result.data
+        yield put(MembersAction.storageMembers({members: data.members}))
     }catch(error) {
         yield alert(error)
     }
@@ -22,4 +42,5 @@ function* addMembers(action : ReturnType<typeof MembersAction.addMembers>){
 
 export default function* memberActions() {
     yield takeLatest (Action.MEMBERS_MEMBER_ADD, addMembers)
+    yield takeLatest (Action.MEMBERS_GET_ALLMEMBERS, getAllMembers)
 }

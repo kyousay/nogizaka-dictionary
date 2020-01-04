@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import MembersReducer, { MembersState } from './MembersReducer'
+import MembersReducer, { MembersState } from './membersReducer'
 import userReducer, {userState} from './userReducer'
 
 

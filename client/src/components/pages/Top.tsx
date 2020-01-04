@@ -7,11 +7,13 @@ import useReactRouter from 'use-react-router'
 interface PageProps {
     user: userState
     isStorageToken: (props: {isLogin: boolean}) => void
+    getAllMembers: () => void
 }
 
 const Top : React.FC<PageProps> = (props) => {
     const {history} = useReactRouter()
     useEffect(() => {
+        props.getAllMembers()
         const isStorageToken = localStorage.getItem('ticket')? true : false
         if(props.user.login === false || isStorageToken === false) {
             props.isStorageToken({isLogin:isStorageToken})

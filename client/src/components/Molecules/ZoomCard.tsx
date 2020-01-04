@@ -6,7 +6,7 @@ import Wrapper from '../Atoms/Wrapper'
 import Txt from '../Atoms/Txt'
 import TxtRowSections from './TxtRowSections'
 import dummy from '../../style/img/anonymous.png'
-import { Member } from '../../reducers/MembersReducer'
+import { Member } from '../../reducers/membersReducer'
 import close from '../../style/img/close.png'
 import Hash from './Hash'
 
@@ -91,7 +91,7 @@ const ZoomCard : React.FC<Props> = props => {
             <Wrapper styled={{position: 'absolute', top: '-30px', right: '-50px'}} onClick={props.zoomOutHandler}>
                 <Img styled={{width: '100%',height: '100%'}} src={close} />
             </Wrapper>
-            <Img src={props.img ? props.img : dummy} styled={{width: '100%', height: '300px'}}/>
+            <Img src={props.image ? props.image : dummy} styled={{width: '100%', height: '300px'}}/>
             <Wrapper styled={{margin: '40px 0 0 0'}}>
                 <Paragragh styled={{margin_top: '40px', font_weight: 'bold', font_size: '2.4rem'}}>
                     {props.name[0]}

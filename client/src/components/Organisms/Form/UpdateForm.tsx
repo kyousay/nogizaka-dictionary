@@ -45,37 +45,57 @@ const baseButtonStyle = {
 interface Props {
     members: membersState
     getAllMembers: () => void
+    update: (member: typeof initialState) => void
 }
 
+const initialState = {
+    _id: '',
+    image: '',
+    name: ['',''],
+    sailium: ['', ''],
+    segment: '',
+    dateOfBirth : '',
+    blod: '',
+    height: '',
+    hash:['']
+}
+
+export type MemberState = typeof initialState
 
 const UpdateForm: React.FC<Props> = props => {
+
+    const [memberState, memberChange] = useState(initialState)
 
     useEffect(() => {
         const getAllMembers = props.getAllMembers
         getAllMembers()
     },[props.getAllMembers])
 
-    const initialState = {
-        _id: props.members[0]._id,
-        image: props.members[0].image,
-        name: props.members[0].name,
-        sailium: props.members[0].sailium,
-        segment: props.members[0].segment,
-        dateOfBirth: props.members[0].dateOfBirth,
-        blod: props.members[0].blod,
-        height: props.members[0].height,
-        hash: props.members[0].hash,
+    useEffect(() => {
+        let initialMemberState = {
+            _id: props.members[0]._id,
+            image: props.members[0].image,
+            name: props.members[0].name,
+            sailium: props.members[0].sailium,
+            segment: props.members[0].segment,
+            dateOfBirth: props.members[0].dateOfBirth,
+            blod: props.members[0].blod,
+            height: props.members[0].height,
+            hash: props.members[0].hash,
+        }
+        memberChange(initialMemberState)
+    },[props.members])
+
+    const selectChangeHanlder = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        props.members.forEach((member,index) => {
+            if(member._id === e.target.value) {
+                memberChange({
+                    ...props.members[index]
+                })
+            }
+        })
+        document.querySelector<HTMLInputElement>('input[name="image"]')!.value = ''
     }
-    const [memberState, memberChange] = useState(initialState)
-
-    const memberChangeHandler = () => {
-        memberChange(memberState)
-    }
-
-    memberChangeHandler()
-
-    console.log(initialState)
-    console.log(memberState)
 
     const fileSetHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         if(event.target.files !== null && event.target.files.length > 0) {
@@ -112,11 +132,12 @@ const UpdateForm: React.FC<Props> = props => {
     }
 
     const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        // const updateData = {
-        //     ...memberState,
-        // }
-        // props.update(updateData)
+        event.preventDefault()
+        console.log(memberState)
+        const updateData = {
+            ...memberState,
+        }
+        props.update(updateData)
     }
 
     const InputSectionsProps = {
@@ -128,7 +149,6 @@ const UpdateForm: React.FC<Props> = props => {
                     placeholder: 'Image',
                     type: 'file',
                     name: 'image',
-                    required: true,
                     onChange: fileSetHandler,
                 },
             },
@@ -240,9 +260,7 @@ const UpdateForm: React.FC<Props> = props => {
     const SelectsProps = {
         options: createOptions(),
         selectProps: {
-            onChange: (e: React.ChangeEvent<HTMLSelectElement>) => {
-                initialState._id = e.target.value
-            }
+            onChange: selectChangeHanlder
         },
         selectStyle: {
             width: '320px',

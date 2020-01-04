@@ -7,7 +7,6 @@ jsonWebToken = require("jsonwebtoken");
 module.exports = {
     checkPermission: (req, res, next) => {
         let token = req.headers.authorization;
-        let data = req.body
         if(token) {
             jsonWebToken.verify(token, "effort_thanks_smile", (error, payload) => {
                 if(payload) {
@@ -52,6 +51,16 @@ module.exports = {
             next(error)
         })
     },
+    update: (req, res, next) => {
+        let memberId = req.body._id;
+        Member.findByIdAndUpdate(memberId,{
+            $set: req.body
+        }).then(user => {
+            next()
+        }).catch(error => {
+            next(error)
+        })
+    },
     getAllMembers: (req, res, next) => {
         Member.find({}).then(members => {
             res.send({
@@ -60,11 +69,5 @@ module.exports = {
         }).catch(error => {
             next(error);
         });
-    },
-    test: (req, res, next) => {
-        let memberId = req.params.id
-
-        console.log(req.params);
-        console.log(memberId);
     }
 };

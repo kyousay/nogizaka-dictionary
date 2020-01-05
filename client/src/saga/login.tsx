@@ -5,6 +5,7 @@ import
 from 'redux-saga/effects'
 import * as Action from '../actions/login/loginConstants'
 import * as LoginAction from '../actions/login/loginActions'
+import * as userAction from '../actions/user/userActions'
 import { loginUserFactory } from '../api/loginUserFactory'
 
 function* createAcount(action : ReturnType<typeof LoginAction.createAcount>){
@@ -12,7 +13,9 @@ function* createAcount(action : ReturnType<typeof LoginAction.createAcount>){
     
     try{
         const api = loginUserFactory();
+        yield put(userAction.changeLoading(true))
         const result = yield call(api, userData, '/login/create')
+        yield put(userAction.changeLoading(false))
         yield alert(result.data);
     }catch(error) {
         yield alert(error);

@@ -5,6 +5,7 @@ import
 from 'redux-saga/effects'
 import * as Action from '../actions/members/membersConstants'
 import * as MembersAction from '../actions/members/membersActions'
+import * as userAction from '../actions/user/userActions'
 import { MemberApiFactory } from '../api/MemberApiFactory'
 
 function* addMembers(action : ReturnType<typeof MembersAction.addMembers>){
@@ -17,7 +18,9 @@ function* addMembers(action : ReturnType<typeof MembersAction.addMembers>){
             data: memberData, 
             url: '/upload'
         }
+        yield put(userAction.changeLoading(true))
         const result = yield call(api, apiOption)
+        yield put(userAction.changeLoading(true))
         const data = result.data
         alert(data.message)
     }catch(error) {
@@ -34,7 +37,9 @@ function* updateMembers(action : ReturnType<typeof MembersAction.updateMembers>)
             data: memberData,
             url: '/update'
         }
+        yield put(userAction.changeLoading(true))
         const result = yield call(api, apiOption)
+        yield put(userAction.changeLoading(false))
         const data = result.data
         yield alert(data.message)
         yield put(MembersAction.storageMembers({members: data.members}))
@@ -50,7 +55,9 @@ function* getAllMembers(){
             method: 'get' as 'get',
             url: '/members'
         }
+        yield put(userAction.changeLoading(true))
         const result = yield call(api, apiOption)
+        yield put(userAction.changeLoading(false))
         const data = result.data
         yield put(MembersAction.storageMembers({members: data.members}))
     }catch(error) {

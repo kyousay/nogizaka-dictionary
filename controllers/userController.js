@@ -20,8 +20,7 @@ module.exports = {
                         $set: userParams
                     })
                     .then(user => {
-                        console.log(user)
-                        res.send(user);
+                        res.send(req.body);
                     })
                     .catch(error => {
                         console.log(`Error updating user by ID: ${error.message}`);

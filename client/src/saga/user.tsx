@@ -9,9 +9,11 @@ import { userDataFactory } from '../api/userDataFactory'
 
 function* upDateUserData(action : ReturnType<typeof userAction.upDateUserData>){
     const userData = action.payload;
+    console.log(userData)
     
     try{
         const api = userDataFactory();
+        yield put(userAction.changeLoading(true))
         const result = yield call(api, userData, '/user/update')
         const data : typeof userData = result.data
         const props = {
@@ -19,7 +21,10 @@ function* upDateUserData(action : ReturnType<typeof userAction.upDateUserData>){
             message: data.message,
             rank: data.rank
         }
+        console.log(props);
+        console.log(data);
         yield put(userAction.setUserData({...props}))
+        yield put(userAction.changeLoading(false))
     }catch(error) {
         yield alert(error)
     }

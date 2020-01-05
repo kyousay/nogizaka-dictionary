@@ -59,7 +59,6 @@ export interface userProfile {
 type Props = userState & {upDate: (props: userProfile) => void}
 
 const TopHeader: React.FC<Props> = props => {
-    console.log(props);
     const [searchWord, changeSearchWord] = useState('')
     const [isHover, changeHover] = useState(false)
     const [isClick, changeClick] = useState(false)

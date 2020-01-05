@@ -12,6 +12,7 @@ const initialState = {
     rank: 'アンダー',
     favoriteMembers: [{}],
     login: false,
+    loading: false,
 }
 
 export type userState = typeof initialState
@@ -27,6 +28,11 @@ const UserReducer : Reducer<userState, LoginAction> = (state : userState = initi
             return {
                 ...state,
                 login: action.payload.isLogin
+            }
+        case ActionUserType.USER_CHANGE_LOADING: 
+            return {
+                ...state,
+                loading: action.payload.loading
             }
         case ActionUserType.USER_SET_USERDATA : 
             return {

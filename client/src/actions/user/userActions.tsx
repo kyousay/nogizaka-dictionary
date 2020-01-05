@@ -15,6 +15,14 @@ export const setUserData = (data : userProfile) => ({
     }
 })
 
+export const changeLoading = (isLoading: boolean) => ({
+    type: ActionType.USER_CHANGE_LOADING as typeof ActionType.USER_CHANGE_LOADING,
+    payload: {
+        loading: isLoading
+    }
+})
+
 export type UserAction = 
     | ReturnType<typeof upDateUserData>
     | ReturnType<typeof setUserData>
+    | ReturnType<typeof changeLoading>

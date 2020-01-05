@@ -19,6 +19,7 @@ function* createAcount(action : ReturnType<typeof LoginAction.createAcount>){
         yield alert(result.data);
     }catch(error) {
         yield alert(error);
+        yield put(userAction.changeLoading(false))
     }
 }
 
@@ -37,6 +38,7 @@ function* loginAcount(action : ReturnType<typeof LoginAction.loginAcount>) {
         }
     }catch(error) {
         yield alert(error);
+        yield put(userAction.changeLoading(false))
     }
 }
 

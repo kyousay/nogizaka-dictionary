@@ -88,7 +88,7 @@ const ListTable: React.FC<Props> = (props) => {
     }
 
     let element
-    if(members.length > 0){
+    if(members[0].name[0].length > 0){
         element = <UnOrderdList styled={{justify_content: "center", flex_wrap: "wrap", max_width: '830px', padding: '60px 40px 60px 40px' }}>
                     <Wrapper styled={{margin: '0 0 30px 20px'}}>
                         <Selects {...SelectsProps} />

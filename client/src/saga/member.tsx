@@ -8,7 +8,7 @@ import * as MembersAction from '../actions/members/membersActions'
 import * as userAction from '../actions/user/userActions'
 import { MemberApiFactory } from '../api/MemberApiFactory'
 
-function* addMembers(action : ReturnType<typeof MembersAction.addMembers>){
+function* addMember(action : ReturnType<typeof MembersAction.addMember>){
     const memberData = action.payload;
     
     try{
@@ -20,15 +20,16 @@ function* addMembers(action : ReturnType<typeof MembersAction.addMembers>){
         }
         yield put(userAction.changeLoading(true))
         const result = yield call(api, apiOption)
-        yield put(userAction.changeLoading(true))
+        yield put(userAction.changeLoading(false))
         const data = result.data
         alert(data.message)
     }catch(error) {
         yield alert(error)
+        yield put(userAction.changeLoading(false))
     }
 }
 
-function* updateMembers(action : ReturnType<typeof MembersAction.updateMembers>){
+function* updateMember(action : ReturnType<typeof MembersAction.updateMember>){
     const memberData = action.payload
     try{
         const api = MemberApiFactory();
@@ -45,6 +46,28 @@ function* updateMembers(action : ReturnType<typeof MembersAction.updateMembers>)
         yield put(MembersAction.storageMembers({members: data.members}))
     }catch(error) {
         yield alert(error)
+        yield put(userAction.changeLoading(false))
+    }
+}
+
+function* deleteMember(action: ReturnType<typeof MembersAction.deleteMember>) {
+    const memberId = action.payload;
+    try {
+        const api = MemberApiFactory();
+        const apiOption = {
+            method: 'delete' as 'delete',
+            data: {memberId},
+            url: '/delete'
+        }
+        yield put(userAction.changeLoading(true))
+        const result = yield call(api, apiOption)
+        yield put(userAction.changeLoading(false))
+        const data = result.data
+        yield alert(data.message)
+        yield put(MembersAction.storageMembers({members: data.members}))
+    }catch(error) {
+        yield alert(error)
+        yield put(userAction.changeLoading(false))
     }
 }
 
@@ -62,11 +85,13 @@ function* getAllMembers(){
         yield put(MembersAction.storageMembers({members: data.members}))
     }catch(error) {
         yield alert(error)
+        yield put(userAction.changeLoading(false))
     }
 }
 
 export default function* memberActions() {
-    yield takeLatest (Action.MEMBERS_MEMBER_ADD, addMembers)
-    yield takeLatest (Action.MEMBERS_MEMBER_UPDATE, updateMembers)
+    yield takeLatest (Action.MEMBERS_MEMBER_ADD, addMember)
+    yield takeLatest (Action.MEMBERS_MEMBER_UPDATE, updateMember)
+    yield takeLatest (Action.MEMBERS_MEMBER_DELETE, deleteMember)
     yield takeLatest (Action.MEMBERS_GET_ALLMEMBERS, getAllMembers)
 }

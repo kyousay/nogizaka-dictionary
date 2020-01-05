@@ -46,6 +46,7 @@ interface Props {
     members: membersState
     getAllMembers: () => void
     update: (member: typeof initialState) => void
+    delete: (memberId: string) => void
 }
 
 const initialState = {
@@ -65,6 +66,11 @@ export type MemberState = typeof initialState
 const UpdateForm: React.FC<Props> = props => {
 
     const [memberState, memberChange] = useState(initialState)
+    const [buttonIndex, setButtonIndex] = useState(1)
+
+    const setIndex = (index: 1 | 2) => {
+        setButtonIndex(index)
+    }
 
     useEffect(() => {
         const getAllMembers = props.getAllMembers
@@ -137,10 +143,14 @@ const UpdateForm: React.FC<Props> = props => {
 
     const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        const updateData = {
-            ...memberState,
+        if(buttonIndex === 1) {
+            const updateData = {
+                ...memberState,
+            }
+            props.update(updateData)
+        } else {
+            props.delete(memberState._id)
         }
-        props.update(updateData)
         clearInputValue('input[name="image"]')
     }
 
@@ -243,7 +253,13 @@ const UpdateForm: React.FC<Props> = props => {
         buttons: [
             {
                 buttonTxt: 'メンバー情報更新',
+                clickHandler: () => setIndex(1) 
             },
+            {
+                buttonTxt: '選択しているメンバーを削除',
+                clickHandler: () => setIndex(2),
+                buttonStyle: { bgColor: '#DB7093' as '#DB7093'}
+            }
         ],
         baseButtonWrapperStyle: {margin: '30px 0 0'},
         baseButtonStyle
@@ -282,7 +298,7 @@ const UpdateForm: React.FC<Props> = props => {
     return(
         <Wrapper styled={{...wrapperStyle}}>
             <Selects {...SelectsProps} />
-            <Img src={Imgsrc} styled={{height: '320px', width: '320px'}}/>
+            <Img src={Imgsrc} styled={{width: '320px'}}/>
             <form onSubmit={(e) => submitHandler(e)} >
                 <InputSections {...InputSectionsProps} />
                 <Buttons {...ButtonsProps} />

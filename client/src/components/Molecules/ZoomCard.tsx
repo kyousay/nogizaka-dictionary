@@ -26,7 +26,7 @@ const contentStyle = {
     position: "absolute",
     left: "50%",
     top: "50%",
-    width: "360px",
+    width: "300px",
     min_height: "576px",
     bgColor: "#fff" as "#fff",
     transform: "translate(-50%,-50%)",
@@ -89,7 +89,7 @@ const ZoomCard : React.FC<Props> = props => {
     <Wrapper styled={{...zoomFieldStyle}} onClick={props.zoomOutHandler}>
         <Wrapper styled={{...contentStyle}}>
             <Wrapper styled={{position: 'absolute', top: '-30px', right: '-50px'}} onClick={props.zoomOutHandler}>
-                <Img styled={{width: '100%',height: '100%'}} src={close} />
+                <Img styled={{width: '100%'}} src={close} />
             </Wrapper>
             <Img src={props.image ? props.image : dummy} styled={{width: '100%', height: '300px'}}/>
             <Wrapper styled={{margin: '40px 0 0 0'}}>

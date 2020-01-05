@@ -27,6 +27,7 @@ function* upDateUserData(action : ReturnType<typeof userAction.upDateUserData>){
         yield put(userAction.changeLoading(false))
     }catch(error) {
         yield alert(error)
+        yield put(userAction.changeLoading(false))
     }
 }
 

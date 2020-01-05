@@ -13,7 +13,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
         dispatch(Action.getAllMembers())
     },
     update: (member: MemberState) => {
-        dispatch(Action.updateMembers(member))
+        dispatch(Action.updateMember(member))
+    },
+    delete: (memberId: string) => {
+        dispatch(Action.deleteMember(memberId))
     }
 })
 

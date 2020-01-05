@@ -5,7 +5,7 @@ import * as Action from '../../../actions/members/membersActions'
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     upload: (member: MemberState) => {
-        dispatch(Action.addMembers(member))
+        dispatch(Action.addMember(member))
     }
 })
 

@@ -3,14 +3,19 @@ import { MemberState as updateMemberState } from '../../components/Organisms/For
 import { MembersState} from '../../reducers/membersReducer'
 import * as ActionType from './membersConstants'
 
-export const addMembers = (member : addMemberState) => ({
+export const addMember = (member : addMemberState) => ({
     type: ActionType.MEMBERS_MEMBER_ADD as typeof ActionType.MEMBERS_MEMBER_ADD,
     payload: {...member} 
 })
 
-export const updateMembers = (member : updateMemberState) => ({
+export const updateMember = (member : updateMemberState) => ({
     type: ActionType.MEMBERS_MEMBER_UPDATE as typeof ActionType.MEMBERS_MEMBER_UPDATE,
     payload: {...member}
+})
+
+export const deleteMember = (memberId: string) => ({
+    type: ActionType.MEMBERS_MEMBER_DELETE as typeof ActionType.MEMBERS_MEMBER_DELETE,
+    payload: memberId
 })
 
 export const getAllMembers = () => ({
@@ -25,7 +30,8 @@ export const storageMembers = (members: MembersState) => ({
 })
 
 export type MembersAction = 
-    |ReturnType<typeof addMembers>
-    |ReturnType<typeof updateMembers>
+    |ReturnType<typeof addMember>
+    |ReturnType<typeof updateMember>
+    |ReturnType<typeof deleteMember>
     |ReturnType<typeof getAllMembers>
     |ReturnType<typeof storageMembers>

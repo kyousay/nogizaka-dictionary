@@ -216,7 +216,7 @@ const AdminForm: React.FC<Props> = props => {
     const Imgsrc = memberState.image ? memberState.image : defaultImage
     return(
         <Wrapper styled={{...wrapperStyle}}>
-            <Img src={Imgsrc} styled={{height: '320px', width: '320px'}}/>
+            <Img src={Imgsrc} styled={{width: '320px'}}/>
             <form onSubmit={(e) => submitHandler(e)} >
                 <InputSections {...InputSectionsProps} />
                 <Buttons {...ButtonsProps} />

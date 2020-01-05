@@ -8,7 +8,7 @@ interface optionConfig {
 interface apiOption {
     method: Method,
     url: string, 
-    data?: MemberState,
+    data?: MemberState | {memberId: string},
 }
 
 const DEFAULT_API_CONFIG = {

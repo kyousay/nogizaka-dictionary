@@ -55,7 +55,7 @@ module.exports = {
         let memberId = req.body._id;
         Member.findByIdAndUpdate(memberId,{
             $set: req.body
-        }).then(user => {
+        }).then(() => {
             Member.find({}).then(members => {
                 res.send({
                     message: '正常にデータが正常にアップデートされました。',
@@ -64,6 +64,17 @@ module.exports = {
             });
         }).catch(error => {
             next(error)
+        })
+    },
+    delete: (req, res, next) => {
+        let {memberId} = req.body
+        Member.findByIdAndRemove(memberId).then(() => {
+            Member.find({}).then(members => {
+                res.send({
+                    message: 'メンバーデータの削除が正常に行われました。',
+                    members
+                });
+            });
         })
     },
     getAllMembers: (req, res, next) => {

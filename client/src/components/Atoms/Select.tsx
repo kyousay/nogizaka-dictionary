@@ -17,8 +17,10 @@ const Select = styled.select<SelectProps>`
     width: ${props => props.styled.width};
     padding: ${props => props.styled.padding};
     border: ${props => props.styled.border};
+    color: ${props => props.styled.color};
     border-radius: ${props => props.styled.border_radius};
     background-color: ${props => props.styled.bgColor};
+    appearance: ${props => props.styled.appearance};
 `
 
 export const withSPStyle = (Component : typeof Select, spStyle: Style) => {

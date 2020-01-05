@@ -84,7 +84,6 @@ const UpdateForm: React.FC<Props> = props => {
             hash: props.members[0].hash,
         }
         memberChange(initialMemberState)
-        console.log('memberChange')
     },[props.members])
 
     const clearInputValue = (query : string) => {

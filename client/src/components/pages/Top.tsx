@@ -10,7 +10,7 @@ interface PageProps {
     getAllMembers: () => void
 }
 
-const Top : React.FC<PageProps> = (props) => {
+const Top : React.FC<PageProps> = props => {
     const {history} = useReactRouter()
     const getAllMembers = props.getAllMembers
     useEffect(() => {

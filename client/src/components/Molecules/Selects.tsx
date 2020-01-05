@@ -9,10 +9,10 @@ export interface Props {
         txt: string
         props?: React.OptionHTMLAttributes<HTMLOptionElement>
     }[]
+    baseOptionStyle?: OptionStyle
     wrapperStyle?: WrapperStyle
     selectStyle?: SelectStyle
     selectProps?: React.SelectHTMLAttributes<HTMLSelectElement>
-    baseOptionStyle?: OptionStyle
 }
 
 const Selects: React.FC<Props> = (props) => (

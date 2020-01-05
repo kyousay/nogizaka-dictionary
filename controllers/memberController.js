@@ -56,7 +56,14 @@ module.exports = {
         Member.findByIdAndUpdate(memberId,{
             $set: req.body
         }).then(user => {
-            next()
+            console.log(this)
+            console.log(Member)
+            Member.find({}).then(members => {
+                res.send({
+                    message: '正常にデータが正常にアップデートされました。',
+                    members
+                });
+            });
         }).catch(error => {
             next(error)
         })

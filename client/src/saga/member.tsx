@@ -19,7 +19,7 @@ function* addMembers(action : ReturnType<typeof MembersAction.addMembers>){
         }
         const result = yield call(api, apiOption)
         const data = result.data
-        alert(`${data.message}`)
+        alert(data.message)
     }catch(error) {
         yield alert(error)
     }
@@ -36,7 +36,8 @@ function* updateMembers(action : ReturnType<typeof MembersAction.updateMembers>)
         }
         const result = yield call(api, apiOption)
         const data = result.data
-        console.log(data)
+        yield alert(data.message)
+        yield put(MembersAction.storageMembers({members: data.members}))
     }catch(error) {
         yield alert(error)
     }

@@ -84,7 +84,12 @@ const UpdateForm: React.FC<Props> = props => {
             hash: props.members[0].hash,
         }
         memberChange(initialMemberState)
+        console.log('memberChange')
     },[props.members])
+
+    const clearInputValue = (query : string) => {
+        document.querySelector<HTMLInputElement>(`${query}`)!.value = ''
+    }
 
     const selectChangeHanlder = (e: React.ChangeEvent<HTMLSelectElement>) => {
         props.members.forEach((member,index) => {
@@ -94,7 +99,7 @@ const UpdateForm: React.FC<Props> = props => {
                 })
             }
         })
-        document.querySelector<HTMLInputElement>('input[name="image"]')!.value = ''
+        clearInputValue('input[name="image"]')
     }
 
     const fileSetHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -133,11 +138,11 @@ const UpdateForm: React.FC<Props> = props => {
 
     const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        console.log(memberState)
         const updateData = {
             ...memberState,
         }
         props.update(updateData)
+        clearInputValue('input[name="image"]')
     }
 
     const InputSectionsProps = {
@@ -260,6 +265,7 @@ const UpdateForm: React.FC<Props> = props => {
     const SelectsProps = {
         options: createOptions(),
         selectProps: {
+            value: memberState._id,
             onChange: selectChangeHanlder
         },
         selectStyle: {

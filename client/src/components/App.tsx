@@ -4,7 +4,7 @@ import { GlobalStyle } from '../style/BaseStyle'
 import Wrapper from './Atoms/Wrapper'
 import Top from '../cotainers/Pages/Top/Top'
 import Login from '../cotainers/Pages/Login/Login'
-import Admin from './Pages/Admin'
+import Admin from '../cotainers/Pages/Admin'
 
 const App: React.FC = () => {
   return (

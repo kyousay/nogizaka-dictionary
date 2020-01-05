@@ -13,11 +13,12 @@ interface PageProps {
 const Top : React.FC<PageProps> = (props) => {
     const {history} = useReactRouter()
     useEffect(() => {
-        props.getAllMembers()
         const isStorageToken = localStorage.getItem('ticket')? true : false
-        if(props.user.login === false || isStorageToken === false) {
+        if(props.user.login !== true || isStorageToken !== true) {
             props.isStorageToken({isLogin:isStorageToken})
             history.push('/login')
+        }else {
+            props.getAllMembers()
         }
     })
 

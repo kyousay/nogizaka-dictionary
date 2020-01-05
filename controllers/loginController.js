@@ -36,6 +36,7 @@ module.exports = {
                     success: true,
                     token: signedToken,
                     user: {
+                        permission: user.permission,
                         id: user._id,
                         nickName: user.nickName,
                         message: user.message,

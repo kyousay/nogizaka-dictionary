@@ -3,6 +3,7 @@ import { LoginAction } from '../actions/login/loginActions'
 import * as ActionType from '../actions/login/loginConstants'
 import * as ActionUserType from '../actions/user/userConstants'
 import { UserAction } from '../actions/user/userActions'
+import { Member } from './membersReducer';
 
 const initialState = {
     permission: '',
@@ -10,7 +11,7 @@ const initialState = {
     nickName: '新参者',
     message: 'こんにちは。',
     rank: 'アンダー',
-    favoriteMembers: [{}],
+    favoriteMembers: [{}] as Member[],
     login: false,
     loading: false,
 }

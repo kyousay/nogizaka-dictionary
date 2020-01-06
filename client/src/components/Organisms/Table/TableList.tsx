@@ -3,13 +3,17 @@ import MembersCard from '../../Molecules/MembersCard'
 import ZoomCard from '../../Molecules/ZoomCard'
 import Wrapper from '../../Atoms/Wrapper'
 import Selects from '../../Molecules/Selects'
-import { StateValue as Props} from '../../../reducers'
-import { membersState } from '../../../reducers/membersReducer'
+import { Member, membersState } from '../../../reducers/membersReducer'
+import { userState } from '../../../reducers/userReducer';
 
 const UnOrderdList = Wrapper.withComponent('ul')
 
 const ListItem = Wrapper.withComponent('li')
 
+interface Props {
+    members: Member[]
+    user: userState
+}
 
 const ListTable: React.FC<Props> = (props) => {
     console.log(props)
@@ -17,7 +21,17 @@ const ListTable: React.FC<Props> = (props) => {
     const [ zoom, setZoom ] = useState(false)
 
     //any型になってしまっている
-    const [ state , setState ] = useState()
+    const [ state , setState ] = useState<Member>({
+        _id: '',
+        image: '',
+        name: ['',''],
+        sailium: ['', ''],
+        segment: '',
+        dateOfBirth : '',
+        blod: '',
+        height: '',
+        hash:['']
+    })
 
     const members : membersState = props.members
     
@@ -96,7 +110,7 @@ const ListTable: React.FC<Props> = (props) => {
                     {members.map((member,index) => {
                         return(
                             <ListItem key={index} onClick={() => {setState(member);setZoom(true)}} styled={{display: 'inline-block'}}>
-                                <MembersCard {...member}/>
+                                <MembersCard {...{member, user: props.user}}/>
                             </ListItem>
                         )
                     })}
@@ -104,7 +118,7 @@ const ListTable: React.FC<Props> = (props) => {
     }
     return (
         <React.Fragment>
-            { zoom ? <ZoomCard zoomOutHandler={zoomOutHandler} {...state}/> : null}
+            { zoom ? <ZoomCard zoomOutHandler={zoomOutHandler} zoom={zoom} member={state}/> : null}
             { element ? element : null}
         </React.Fragment>
     )

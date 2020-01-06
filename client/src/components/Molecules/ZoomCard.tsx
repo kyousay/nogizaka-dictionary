@@ -55,48 +55,47 @@ const TxtRowSectionsStyle = {
     },
 }
 
-interface ZoomCardProps {
-    zoomOutHandler : () => void
-    name: string[]
+interface Props {
+    zoomOutHandler : (zoom: boolean) => void
+    member: Member
+    zoom: boolean
 }
-
-export type Props = Member & ZoomCardProps
 
 const ZoomCard : React.FC<Props> = props => {
     const TxtRowSectionsProps = {
         sections: [
             {
                 title: "生年月日",
-                content: props.dateOfBirth,
+                content: props.member.dateOfBirth,
                 ...TxtRowSectionsStyle,
                 wrapperStyle: {border_top: '1px solid #D8D8D8', padding: '12px 0 0 0'}
             },
             {
                 title: "血液型",
-                content: props.blod,
+                content: props.member.blod,
                 ...TxtRowSectionsStyle,
                 wrapperStyle: {margin: '17px 0 0'}
             },
             {
                 title: "身長",
-                content: `${props.height}cm`,
+                content: `${props.member.height}cm`,
                 ...TxtRowSectionsStyle,
                 wrapperStyle: {margin: '17px 0 0'}
             },
         ]
     }
     return (
-    <Wrapper styled={{...zoomFieldStyle}} onClick={props.zoomOutHandler}>
+    <Wrapper styled={{...zoomFieldStyle}} onClick={() => props.zoomOutHandler(props.zoom)}>
         <Wrapper styled={{...contentStyle}}>
-            <Wrapper styled={{position: 'absolute', top: '-30px', right: '-50px'}} onClick={props.zoomOutHandler}>
+            <Wrapper styled={{position: 'absolute', top: '-30px', right: '-50px'}} onClick={() => props.zoomOutHandler(props.zoom)}>
                 <Img styled={{width: '100%'}} src={close} />
             </Wrapper>
-            <Img src={props.image ? props.image : dummy} styled={{width: '100%', height: '300px'}}/>
+            <Img src={props.member.image ? props.member.image : dummy} styled={{width: '100%', height: '300px'}}/>
             <Wrapper styled={{margin: '40px 0 0 0'}}>
                 <Paragragh styled={{margin_top: '40px', font_weight: 'bold', font_size: '2.4rem'}}>
-                    {props.name[0]}
+                    {props.member.name[0]}
                     <WeakTxt styled={{font_size: '1.2rem', font_weight: 'bold'}}>
-                        {props.name[1]}
+                        {props.member.name[1]}
                     </WeakTxt>
                 </Paragragh>
             </Wrapper>
@@ -104,7 +103,7 @@ const ZoomCard : React.FC<Props> = props => {
                 <TxtRowSections {...TxtRowSectionsProps} />
             </Wrapper>
             <HashWrapper styled={{wrap:"wrap", margin: '15px 0 0 0', max_height: '50px'}}>
-                <Hash hash={props.hash} segment={props.segment}/>
+                <Hash hash={props.member.hash} segment={props.member.segment}/>
             </HashWrapper>
         </Wrapper>
     </Wrapper>

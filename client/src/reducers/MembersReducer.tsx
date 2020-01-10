@@ -3,7 +3,7 @@ import { MembersAction } from '../actions/members/membersActions'
 import * as ActionType from '../actions/members/membersConstants'
 
 
-const initialState  = {
+export const initialState  = {
     members: [
         {
             _id: '',

@@ -39,11 +39,10 @@ module.exports = {
         let data = req.body
         Member.create({
             ...data
-        }).then(member => {
+        }).then(() => {
             Member.find({}).then(members => {
                 res.send({
                     message: '正常にデータがアップロードされました。',
-                    member,
                     members
                 });
             });

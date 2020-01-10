@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {Member} from '../../reducers/membersReducer'
 import styled from 'styled-components'
 import {Paragragh} from '../Atoms/Paragragh'
 import Wrapper from '../Atoms/Wrapper'
 import Img from '../Atoms/Img'
 import Txt from '../Atoms/Txt'
-import Heart from '../../style/img/Heart.svg'
-import grayHeart from '../../style/img/grayHeart.svg'
-import { userState } from '../../reducers/userReducer';
 
 interface BoxProps {
     styled: {
@@ -46,29 +43,17 @@ const Box = styled(Wrapper)<BoxProps>`
 
 interface Props {
     member: Member
-    user: userState
+    favoriteImage?: string
 }
 
-const MembersCard: React.FC<Props> = props => {
-    console.log(props.member)
-    const [isFavoriteMember, setFavoriteMember] = useState(false)
-    useEffect(() => {
-        const MemberId = props.member._id
-        const favoriteMembers = props.user.favoriteMembers;
-        if(favoriteMembers[0]._id !== undefined) {
-            favoriteMembers.forEach((favoriteMember, index) => {
-                if(favoriteMember._id === MemberId) {
-                    setFavoriteMember(true)
-                }
-            })
-        }
-    },[props.user, props.member])
-    const isFavorite = isFavoriteMember ? Heart : grayHeart 
-    console.log(isFavorite)
-    return(
+const MembersCard: React.FC<Props> = props => (
         <Box styled={{color1: props.member.sailium[0], color2: props.member.sailium[1]}}>
             <Wrapper styled={{position: 'absolute', right: '5px', top: '3px'}}>
-                <Img styled={{width: '20px', height: '20px'}} src={isFavorite} />
+                {props.favoriteImage?
+                    <Img styled={{width: '20px', height: '20px'}} src={props.favoriteImage} />
+                    :
+                    null
+                }
             </Wrapper>
             <Img src={props.member.image} styled={{width: '100%'}}/>
             <Wrapper styled={{margin: '16px 0 0 0', text_align: 'center'}}>
@@ -78,7 +63,6 @@ const MembersCard: React.FC<Props> = props => {
                 </Wrapper>
             </Wrapper>
         </Box>
-    )
-}
+)
 
 export default MembersCard

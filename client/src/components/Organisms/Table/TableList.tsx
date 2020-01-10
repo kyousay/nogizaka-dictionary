@@ -100,26 +100,22 @@ const ListTable: React.FC<Props> = (props) => {
             onChange: selectChangeHandler
         }
     }
-
-    let element
-    if(members[0].name[0].length > 0){
-        element = <UnOrderdList styled={{justify_content: "center", flex_wrap: "wrap", max_width: '830px', padding: '60px 40px 60px 40px' }}>
-                    <Wrapper styled={{margin: '0 0 30px 20px'}}>
-                        <Selects {...SelectsProps} />
-                    </Wrapper>
-                    {members.map((member,index) => {
-                        return(
-                            <ListItem key={index} onClick={() => {setState(member);setZoom(true)}} styled={{display: 'inline-block'}}>
-                                <MembersCard {...{member, user: props.user}}/>
-                            </ListItem>
-                        )
-                    })}
-                  </UnOrderdList>
-    }
+    
     return (
         <React.Fragment>
             { zoom ? <ZoomCard zoomOutHandler={zoomOutHandler} zoom={zoom} member={state}/> : null}
-            { element ? element : null}
+            { <UnOrderdList styled={{justify_content: "center", flex_wrap: "wrap", max_width: '830px', padding: '60px 40px 60px 40px' }}>
+                <Wrapper styled={{margin: '0 0 30px 20px'}}>
+                    <Selects {...SelectsProps} />
+                </Wrapper>
+                {members.map((member,index) => {
+                    return(
+                        <ListItem key={index} onClick={() => {setState(member);setZoom(true)}} styled={{display: 'inline-block'}}>
+                            <MembersCard {...{member, user: props.user}}/>
+                        </ListItem>
+                    )
+                })}
+            </UnOrderdList>}
         </React.Fragment>
     )
 }

@@ -6,6 +6,7 @@ from 'redux-saga/effects'
 import * as Action from '../actions/members/membersConstants'
 import * as MembersAction from '../actions/members/membersActions'
 import * as userAction from '../actions/user/userActions'
+import {initialState} from '../reducers/membersReducer'
 import { MemberApiFactory } from '../api/MemberApiFactory'
 
 function* addMember(action : ReturnType<typeof MembersAction.addMember>){
@@ -22,6 +23,7 @@ function* addMember(action : ReturnType<typeof MembersAction.addMember>){
         const result = yield call(api, apiOption)
         yield put(userAction.changeLoading(false))
         const data = result.data
+        yield put(MembersAction.storageMembers({members: data.members}))
         alert(data.message)
     }catch(error) {
         yield alert(error)
@@ -64,7 +66,12 @@ function* deleteMember(action: ReturnType<typeof MembersAction.deleteMember>) {
         yield put(userAction.changeLoading(false))
         const data = result.data
         yield alert(data.message)
-        yield put(MembersAction.storageMembers({members: data.members}))
+        console.log(data.members)
+        if(data.members.length > 0) {
+            yield put(MembersAction.storageMembers({members: data.members}))
+        } else {
+            yield put(MembersAction.storageMembers({...initialState}));
+        }
     }catch(error) {
         yield alert(error)
         yield put(userAction.changeLoading(false))

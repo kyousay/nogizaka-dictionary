@@ -8,6 +8,7 @@ import Selects from '../../Molecules/Selects'
 import defaultImage from '../../../style/img/defaultImg.jpg'
 import { membersState } from '../../../reducers/membersReducer'
 import {Link}from 'react-router-dom'
+import useReactRouter from 'use-react-router'
 
 const wrapperStyle = {
     width: '320px', 
@@ -64,7 +65,7 @@ const initialState = {
 export type MemberState = typeof initialState
 
 const UpdateForm: React.FC<Props> = props => {
-
+    const {history} = useReactRouter()
     const [memberState, memberChange] = useState(initialState)
     const [buttonIndex, setButtonIndex] = useState(1)
 
@@ -78,6 +79,9 @@ const UpdateForm: React.FC<Props> = props => {
     },[props.getAllMembers])
 
     useEffect(() => {
+        if(props.members[0]._id.length > 0){
+            history.push("/admin")
+        }
         let initialMemberState = {
             _id: props.members[0]._id,
             image: props.members[0].image,
@@ -90,7 +94,7 @@ const UpdateForm: React.FC<Props> = props => {
             hash: props.members[0].hash,
         }
         memberChange(initialMemberState)
-    },[props.members])
+    },[props.members, history])
 
     const clearInputValue = (query : string) => {
         document.querySelector<HTMLInputElement>(`${query}`)!.value = ''

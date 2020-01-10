@@ -6,6 +6,7 @@ import InputSections from '../../Molecules/InputSections'
 import Buttons from '../../Molecules/Buttons'
 import defaultImage from '../../../style/img/defaultImg.jpg'
 import {Link} from 'react-router-dom'
+import { membersState } from '../../../reducers/membersReducer';
 
 const wrapperStyle = {
     width: '320px', 
@@ -54,10 +55,12 @@ const initialState = {
 export type MemberState = typeof initialState
 
 interface Props {
+    members: membersState
     upload: (data: MemberState) => void
 }
 
 const AdminForm: React.FC<Props> = props => {
+    console.log(props);
     const [memberState, memberChange] = useState<MemberState>(initialState)
 
     const fileSetHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -221,9 +224,14 @@ const AdminForm: React.FC<Props> = props => {
                 <InputSections {...InputSectionsProps} />
                 <Buttons {...ButtonsProps} />
             </form>
-            <Wrapper styled={{margin: '30px 0 0'}}>
-                <Link to={"/admin/update"}><Button styled={{...baseButtonStyle, bgColor: '#42b72a' as '#42b72a'}}>メンバー情報更新ページへ</Button></Link>
-            </Wrapper>
+            {
+                props.members[0]._id.length > 0 ?
+                    <Wrapper styled={{margin: '30px 0 0'}}>
+                        <Link to={"/admin/update"}><Button styled={{...baseButtonStyle, bgColor: '#42b72a' as '#42b72a'}}>メンバー情報更新ページへ</Button></Link>
+                    </Wrapper>
+                :   
+                    null
+            }
         </Wrapper>
     )
 }

@@ -6,7 +6,7 @@ interface Style {
     [k : string] : string
 }
 
-export type ElementStyle = Partial<Style & Pick<constantStyle, 'font_size'>>
+export type ElementStyle = Partial<Style & Pick<constantStyle, 'font_size' | 'display'>>
 
 interface SelectProps {
     styled: ElementStyle

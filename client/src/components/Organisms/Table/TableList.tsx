@@ -5,6 +5,8 @@ import Wrapper from '../../Atoms/Wrapper'
 import Selects from '../../Molecules/Selects'
 import { Member, membersState } from '../../../reducers/membersReducer'
 import { userState } from '../../../reducers/userReducer';
+import grayHeart from '../../../style/img/grayHeart.svg'
+import Heart from '../../../style/img/Heart.svg'
 
 const UnOrderdList = Wrapper.withComponent('ul')
 
@@ -16,11 +18,9 @@ interface Props {
 }
 
 const ListTable: React.FC<Props> = (props) => {
-    console.log(props)
 
     const [ zoom, setZoom ] = useState(false)
 
-    //any型になってしまっている
     const [ state , setState ] = useState<Member>({
         _id: '',
         image: '',
@@ -100,7 +100,13 @@ const ListTable: React.FC<Props> = (props) => {
             onChange: selectChangeHandler
         }
     }
-    
+
+    const checkFavoriteId = () => {
+        for(let i = 0; i < members.length; i++) {
+            
+        }
+    }
+
     return (
         <React.Fragment>
             { zoom ? <ZoomCard zoomOutHandler={zoomOutHandler} zoom={zoom} member={state}/> : null}
@@ -108,13 +114,12 @@ const ListTable: React.FC<Props> = (props) => {
                 <Wrapper styled={{margin: '0 0 30px 20px'}}>
                     <Selects {...SelectsProps} />
                 </Wrapper>
-                {members.map((member,index) => {
-                    return(
-                        <ListItem key={index} onClick={() => {setState(member);setZoom(true)}} styled={{display: 'inline-block'}}>
-                            <MembersCard {...{member, user: props.user}}/>
-                        </ListItem>
-                    )
-                })}
+                {members.map((member,index) => (
+                    <ListItem key={index} onClick={() => {setState(member);setZoom(true)}} styled={{display: 'inline-block'}}>
+                        <MembersCard {...{member, user: props.user}}/>
+                    </ListItem>
+                ))
+                }
             </UnOrderdList>}
         </React.Fragment>
     )

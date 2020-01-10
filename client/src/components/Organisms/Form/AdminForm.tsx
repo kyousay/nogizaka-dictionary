@@ -60,7 +60,6 @@ interface Props {
 }
 
 const AdminForm: React.FC<Props> = props => {
-    console.log(props);
     const [memberState, memberChange] = useState<MemberState>(initialState)
 
     const fileSetHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -224,14 +223,9 @@ const AdminForm: React.FC<Props> = props => {
                 <InputSections {...InputSectionsProps} />
                 <Buttons {...ButtonsProps} />
             </form>
-            {
-                props.members[0]._id.length > 0 ?
-                    <Wrapper styled={{margin: '30px 0 0'}}>
-                        <Link to={"/admin/update"}><Button styled={{...baseButtonStyle, bgColor: '#42b72a' as '#42b72a'}}>メンバー情報更新ページへ</Button></Link>
-                    </Wrapper>
-                :   
-                    null
-            }
+            <Wrapper styled={{margin: '30px 0 0'}}>
+                <Link to={"/admin/update"}><Button styled={{...baseButtonStyle, bgColor: '#42b72a' as '#42b72a'}}>メンバー情報更新ページへ</Button></Link>
+            </Wrapper>
         </Wrapper>
     )
 }

@@ -79,7 +79,7 @@ const UpdateForm: React.FC<Props> = props => {
     },[props.getAllMembers])
 
     useEffect(() => {
-        if(props.members[0]._id.length > 0){
+        if(props.members[0]._id.length < 1){
             history.push("/admin")
         }
         let initialMemberState = {

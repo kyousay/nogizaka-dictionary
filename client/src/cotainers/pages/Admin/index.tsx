@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import * as Action from '../../../actions/login/loginActions'
-import { userState } from '../../../reducers/userReducer'
+import {State} from '../../../reducers/index'
 import Admin from '../../../components/Pages/Admin'
 
-const mapStateToProps = ({user} : {user:userState}) => ({
-    user
+const mapStateToProps = (state: State) => ({
+    user: state.user
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

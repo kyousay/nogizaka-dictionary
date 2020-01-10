@@ -89,7 +89,11 @@ function* getAllMembers(){
         const result = yield call(api, apiOption)
         yield put(userAction.changeLoading(false))
         const data = result.data
-        yield put(MembersAction.storageMembers({members: data.members}))
+        if(data.members.length > 0) {
+            yield put(MembersAction.storageMembers({members: data.members}))
+        } else {
+            yield put(MembersAction.storageMembers({...initialState}));
+        }
     }catch(error) {
         yield alert(error)
         yield put(userAction.changeLoading(false))

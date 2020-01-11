@@ -38,6 +38,7 @@ module.exports = {
                     user: {
                         permission: user.permission,
                         id: user._id,
+                        favoriteMembers: user.favoriteMembers,
                         nickName: user.nickName,
                         message: user.message,
                         rank: user.rank

@@ -43,17 +43,20 @@ const Box = styled(Wrapper)<BoxProps>`
 
 interface Props {
     member: Member
-    favoriteImage?: string
+    favoriteImage: string
+    imageClickHandler: (memberId: string, isFavorite: boolean) => void
+    status: boolean
 }
 
 const MembersCard: React.FC<Props> = props => (
         <Box styled={{color1: props.member.sailium[0], color2: props.member.sailium[1]}}>
-            <Wrapper styled={{position: 'absolute', right: '5px', top: '3px'}}>
-                {props.favoriteImage?
-                    <Img styled={{width: '20px', height: '20px'}} src={props.favoriteImage} />
-                    :
-                    null
+            <Wrapper styled={{position: 'absolute', right: '5px', top: '3px'}} 
+                onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+                        event.stopPropagation();
+                        props.imageClickHandler(props.member._id, props.status);
                 }
+            }>
+                <Img styled={{width: '20px', height: '20px'}} src={props.favoriteImage}/>
             </Wrapper>
             <Img src={props.member.image} styled={{width: '100%'}}/>
             <Wrapper styled={{margin: '16px 0 0 0', text_align: 'center'}}>

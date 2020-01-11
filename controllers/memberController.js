@@ -84,5 +84,8 @@ module.exports = {
         }).catch(error => {
             next(error);
         });
+    },
+    search: (req, res, next) => {
+        console.log(req.params);
     }
 };

@@ -41,4 +41,8 @@ let memberSchema = new Schema(
     timestamps: true
 });
 
+memberSchema.virtual("search").get(function() {
+    return [this.name, this.sailium, this.segment, this.dateOfBirth, this.blod, this.height, this.hash]
+})
+
 module.exports = mongoose.model("Member", memberSchema);

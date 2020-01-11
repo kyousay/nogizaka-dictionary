@@ -15,6 +15,8 @@ const ListItem = Wrapper.withComponent('li')
 interface Props {
     members: Member[]
     user: userState
+    favorite: (id: string) => void
+    unfavorite: (id: string) => void
 }
 
 const ListTable: React.FC<Props> = (props) => {
@@ -101,9 +103,24 @@ const ListTable: React.FC<Props> = (props) => {
         }
     }
 
-    const checkFavoriteId = () => {
-        for(let i = 0; i < members.length; i++) {
-            
+    const checkFavoriteId = (memberId: string) => {
+        const userFavoriteMembers = props.user.favoriteMembers
+        let isFavorite = false;
+        if(userFavoriteMembers.length > 0) {
+            isFavorite = userFavoriteMembers.some((favoriteMemberId, index) => {
+                return memberId === favoriteMemberId
+            })
+        }
+        return isFavorite
+    }
+
+    const changeFavoriteMember = (memberId: string, isFavorite: boolean) => {
+        const newFavoriteState = isFavorite ? false : true
+        console.log(memberId)
+        if(newFavoriteState) {
+            props.favorite(memberId)
+        }else {
+            props.unfavorite(memberId)
         }
     }
 
@@ -114,11 +131,14 @@ const ListTable: React.FC<Props> = (props) => {
                 <Wrapper styled={{margin: '0 0 30px 20px'}}>
                     <Selects {...SelectsProps} />
                 </Wrapper>
-                {members.map((member,index) => (
-                    <ListItem key={index} onClick={() => {setState(member);setZoom(true)}} styled={{display: 'inline-block'}}>
-                        <MembersCard {...{member, user: props.user}}/>
-                    </ListItem>
-                ))
+                {members.map((member,index) => {
+                    const isFavorite = checkFavoriteId(member._id)
+                    const src = isFavorite? Heart : grayHeart 
+                    return(
+                        <ListItem key={index} onClick={() => {setState(member);setZoom(true)}} styled={{display: 'inline-block'}}>
+                            <MembersCard {...{member, user: props.user}} favoriteImage={src} imageClickHandler={changeFavoriteMember} status={isFavorite}/>
+                        </ListItem>
+                    )})
                 }
             </UnOrderdList>}
         </React.Fragment>

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { Method } from 'axios'
 import { userProfile } from '../components/Organisms/Header/TopHeader'
 
 interface apiConfig {
@@ -10,8 +10,14 @@ interface optionConfig {
     [k : string] : string | object | undefined
 }
 
+interface apiOption {
+    method: Method,
+    url?: string, 
+    data?: userProfile | {id: string},
+}
+
 const DEFAULT_API_CONFIG: apiConfig = {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3000/user',
     timeout: 7000,
 };
 
@@ -25,9 +31,11 @@ export const userDataFactory = (optionConfig? : optionConfig) => {
 
     const instance = axios.create(config);
 
-    const userAxios = async (data: userProfile, url: string) => {
+    const userAxios = async (apiOption: apiOption) => {
         try {
-            const response = await instance.put(`${url}`, data);
+            const response = await instance({
+                ...apiOption
+            });
 
             if(response.status !== 200) {
                 throw new Error(`Server Error`);

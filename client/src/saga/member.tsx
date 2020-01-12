@@ -66,7 +66,6 @@ function* deleteMember(action: ReturnType<typeof MembersAction.deleteMember>) {
         yield put(userAction.changeLoading(false))
         const data = result.data
         yield alert(data.message)
-        console.log(data.members)
         if(data.members.length > 0) {
             yield put(MembersAction.storageMembers({members: data.members}))
         } else {

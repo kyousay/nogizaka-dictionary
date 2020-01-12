@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Img from '../Atoms/Img'
 import {Paragragh} from '../Atoms/Paragragh'
@@ -8,6 +8,8 @@ import TxtRowSections from './TxtRowSections'
 import dummy from '../../style/img/anonymous.png'
 import { Member } from '../../reducers/membersReducer'
 import close from '../../style/img/close.png'
+import grayHeart from '../../style/img/grayHeart.svg'
+import Heart from '../../style/img/Heart.svg'
 import Hash from './Hash'
 
 const zoomFieldStyle = {
@@ -57,11 +59,18 @@ const TxtRowSectionsStyle = {
 
 interface Props {
     zoomOutHandler : (zoom: boolean) => void
+    imageClickHandler: (memberId: string, isFavorite: boolean) => void
+    zoomProps: {
+        src: string
+        favorite: boolean
+        selectValue: string
+    }
     member: Member
     zoom: boolean
 }
 
 const ZoomCard : React.FC<Props> = props => {
+    const [image, setImage] = useState(props.zoomProps.src)
     const TxtRowSectionsProps = {
         sections: [
             {
@@ -89,6 +98,19 @@ const ZoomCard : React.FC<Props> = props => {
         <Wrapper styled={{...contentStyle}}>
             <Wrapper styled={{position: 'absolute', top: '-30px', right: '-50px'}} onClick={() => props.zoomOutHandler(props.zoom)}>
                 <Img styled={{width: '100%'}} src={close} />
+            </Wrapper>
+            <Wrapper styled={{position: 'absolute', right: '20px', top: '20px'}} 
+                onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+                        event.stopPropagation();
+                        props.imageClickHandler(props.member._id, props.zoomProps.favorite);
+                        const newImage = image === Heart ? grayHeart : Heart
+                        setImage(newImage)
+                        if(props.zoomProps.selectValue === 'favorite') {
+                            props.zoomOutHandler(props.zoom)
+                        }
+                }
+            }>
+                <Img styled={{width: '50px', height: '50px'}} src={image}/>
             </Wrapper>
             <Img src={props.member.image ? props.member.image : dummy} styled={{width: '100%', height: '300px'}}/>
             <Wrapper styled={{margin: '40px 0 0 0'}}>

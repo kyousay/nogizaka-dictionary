@@ -46,6 +46,12 @@ const ListTable: React.FC<Props> = (props) => {
         setZoom(newZoom)
     }
 
+    const [zoomProps, setZoomProps] = useState({
+        src: grayHeart,
+        favorite: false,
+        selectValue
+    })
+
     const selectChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectValue(event.target.value);
         props.search(event.target.value);
@@ -140,21 +146,28 @@ const ListTable: React.FC<Props> = (props) => {
 
     return (
         <React.Fragment>
-            { zoom ? <ZoomCard zoomOutHandler={zoomOutHandler} zoom={zoom} member={state}/> : null}
-            { <UnOrderdList styled={{justify_content: "center", flex_wrap: "wrap", max_width: '830px', padding: '60px 40px 60px 40px' }}>
-                <Wrapper styled={{margin: '0 0 30px 20px'}}>
-                    <Selects {...SelectsProps} />
-                </Wrapper>
-                {members.map((member,index) => {
-                    const isFavorite = checkFavoriteId(member._id)
-                    const src = isFavorite? Heart : grayHeart 
-                    return(
-                        <ListItem key={index} onClick={() => {setState(member);setZoom(true)}} styled={{display: 'inline-block'}}>
-                            <MembersCard {...{member, user: props.user}} favoriteImage={src} imageClickHandler={changeFavoriteMember} status={isFavorite}/>
-                        </ListItem>
-                    )})
-                }
-            </UnOrderdList>}
+            { zoom ? 
+                        <ZoomCard zoomOutHandler={zoomOutHandler} zoom={zoom} member={state} 
+                        zoomProps={zoomProps} imageClickHandler={changeFavoriteMember}/> 
+                    : 
+                    
+                        null
+            }
+            {   <UnOrderdList styled={{justify_content: "center", flex_wrap: "wrap", max_width: '830px', padding: '60px 40px 60px 40px' }}>
+                    <Wrapper styled={{margin: '0 0 30px 20px'}}>
+                        <Selects {...SelectsProps} />
+                    </Wrapper>
+                    {members.map((member,index) => {
+                        const isFavorite = checkFavoriteId(member._id)
+                        const src = isFavorite? Heart : grayHeart 
+                        return(
+                            <ListItem key={index} onClick={() => {setState(member);setZoom(true);setZoomProps({favorite: isFavorite, src: src, selectValue})}} styled={{display: 'inline-block'}}>
+                                <MembersCard {...{member, user: props.user}} favoriteImage={src} imageClickHandler={changeFavoriteMember} status={isFavorite}/>
+                            </ListItem>
+                        )})
+                    }
+                </UnOrderdList>
+            }
         </React.Fragment>
     )
 }

@@ -6,34 +6,16 @@ jsonWebToken = require("jsonwebtoken");
 
 module.exports = {
     checkPermission: (req, res, next) => {
-        let token = req.headers.authorization;
-        if(token) {
-            jsonWebToken.verify(token, "effort_thanks_smile", (error, payload) => {
-                if(payload) {
-                    User.findById(payload.data).then(user => {
-                        let permission = user.permission;
-                        if(permission === 'root') {
-                            next();
-                        }else {
-                            res.send({
-                                message: "アップロードを行う権限がありません。"
-                            });
-                        }
-                    })
-                } else {
-                    res.status(httpStatus.UNAUTHORIZED).json({
-                        error: true,
-                        message: "正しく認証が行えませんでした。恐れ入りますが、ログインからやり直してください。"
-                    });
-                    next();
-                }
-            });
-        } else {
-            res.status(httpStatus.UNAUTHORIZED).json({
-                error: true,
-                message: "正しく認証が行えませんでした。恐れ入りますが、ログインからやり直してください。"
-            });
-        }
+        User.findById(res.locals.userId).then(user => {
+            let permission = user.permission;
+            if(permission === 'root') {
+                next();
+            }else {
+                res.send({
+                    message: "アップロードを行う権限がありません。"
+                });
+            }
+        });
     },
     upload: (req, res, next) => {
         let data = req.body
@@ -84,8 +66,5 @@ module.exports = {
         }).catch(error => {
             next(error);
         });
-    },
-    search: (req, res, next) => {
-        console.log(req.params);
     }
 };

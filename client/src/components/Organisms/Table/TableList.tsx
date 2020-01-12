@@ -17,6 +17,8 @@ interface Props {
     user: userState
     favorite: (id: string) => void
     unfavorite: (id: string) => void
+    search: (url: string) => void
+    storageMembers: (members: {members:membersState}) => void
 }
 
 const ListTable: React.FC<Props> = (props) => {
@@ -35,6 +37,8 @@ const ListTable: React.FC<Props> = (props) => {
         hash:['']
     })
 
+    const [selectValue, setSelectValue] = useState('members')
+
     const members : membersState = props.members
     
     const zoomOutHandler = (zoom: boolean) => {
@@ -43,7 +47,8 @@ const ListTable: React.FC<Props> = (props) => {
     }
 
     const selectChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log(event.target.value);
+        setSelectValue(event.target.value);
+        props.search(event.target.value);
     }
 
     const SelectsProps = {
@@ -57,37 +62,37 @@ const ListTable: React.FC<Props> = (props) => {
             {
                 txt: '一期生',
                 props: {
-                    value: '/search?segment="1期生"'
+                    value: 'segment=1期生'
                 }
             },
             {
                 txt: '二期生',
                 props: {
-                    value: '/search?segment="2期生"'
+                    value: 'segment=2期生'
                 }
             },
             {
                 txt: '三期生',
                 props: {
-                    value: '/search?segment="3期生"'
+                    value: 'segment=3期生'
                 }
             },
             {
                 txt: '四期生',
                 props: {
-                    value: '/search?segment="4期生"'
+                    value: 'segment=4期生'
                 }
             },
             {
                 txt: '卒業生',
                 props: {
-                    value: '/search?segment="卒業生"'
+                    value: 'segment=卒業生'
                 }
             },
             {
                 txt: '推しメン',
                 props: {
-                    value: '/favorite'
+                    value: 'favorite'
                 }
             }
         ],
@@ -99,6 +104,7 @@ const ListTable: React.FC<Props> = (props) => {
             bgColor: '#F9F9F9' as '#F9F9F9'
         },
         selectProps: {
+            value: selectValue,
             onChange: selectChangeHandler
         }
     }
@@ -116,11 +122,19 @@ const ListTable: React.FC<Props> = (props) => {
 
     const changeFavoriteMember = (memberId: string, isFavorite: boolean) => {
         const newFavoriteState = isFavorite ? false : true
-        console.log(memberId)
         if(newFavoriteState) {
             props.favorite(memberId)
         }else {
             props.unfavorite(memberId)
+            if(selectValue === 'favorite') {
+                const newMembers = [] as membersState;
+                props.members.forEach(member => {
+                    if(memberId !== member._id) {
+                        newMembers.push(member)
+                    }
+                })
+                props.storageMembers({members:newMembers})
+            }
         }
     }
 

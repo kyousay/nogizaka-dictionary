@@ -59,6 +59,7 @@ module.exports = {
             jsonWebToken.verify(token, "effort_thanks_smile", (error, payload) => {
                 if(payload) {
                     User.findById(payload.data).then(user => {
+                        res.locals.userId = payload.data
                         if(user) {
                             next();
                         } else {

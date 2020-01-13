@@ -21,4 +21,44 @@ module.exports = {
             })
         }
     },
+    test: (req, res, next) => {
+        const {word} = req.query;
+        Member.find({}).then(members => {
+            let result = [];
+            members.forEach((member,index) => {
+                const searchs = member.search;
+                let isResult = false;
+                console.log(searchs);
+                console.log(index);
+                searchs.forEach(search => {
+                    if(isResult !== true){
+                        if(Array.isArray(search)){
+                            search.forEach(value => {
+                                console.log(value, word, value===word);
+                                if(value === word){
+                                    isResult = true
+                                }
+                            });
+                        } else {
+                            console.log(search, word, search===word);
+                            isResult = search == word;
+                        }
+                    }
+                });
+                if(isResult) {
+                    result.push(member);
+                }
+            });
+            if(result.length > 0) {
+                res.send({
+                    isResult: true,
+                    result
+                });
+            } else {
+                res.send({
+                    isResult: false
+                })
+            }
+        });
+    }
 };

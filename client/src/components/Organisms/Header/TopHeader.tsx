@@ -56,10 +56,13 @@ export interface userProfile {
     rank: string
 }
 
-type Props = userState & {upDate: (props: userProfile) => void}
+type Props = userState & {
+    upDate: (props: userProfile) => void
+    searchWord: (word: string) => void
+}
 
 const TopHeader: React.FC<Props> = props => {
-    const [searchWord, changeSearchWord] = useState('')
+    const [word, changeSearchWord] = useState('')
     const [isHover, changeHover] = useState(false)
     const [isClick, changeClick] = useState(false)
     let initialUserState = {
@@ -84,6 +87,10 @@ const TopHeader: React.FC<Props> = props => {
 
     const upDateUserData = (userState : userProfile) => {
         props.upDate(userState)
+    }
+
+    const searchActionHandler = () => {
+        props.searchWord(word)
     }
     
     const UserCardProps = {
@@ -178,7 +185,7 @@ const TopHeader: React.FC<Props> = props => {
         <Wrapper styled={{display:'flex', align_items:"center", justify_content:"space-between", bgColor:'#fff', padding: '0px 20px'}}>
             <Img src={logo} styled={{width:"300px"}}/>
             <Wrapper styled={{display: 'flex', justify_content: 'space-between', min_width: '420px'}}>
-                <SearchPanel value={searchWord} changeHandler={(e : React.ChangeEvent<HTMLInputElement>) => changeSearchWord(e.target.value)}/>
+                <SearchPanel value={word} changeHandler={(e: React.ChangeEvent<HTMLInputElement>) => changeSearchWord(e.target.value)} clickHandler={searchActionHandler}/>
                 <ImgBoxWrapper styled={{margin: '0 0 0 20px', position: 'relative'}} 
                 onMouseEnter={() => changeHoverStateHandler(true)}
                 onMouseLeave={() => {

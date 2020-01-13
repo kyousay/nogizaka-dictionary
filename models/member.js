@@ -43,6 +43,8 @@ let memberSchema = new Schema(
 
 memberSchema.virtual("search").get(function() {
     return [this.name, this.sailium, this.segment, this.dateOfBirth, this.blod, this.height, this.hash]
-})
+});
+
+memberSchema.set("toJSON", { virtuals: true });
 
 module.exports = mongoose.model("Member", memberSchema);

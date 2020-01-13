@@ -20,10 +20,28 @@ function* searchSelect(action: ReturnType<typeof SearchAction.searchSelect>) {
         const result = yield call(api, apiOption)
         yield put(userAction.changeLoading(false))
         const data = result.data
+        yield put(MembersAction.storageMembers({members: data.members}))
+    }catch(error) {
+        yield alert(error)
+        yield put(userAction.changeLoading(false))
+    }
+}
+
+function* searchWord(action: ReturnType<typeof SearchAction.searchWord>) {
+    try{
+        const api = searchApiFactory();
+        const apiOption = {
+            method: 'post' as 'post',
+            url: `/freeword?word=${action.payload.word}`
+        }
+        yield put(userAction.changeLoading(true))
+        const result = yield call(api, apiOption)
+        yield put(userAction.changeLoading(false))
+        const data = result.data
         console.log(data)
-        // if(data.members.length > 0) {
-            yield put(MembersAction.storageMembers({members: data.members}))
-        // } 
+        if(data.isResult){
+            yield put(MembersAction.storageMembers({members: data.result}))
+        }
     }catch(error) {
         yield alert(error)
         yield put(userAction.changeLoading(false))
@@ -31,5 +49,6 @@ function* searchSelect(action: ReturnType<typeof SearchAction.searchSelect>) {
 }
 
 export default function* searchActions() {
-    yield takeLatest(Action.MEMBERS_SEARCH_SELECT, searchSelect)
+    yield takeLatest(Action.SEARCH_MEMBERS_SELECT, searchSelect)
+    yield takeLatest(Action.SEARCH_MEMBERS_WORD, searchWord)
 }

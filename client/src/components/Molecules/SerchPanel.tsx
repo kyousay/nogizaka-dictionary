@@ -14,7 +14,8 @@ const inputStyle = {
 
 interface Props {
     value: string
-    changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void 
+    changeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void
+    clickHandler?: () => void
 }
 
 const SearchPanel: React.FC<Props> = (props) => (
@@ -22,7 +23,7 @@ const SearchPanel: React.FC<Props> = (props) => (
         <Wrapper styled={{margin: '0 20px 0 0'}}>
             <Input styled={{...inputStyle}} type="text" placeholder="名前、フリーワード" value={props.value} onChange={props.changeHandler}/>
         </Wrapper>
-        <Button styled={{margin: "0 0 0 12px", padding: "10px 20px", bgColor: "#812990"}}>検索</Button>
+        <Button styled={{margin: "0 0 0 12px", padding: "10px 20px", bgColor: "#812990"}} onClick={props.clickHandler}>検索</Button>
     </Wrapper>
 )
 

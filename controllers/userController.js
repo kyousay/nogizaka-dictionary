@@ -28,7 +28,7 @@ module.exports = {
                 $addToSet: { favoriteMembers: favoriteId }
         },
         {new: true}
-        ).then((user) => {
+        ).then(user => {
             res.send(user)
         });
     },
@@ -37,7 +37,7 @@ module.exports = {
         User.findByIdAndUpdate(res.locals.userId, {
                 $pull: { favoriteMembers: favoriteId }
         },
-        {new: true}).then((user) => {
+        {new: true}).then(user => {
                 res.send(user);
         });
     }

@@ -11,6 +11,9 @@ const mapStateToProps = ({members}: {members: MembersState}) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     upload: (member: MemberState) => {
         dispatch(Action.addMember(member))
+    },
+    getAllMembers: () => {
+        dispatch(Action.getAllMembers())
     }
 })
 

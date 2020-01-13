@@ -79,21 +79,23 @@ const UpdateForm: React.FC<Props> = props => {
     },[props.getAllMembers])
 
     useEffect(() => {
-        if(props.members[0]._id.length < 1){
+        console.log(props.members.length)
+        if(props.members.length < 1){
             history.push("/admin")
+        } else {
+            let initialMemberState = {
+                _id: props.members[0]._id,
+                image: props.members[0].image,
+                name: props.members[0].name,
+                sailium: props.members[0].sailium,
+                segment: props.members[0].segment,
+                dateOfBirth: props.members[0].dateOfBirth,
+                blod: props.members[0].blod,
+                height: props.members[0].height,
+                hash: props.members[0].hash,
+            }
+            memberChange(initialMemberState)
         }
-        let initialMemberState = {
-            _id: props.members[0]._id,
-            image: props.members[0].image,
-            name: props.members[0].name,
-            sailium: props.members[0].sailium,
-            segment: props.members[0].segment,
-            dateOfBirth: props.members[0].dateOfBirth,
-            blod: props.members[0].blod,
-            height: props.members[0].height,
-            hash: props.members[0].hash,
-        }
-        memberChange(initialMemberState)
     },[props.members, history])
 
     const clearInputValue = (query : string) => {

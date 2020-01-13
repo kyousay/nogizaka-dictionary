@@ -2,7 +2,7 @@
 
 const User = require("../models/user"),
 Member = require("../models/member"),
-jsonWebToken = require("jsonwebtoken");
+mongoose = require("mongoose");
 
 module.exports = {
     checkPermission: (req, res, next) => {
@@ -48,12 +48,29 @@ module.exports = {
         })
     },
     delete: (req, res, next) => {
-        let {memberId} = req.body
+        let memberId = req.body.memberId;
         Member.findByIdAndRemove(memberId).then(() => {
+            User.find({}).then(users => {
+                users.forEach(user => {
+                    User.findByIdAndUpdate(user._id, {
+                        $pull: { favoriteMembers: memberId }
+                    },{new: true}, 
+                    function(err, user){
+                        if(err) console.log(err);
+                        console.log(typeof res.locals.userId)
+                        if(res.locals.userId == user._id) {
+                            res.locals.userData = user;
+                        }
+                    });
+                });
+            });
             Member.find({}).then(members => {
                 res.send({
                     message: 'メンバーデータの削除が正常に行われました。',
-                    members
+                    members,
+                    user : {
+                        favoriteMembers: res.locals.userData._doc.favoriteMembers
+                    }
                 });
             });
         })

@@ -19,11 +19,15 @@ export const initialState  = {
     ]
 }
 
+export const defaultState = {
+    members: [] as membersState
+}
+
 export type membersState = typeof initialState.members
 export type MembersState = typeof initialState
 export type Member = typeof initialState.members[0]
 
-const MembersReducer : Reducer<MembersState, MembersAction> = (state : MembersState = initialState, action : MembersAction) => {
+const MembersReducer : Reducer<MembersState, MembersAction> = (state : MembersState = defaultState, action : MembersAction) => {
     switch(action.type) {
         case ActionType.MEMBERS_STORAGE_MEMBERS : 
             return {

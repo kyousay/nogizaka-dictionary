@@ -24,38 +24,21 @@ module.exports = {
     },
     favorite: (req, res, next) => {
         let favoriteId = req.body.id
-        User.findById(res.locals.userId).then(user => {
-            let newFavoriteMembers= [];
-            if(user.favoriteMembers.length > 0) {
-                newFavoriteMembers = user.favoriteMembers.concat([favoriteId]);
-            }else {
-                newFavoriteMembers.push(favoriteId)
-            }
-            User.findByIdAndUpdate(res.locals.userId, {
-                    $set: { favoriteMembers: newFavoriteMembers }
-            }).then(() => {
-                User.findById(res.locals.userId).then((latestUser) => {
-                    res.send(latestUser)
-                });
-            });
+        User.findByIdAndUpdate(res.locals.userId, {
+                $addToSet: { favoriteMembers: favoriteId }
+        },
+        {new: true}
+        ).then((user) => {
+            res.send(user)
         });
     },
     unfavorite: (req, res, next) => {
         let favoriteId = req.body.id
-        User.findById(res.locals.userId).then(user => {
-            let newFavoriteMembers = [];
-            user.favoriteMembers.forEach((memberId,index) => {
-                if(memberId != favoriteId) {
-                    newFavoriteMembers.push(memberId);
-                }
-            })
-            User.findByIdAndUpdate(res.locals.userId, {
-                    $set: { favoriteMembers: newFavoriteMembers }
-            }).then(() => {
-                User.findById(res.locals.userId).then((latestUser) => {
-                    res.send(latestUser)
-                });
-            });
+        User.findByIdAndUpdate(res.locals.userId, {
+                $pull: { favoriteMembers: favoriteId }
+        },
+        {new: true}).then((user) => {
+                res.send(user);
         });
     }
 };

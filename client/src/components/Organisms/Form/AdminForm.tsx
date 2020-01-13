@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Wrapper from '../../Atoms/Wrapper'
 import Img from '../../Atoms/Img'
 import Button from '../../Atoms/Button'
@@ -57,9 +57,14 @@ export type MemberState = typeof initialState
 interface Props {
     members: membersState
     upload: (data: MemberState) => void
+    getAllMembers:() => void
 }
 
 const AdminForm: React.FC<Props> = props => {
+    useEffect(() => {
+        const getAllMembers = props.getAllMembers
+        getAllMembers()
+    },[props.getAllMembers])
     const [memberState, memberChange] = useState<MemberState>(initialState)
 
     const fileSetHandler = (event: React.ChangeEvent<HTMLInputElement>) => {

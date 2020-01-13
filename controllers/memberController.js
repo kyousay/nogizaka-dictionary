@@ -49,31 +49,28 @@ module.exports = {
     },
     delete: (req, res, next) => {
         let memberId = req.body.memberId;
+        let userJson;
         Member.findByIdAndRemove(memberId).then(() => {
             User.find({}).then(users => {
                 users.forEach(user => {
                     User.findByIdAndUpdate(user._id, {
                         $pull: { favoriteMembers: memberId }
-                    },{new: true}, 
-                    function(err, user){
-                        if(err) console.log(err);
-                        console.log(typeof res.locals.userId)
+                    },
+                    {new: true}).then(user => {
                         if(res.locals.userId == user._id) {
-                            res.locals.userData = user;
+                            Member.find({}).then(members => {
+                                res.send({
+                                    message: 'メンバーデータの削除が正常に行われました。',
+                                    members,
+                                    user : {
+                                        favoriteMembers: user.favoriteMembers}
+                                });
+                            });
                         }
-                    });
+                    }) 
                 });
             });
-            Member.find({}).then(members => {
-                res.send({
-                    message: 'メンバーデータの削除が正常に行われました。',
-                    members,
-                    user : {
-                        favoriteMembers: res.locals.userData._doc.favoriteMembers
-                    }
-                });
-            });
-        })
+        });
     },
     getAllMembers: (req, res, next) => {
         Member.find({}).then(members => {

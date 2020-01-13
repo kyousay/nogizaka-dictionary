@@ -64,6 +64,7 @@ function* deleteMember(action: ReturnType<typeof MembersAction.deleteMember>) {
         const result = yield call(api, apiOption)
         yield put(userAction.changeLoading(false))
         const data = result.data
+        yield console.log(data)
         yield alert(data.message)
         yield put(MembersAction.storageMembers({members: data.members}))
         yield put(userAction.setUserData({...data.user}))

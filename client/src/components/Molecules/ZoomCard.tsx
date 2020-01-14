@@ -8,8 +8,6 @@ import TxtRowSections from './TxtRowSections'
 import dummy from '../../style/img/anonymous.png'
 import { Member } from '../../reducers/membersReducer'
 import close from '../../style/img/close.png'
-import grayHeart from '../../style/img/grayHeart.svg'
-import Heart from '../../style/img/Heart.svg'
 import Hash from './Hash'
 
 const zoomFieldStyle = {
@@ -58,19 +56,13 @@ const TxtRowSectionsStyle = {
 }
 
 interface Props {
-    zoomOutHandler : (zoom: boolean) => void
-    imageClickHandler: (memberId: string, isFavorite: boolean) => void
-    zoomProps: {
-        src: string
-        favorite: boolean
-        selectValue: string
-    }
+    zoomOutHandler : () => void
+    iconClickHandler: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+    image?: string
     member: Member
-    zoom: boolean
 }
 
 const ZoomCard : React.FC<Props> = props => {
-    const [image, setImage] = useState(props.zoomProps.src)
     const TxtRowSectionsProps = {
         sections: [
             {
@@ -94,24 +86,19 @@ const ZoomCard : React.FC<Props> = props => {
         ]
     }
     return (
-    <Wrapper styled={{...zoomFieldStyle}} onClick={() => props.zoomOutHandler(props.zoom)}>
+    <Wrapper styled={{...zoomFieldStyle}} onClick={props.zoomOutHandler}>
         <Wrapper styled={{...contentStyle}}>
-            <Wrapper styled={{position: 'absolute', top: '-30px', right: '-50px'}} onClick={() => props.zoomOutHandler(props.zoom)}>
+            <Wrapper styled={{position: 'absolute', top: '-30px', right: '-50px'}} onClick={props.zoomOutHandler}>
                 <Img styled={{width: '100%'}} src={close} />
             </Wrapper>
-            <Wrapper styled={{position: 'absolute', right: '20px', top: '20px'}} 
-                onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-                        event.stopPropagation();
-                        props.imageClickHandler(props.member._id, props.zoomProps.favorite);
-                        const newImage = image === Heart ? grayHeart : Heart
-                        setImage(newImage)
-                        if(props.zoomProps.selectValue === 'favorite') {
-                            props.zoomOutHandler(props.zoom)
-                        }
-                }
-            }>
-                <Img styled={{width: '50px', height: '50px'}} src={image}/>
-            </Wrapper>
+            {
+                props.image?
+                    <Wrapper styled={{position: 'absolute', right: '20px', top: '20px'}} onClick={props.iconClickHandler}>
+                        <Img styled={{width: '50px', height: '50px'}} src={props.image}/>
+                    </Wrapper>
+                : 
+                    null
+            }
             <Img src={props.member.image ? props.member.image : dummy} styled={{width: '100%', height: '300px'}}/>
             <Wrapper styled={{margin: '40px 0 0 0'}}>
                 <Paragragh styled={{margin_top: '40px', font_weight: 'bold', font_size: '2.4rem'}}>

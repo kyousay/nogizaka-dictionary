@@ -38,10 +38,7 @@ function* searchWord(action: ReturnType<typeof SearchAction.searchWord>) {
         const result = yield call(api, apiOption)
         yield put(userAction.changeLoading(false))
         const data = result.data
-        console.log(data)
-        if(data.isResult){
-            yield put(MembersAction.storageMembers({members: data.result}))
-        }
+        yield put(MembersAction.storageMembers({members: data.result}))
     }catch(error) {
         yield alert(error)
         yield put(userAction.changeLoading(false))

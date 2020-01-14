@@ -56,7 +56,8 @@ module.exports = {
                 });
             } else {
                 res.send({
-                    isResult: false
+                    isResult: false,
+                    result: []
                 })
             }
         });

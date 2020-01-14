@@ -3,8 +3,10 @@ import MembersCard from '../../Molecules/MembersCard'
 import ZoomCard from '../../Molecules/ZoomCard'
 import Wrapper from '../../Atoms/Wrapper'
 import Selects from '../../Molecules/Selects'
+import Button from '../../Atoms/Button'
 import { Member, membersState } from '../../../reducers/membersReducer'
-import { userState } from '../../../reducers/userReducer';
+import { userState } from '../../../reducers/userReducer'
+import { Link } from 'react-router-dom'
 import grayHeart from '../../../style/img/grayHeart.svg'
 import Heart from '../../../style/img/Heart.svg'
 
@@ -19,6 +21,14 @@ interface Props {
     unfavorite: (id: string) => void
     search: (url: string) => void
     storageMembers: (members: {members:membersState}) => void
+}
+
+const buttonStyle = {
+    font_size: '1.4rem' as '1.4rem',
+    font_weight: 'bold' as 'bold',
+    color: '#fff',
+    padding: '10px 30px',
+    bgColor: '#812990' as '#812990',
 }
 
 const ListTable: React.FC<Props> = (props) => {
@@ -42,8 +52,7 @@ const ListTable: React.FC<Props> = (props) => {
     const members : membersState = props.members
     
     const zoomOutHandler = (zoom: boolean) => {
-        const newZoom = zoom ? false : true
-        setZoom(newZoom)
+        setZoom(zoom)
     }
 
     const [zoomProps, setZoomProps] = useState({
@@ -142,27 +151,45 @@ const ListTable: React.FC<Props> = (props) => {
                 props.storageMembers({members:newMembers})
             }
         }
+        setZoomProps({
+            src: newFavoriteState ? Heart : grayHeart,
+            favorite: newFavoriteState,
+            selectValue
+        });
+    }
+
+    const iconClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, memberId: string, isFavorite: boolean) => {
+        event.stopPropagation();
+        changeFavoriteMember(memberId, isFavorite);
     }
 
     return (
         <React.Fragment>
             { zoom ? 
-                        <ZoomCard zoomOutHandler={zoomOutHandler} zoom={zoom} member={state} 
-                        zoomProps={zoomProps} imageClickHandler={changeFavoriteMember}/> 
+                        <ZoomCard zoomOutHandler={() => zoomOutHandler(false)} member={state} image={zoomProps.src}
+                        iconClickHandler={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+                            iconClickHandler(event, state._id, zoomProps.favorite)
+                            if(selectValue === 'favorite') {
+                                zoomOutHandler(false)
+                        }
+                        }}/> 
                     : 
                     
                         null
             }
             {   <UnOrderdList styled={{justify_content: "center", flex_wrap: "wrap", max_width: '830px', padding: '60px 40px 60px 40px' }}>
-                    <Wrapper styled={{margin: '0 0 30px 20px'}}>
+                    <Wrapper styled={{margin: '0 0 30px 20px', display: 'flex'}}>
                         <Selects {...SelectsProps} />
+                        <Wrapper styled={{margin: '0 0 0 20px'}}>
+                            <Link to={"/talk"}><Button styled={{...buttonStyle}}>トークルームへ</Button></Link>
+                        </Wrapper>
                     </Wrapper>
                     {members.map((member,index) => {
                         const isFavorite = checkFavoriteId(member._id)
-                        const src = isFavorite? Heart : grayHeart 
+                        const src = isFavorite? Heart : grayHeart
                         return(
                             <ListItem key={index} onClick={() => {setState(member);setZoom(true);setZoomProps({favorite: isFavorite, src: src, selectValue})}} styled={{display: 'inline-block'}}>
-                                <MembersCard {...{member, user: props.user}} favoriteImage={src} imageClickHandler={changeFavoriteMember} status={isFavorite}/>
+                                <MembersCard {...{member, user: props.user}} favoriteImage={src} iconClickHandler={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => iconClickHandler(event, member._id, isFavorite)}/>
                             </ListItem>
                         )})
                     }

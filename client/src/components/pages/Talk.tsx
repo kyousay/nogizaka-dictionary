@@ -1,7 +1,8 @@
 import React from 'react'
+import TalkHeader from '../Organisms/Header/TalkHeader';
 
 const Talk = () => (
-    <div>Talk</div>
+    <TalkHeader/>
 )
 
 export default Talk

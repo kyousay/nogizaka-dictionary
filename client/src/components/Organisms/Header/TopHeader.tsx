@@ -13,9 +13,6 @@ import {userState} from '../../../reducers/userReducer'
 
 const ImgBoxWrapper = styled(Wrapper)`
     cursor: pointer;
-    &:hover {
-        opacity: 0.7
-    }
 `
 
 const cardStyle = {
@@ -23,7 +20,7 @@ const cardStyle = {
     right: '10px',
     bgColor: '#fff' as '#fff',
     width: '315px',
-    padding: '20px'
+    padding: '20px',
 }
 
 const TxtRowSectionStyle = {
@@ -133,7 +130,7 @@ const TopHeader: React.FC<Props> = props => {
                 },
                 {
                     buttonTxt: 'ログアウト',
-                    buttonStyle: {...buttonStyle, bgColor: '#42b72a' as '#42b72a',},
+                    buttonStyle: {...buttonStyle, bgColor: '#42b72a' as '#42b72a'},
                     clickHandler: () => logoutHandler(),
                 },
             ],
@@ -213,7 +210,7 @@ const TopHeader: React.FC<Props> = props => {
             <Img src={logo} styled={{width:"300px"}}/>
             <Wrapper styled={{display: 'flex', justify_content: 'space-between', min_width: '420px'}}>
                 <SearchPanel value={word} changeHandler={(e: React.ChangeEvent<HTMLInputElement>) => changeSearchWord(e.target.value)} clickHandler={searchActionHandler}/>
-                <ImgBoxWrapper styled={{margin: '0 0 0 20px', position: 'relative'}} 
+                <ImgBoxWrapper styled={{margin: '0 0 0 20px', position: 'relative', z_index: '50'}} 
                 onMouseEnter={() => changeHoverStateHandler(true)}
                 onMouseLeave={() => {
                     changeHoverStateHandler(false);

@@ -4,9 +4,8 @@ import * as ActionType from '../actions/login/loginConstants'
 import * as ActionUserType from '../actions/user/userConstants'
 import { UserAction } from '../actions/user/userActions'
 
-const initialState = {
+export const initialState = {
     permission: '',
-    id: '',
     nickName: '新参者',
     message: 'こんにちは。',
     rank: 'アンダー',

@@ -1,8 +1,15 @@
 "use strict";
 
 const User = require("../models/user"),
-httpStatus = require("http-status-codes"),
-jsonWebToken = require("jsonwebtoken");
+getUserData = data => {
+    return {
+        permission: data.permission,
+        favoriteMembers: data.favoriteMembers,
+        nickName: data.nickName,
+        message: data.message,
+        rank: data.rank
+    }
+};
 
 module.exports = {
     update: (req, res, next) => {
@@ -18,7 +25,6 @@ module.exports = {
             res.send(req.body);
         })
         .catch(error => {
-            console.log(`Error updating user by ID: ${error.message}`);
             next(error);
         })
     },
@@ -29,7 +35,8 @@ module.exports = {
         },
         {new: true}
         ).then(user => {
-            res.send(user)
+            const userData = getUserData(user);
+            res.send(userData);
         });
     },
     unfavorite: (req, res, next) => {
@@ -38,7 +45,8 @@ module.exports = {
                 $pull: { favoriteMembers: favoriteId }
         },
         {new: true}).then(user => {
-                res.send(user);
+            const userData = getUserData(user);
+            res.send(userData);
         });
     }
 };

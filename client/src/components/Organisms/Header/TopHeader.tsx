@@ -6,6 +6,7 @@ import InputCard from '../../Molecules/InputCard'
 import ImgBox from '../../Molecules/ImgBox'
 import Wrapper from '../../Atoms/Wrapper'
 import Img from '../../Atoms/Img'
+import { persistor } from '../../../store'
 import logo from '../../../style/img/logo.jpg'
 import icon from '../../../style/img/user_icon.png'
 import {userState} from '../../../reducers/userReducer'
@@ -32,11 +33,17 @@ const TxtRowSectionStyle = {
     wrapperStyle: {padding: '20px'},
 }
 
+const baseButtonStyle = {
+    font_size: '1.4rem' as '1.4rem',
+    color: '#fff',
+    width: '100%',
+    padding: '10px',
+}
+
 const buttonStyle = {
     font_size: '1.4rem' as '1.4rem',
     color: '#fff',
     width: '100%',
-    margin: '20px',
     padding: '10px',
     bgColor: '#812990' as '#812990',
 }
@@ -59,6 +66,7 @@ export interface userProfile {
 type Props = userState & {
     upDate: (props: userProfile) => void
     searchWord: (word: string) => void
+    logout: () => void
 }
 
 const TopHeader: React.FC<Props> = props => {
@@ -92,6 +100,12 @@ const TopHeader: React.FC<Props> = props => {
     const searchActionHandler = () => {
         props.searchWord(word)
     }
+
+    const logoutHandler = () => {
+        props.logout()
+        localStorage.removeItem('ticket')
+        persistor.purge()
+    }
     
     const UserCardProps = {
         TxtRowSectionsProps:{
@@ -110,9 +124,22 @@ const TopHeader: React.FC<Props> = props => {
             }],
         },
         cardStyle: cardStyle,
-        button: buttonStyle,
-        buttonTxt: 'プロフィールを編集する',
-        clickHandler: () => changeClickStateHandler(isClick)
+        ButtonsProps:　{
+            buttons:[
+                {
+                    buttonTxt: 'プロフィールを編集する',
+                    buttonStyle,
+                    clickHandler: () => changeClickStateHandler(isClick),
+                },
+                {
+                    buttonTxt: 'ログアウト',
+                    buttonStyle: {...buttonStyle, bgColor: '#42b72a' as '#42b72a',},
+                    clickHandler: () => logoutHandler(),
+                },
+            ],
+            baseButtonWrapperStyle: {margin: '20px'},
+            baseButtonStyle
+        }
     }
 
     const UserEditCardProps = {

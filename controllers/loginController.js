@@ -9,6 +9,15 @@ const User = require("../models/user"),
             email: body.email,
             password: body.password
         }
+    },
+    getUserData = data => {
+        return {
+            permission: data.permission,
+            favoriteMembers: data.favoriteMembers,
+            nickName: data.nickName,
+            message: data.message,
+            rank: data.rank
+        }
     };
 
 module.exports = {
@@ -32,17 +41,11 @@ module.exports = {
                     },
                     "effort_thanks_smile"
                 );
+                const userData = getUserData(user)
                 res.json({
                     success: true,
                     token: signedToken,
-                    user: {
-                        permission: user.permission,
-                        id: user._id,
-                        favoriteMembers: user.favoriteMembers,
-                        nickName: user.nickName,
-                        message: user.message,
-                        rank: user.rank
-                    },
+                    user: userData,
                     message: "ユーザー認証に成功しました。"
                 });
             } else {

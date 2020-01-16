@@ -6,7 +6,9 @@ import Wrapper from '../../Atoms/Wrapper'
 import Img from '../../Atoms/Img'
 import logo from '../../../style/img/logo.jpg'
 import icon from '../../../style/img/chat_icon.svg'
-// import {talkState} from '../../../reducers/talkReducer'
+import {persistor} from '../../../store/index'
+import {TalkState} from '../../../reducers/talkReducer'
+import { userState } from '../../../reducers/userReducer'
 
 const ImgBoxWrapper = styled(Wrapper)`
     cursor: pointer;
@@ -40,18 +42,24 @@ const inputStyle = {
 const initialState = {
     roomName: '',
     description: '',
-    isRock: false,
     key: ''
 }
 
 export interface RoomState {
     roomName: string
     description: string
-    isRock: boolean
     key: string
+    isRock: boolean
 }
 
-const TalkHeader = () => {
+export interface Props {
+    user: userState
+    createRoom: (date: RoomState) => void
+    logout: () => void
+    // searchRoom: (word : string) => void
+}
+
+const TalkHeader : React.FC<Props> = (props) => {
     const [word, changeSearchWord] = useState('')
     const [isHover, changeHover] = useState(false)
     const [roomState, setTalkRoomState] = useState(initialState)
@@ -63,12 +71,20 @@ const TalkHeader = () => {
         setTalkRoomState(state)
     }
 
-    // const createRoom = (state : typeof initialState) => {
-    //     props.createRoom(state)
-    // }
+    const createRoomHandler = () => {
+        const isRock = roomState.key.length > 0
+        const roomPostValue : RoomState = Object.assign(roomState, {isRock});
+        props.createRoom(roomPostValue)
+    }
+
+    const logoutHandler = () => {
+        props.logout()
+        localStorage.removeItem('ticket')
+        persistor.purge()
+    }
 
     const searchActionHandler = () => {
-    //     props.searchWord(word)
+        // props.searchWord(word)
         console.log('click')
     }
 
@@ -99,9 +115,6 @@ const TalkHeader = () => {
                         maxLength: 10,
                         onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
                             changeInputValueHandler({...roomState, key: e.target.value})
-                            if(e.target.value !== '') {
-                                changeInputValueHandler({...roomState, isRock: true})
-                            }
                         }
                     }
                 },
@@ -125,7 +138,7 @@ const TalkHeader = () => {
                     buttonStyle: {...buttonStyle, margin:'0'},
                     buttonTxt: 'トークルーム作成',
                     clickHandler: () => {
-                        // createRoom(roomState)
+                        createRoomHandler()
                         setTalkRoomState(initialState)
                     }
                 },
@@ -133,6 +146,7 @@ const TalkHeader = () => {
                     buttonStyle: {...buttonStyle,bgColor: '#42b72a' as '#42b72a', margin: '0'},
                     buttonTxt: 'ログアウト',
                     clickHandler: () => {
+                        logoutHandler();
                         setTalkRoomState(initialState);
                     }
                 }

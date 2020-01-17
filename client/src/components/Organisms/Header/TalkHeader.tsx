@@ -4,6 +4,7 @@ import SearchPanel from '../../Molecules/SerchPanel'
 import InputCard from '../../Molecules/InputCard'
 import Wrapper from '../../Atoms/Wrapper'
 import Img from '../../Atoms/Img'
+import ImgBox from '../../Molecules/ImgBox'
 import logo from '../../../style/img/logo.jpg'
 import icon from '../../../style/img/chat_icon.svg'
 import {persistor} from '../../../store/index'
@@ -42,13 +43,16 @@ const inputStyle = {
 const initialState = {
     roomName: '',
     description: '',
-    key: ''
+    password: ''
 }
 
+export type InitialState = typeof initialState
+
 export interface RoomState {
+    image?: string
     roomName: string
     description: string
-    key: string
+    password: string
     isRock: boolean
 }
 
@@ -62,19 +66,35 @@ export interface Props {
 const TalkHeader : React.FC<Props> = (props) => {
     const [word, changeSearchWord] = useState('')
     const [isHover, changeHover] = useState(false)
-    const [roomState, setTalkRoomState] = useState(initialState)
+    const [roomState, setTalkRoomState] = useState<InitialState>(initialState)
     
     const changeHoverStateHandler = (state: boolean) => {
         changeHover(state)
     }
-    const changeInputValueHandler = (state : typeof initialState) => {
+    const changeInputValueHandler = (state : InitialState) => {
         setTalkRoomState(state)
     }
 
+    const emptyCheck = (checkObj: InitialState) => {
+        let isEmpty = false;
+        Object.entries(checkObj).forEach(([key,value]) => {
+            if(key !== 'key' && !isEmpty) {
+                isEmpty = value.length > 0
+            }
+        })
+        return isEmpty
+    }
+
     const createRoomHandler = () => {
-        const isRock = roomState.key.length > 0
-        const roomPostValue : RoomState = Object.assign(roomState, {isRock});
-        props.createRoom(roomPostValue)
+        if(emptyCheck(roomState)) {
+            const isRock = roomState.password.length > 0
+            const randomImage = Math.floor(Math.random() * props.user.favoriteMembers.length);
+            const roomParams = props.user.favoriteMembers.length === 0 ? {isRock} : {isRock, image: props.user.favoriteMembers[randomImage]}
+            const roomPostValue : RoomState = Object.assign(roomState, roomParams);
+            props.createRoom(roomPostValue)
+        } else {
+            alert("必要な項目が入力されていません")
+        }
     }
 
     const logoutHandler = () => {
@@ -95,6 +115,7 @@ const TalkHeader : React.FC<Props> = (props) => {
                     title: 'ルーム名',
                     props: {
                         maxLength: 10,
+                        required: true,
                         value: roomState.roomName,
                         onChange: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...roomState, roomName: e.target.value})
                     }
@@ -104,6 +125,7 @@ const TalkHeader : React.FC<Props> = (props) => {
                     title: '説明',
                     props: {
                         value: roomState.description,
+                        required: true,
                         maxLength: 60,
                         onChange: (e: React.ChangeEvent<HTMLInputElement>) => changeInputValueHandler({...roomState, description: e.target.value})
                     }
@@ -111,10 +133,10 @@ const TalkHeader : React.FC<Props> = (props) => {
                 {
                     title: '鍵かけ(*任意)',
                     props: {
-                        value: roomState.key,
+                        value: roomState.password,
                         maxLength: 10,
                         onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                            changeInputValueHandler({...roomState, key: e.target.value})
+                            changeInputValueHandler({...roomState, password: e.target.value})
                         }
                     }
                 },
@@ -146,8 +168,10 @@ const TalkHeader : React.FC<Props> = (props) => {
                     buttonStyle: {...buttonStyle,bgColor: '#42b72a' as '#42b72a', margin: '0'},
                     buttonTxt: 'ログアウト',
                     clickHandler: () => {
-                        logoutHandler();
-                        setTalkRoomState(initialState);
+                        if(window.confirm("ログアウトしてよろしいですか？")) {
+                            logoutHandler();
+                            setTalkRoomState(initialState);
+                        }
                     }
                 }
             ],
@@ -166,7 +190,7 @@ const TalkHeader : React.FC<Props> = (props) => {
                     changeHoverStateHandler(false);
                     setTalkRoomState(initialState);
                 }}>
-                    <Img src={icon} styled={{width:'50px'}} />
+                    <ImgBox src={icon} width={'40px'} description={"TalkRoom作成"} font_size={'1.2rem' as '1.2rem'} />
                     
                     {
                         isHover ?

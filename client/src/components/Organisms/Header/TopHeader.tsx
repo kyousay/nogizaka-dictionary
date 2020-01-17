@@ -103,6 +103,16 @@ const TopHeader: React.FC<Props> = props => {
         localStorage.removeItem('ticket')
         persistor.purge()
     }
+
+    const emptyCheck = (checkObj: userProfile) => {
+        let isEmpty = true;
+        Object.entries(checkObj).forEach(([ _ , value ]) => {
+            if(isEmpty) {
+                isEmpty = value.length > 1
+            }
+        })
+        return isEmpty
+    }
     
     const UserCardProps = {
         TxtRowSectionsProps:{
@@ -131,7 +141,11 @@ const TopHeader: React.FC<Props> = props => {
                 {
                     buttonTxt: 'ログアウト',
                     buttonStyle: {...buttonStyle, bgColor: '#42b72a' as '#42b72a'},
-                    clickHandler: () => logoutHandler(),
+                    clickHandler: () => {
+                        if(window.confirm("ログアウトしてよろしいですか？")){
+                            logoutHandler()
+                        }
+                    },
                 },
             ],
             baseButtonWrapperStyle: {margin: '20px'},
@@ -187,9 +201,13 @@ const TopHeader: React.FC<Props> = props => {
                     buttonStyle: {...buttonStyle, margin:'0'},
                     buttonTxt: '変更を保存する',
                     clickHandler: () => {
-                        upDateUserData(userState);
-                        initialUserState = userState;
-                        changeClickStateHandler(isClick);
+                        if(emptyCheck(userState)) {
+                            upDateUserData(userState);
+                            initialUserState = userState;
+                            changeClickStateHandler(isClick);
+                        }else {
+                            alert("必要な項目が入力されていません")
+                        }
                     }
                 },
                 {

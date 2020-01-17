@@ -8,7 +8,7 @@ export interface chatState {
 }
 
 export interface TalkRoomState {
-    id: string
+    _id: string
     roomName: string,
     description: string,
     image: string,
@@ -18,7 +18,7 @@ export interface TalkRoomState {
 export const initialState = {
     rooms: [] as TalkRoomState[],
     room: {
-        id: '',
+        _id: '',
         roomName: '',
         description: '',
         image: '',

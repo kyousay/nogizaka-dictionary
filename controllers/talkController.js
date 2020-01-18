@@ -31,19 +31,19 @@ module.exports = {
                         }
                     });
                     res.send({
-                        result: true,
+                        isSuccess: true,
                         data: newRooms
                     });
                 })
             }).catch(error => {
                 res.send({
-                    result: false,
+                    isSuccess: false,
                     message:`${error.name}: ${error.message}`
                 });
             })
         }).catch(error => {
             res.send({
-                result: false,
+                isSuccess: false,
                 message: `${error.name}: ${error.message}`
             });
         })

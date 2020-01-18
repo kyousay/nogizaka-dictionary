@@ -20,7 +20,11 @@ function* createTalkRoom(action : ReturnType<typeof talkAction.createTalkRoom>){
         yield put(userAction.changeLoading(true))
         const result = yield call(api, apiOption)
         yield put(userAction.changeLoading(false))
-        console.log(result)
+        if(result.data.isSuccess) {
+            yield put(talkAction.setTalkRooms(result.data.data))
+        } else {
+            yield alert(result.data.message)
+        }
     }catch(error) {
         yield alert(error)
         yield put(userAction.changeLoading(false))

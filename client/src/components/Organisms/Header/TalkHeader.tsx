@@ -8,7 +8,6 @@ import ImgBox from '../../Molecules/ImgBox'
 import logo from '../../../style/img/logo.jpg'
 import icon from '../../../style/img/chat_icon.svg'
 import {persistor} from '../../../store/index'
-import {TalkState} from '../../../reducers/talkReducer'
 import { userState } from '../../../reducers/userReducer'
 
 const ImgBoxWrapper = styled(Wrapper)`

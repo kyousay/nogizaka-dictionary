@@ -4,6 +4,7 @@ import {TalkAction} from '../actions/talk/talkActions'
 
 export interface chatState {
     userName: string
+    chat: string
     Date: string
 }
 
@@ -12,7 +13,7 @@ export interface TalkRoomState {
     roomName: string,
     description: string,
     image: string,
-    talk: chatState[],
+    isRock: boolean
 }
 
 export const initialState = {

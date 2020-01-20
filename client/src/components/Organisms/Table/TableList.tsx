@@ -177,7 +177,7 @@ const ListTable: React.FC<Props> = (props) => {
                     
                         null
             }
-            {   <UnOrderdList styled={{justify_content: "center", flex_wrap: "wrap", max_width: '830px', padding: '60px 40px 60px 40px' }}>
+            {   <UnOrderdList styled={{justify_content: "center", flex_wrap: "wrap", padding: '60px 40px 60px 40px' }}>
                     <Wrapper styled={{margin: '0 0 30px 20px', display: 'flex'}}>
                         <Selects {...SelectsProps} />
                         <Wrapper styled={{margin: '0 0 0 20px'}}>

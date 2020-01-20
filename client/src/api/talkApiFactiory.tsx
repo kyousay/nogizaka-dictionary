@@ -1,5 +1,6 @@
 import axios, { Method } from 'axios'
 import { RoomState } from '../components/Organisms/Header/TalkHeader';
+import { RoomParam } from '../actions/talk/talkActions';
 
 interface optionConfig {
     [k : string] : string | object | undefined
@@ -8,7 +9,7 @@ interface optionConfig {
 interface apiOption {
     method: Method,
     url?: string, 
-    data?: RoomState,
+    data?: RoomState | RoomParam
 }
 
 const DEFAULT_API_CONFIG = {

@@ -26,6 +26,10 @@ let talkSchema = new Schema(
         },
         image: {
             type: [{ type: Schema.Types.ObjectId, ref: "Member" }],
+        },
+        chat: {
+            type: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
+            default: []
         }
 },{
     timestamps: true

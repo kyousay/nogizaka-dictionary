@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import * as Action from '../../../actions/login/loginActions'
+import * as loginAction from '../../../actions/login/loginActions'
+import * as talkAction from '../../../actions/talk/talkActions'
 import {State} from '../../../reducers/index'
 import Talk from '../../../components/Pages/Talk'
 
@@ -10,7 +11,10 @@ const mapStateToProps = (state: State) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     isStorageToken: (isToken : {isLogin: boolean}) => {
-        dispatch(Action.changeUserIsLogin(isToken))
+        dispatch(loginAction.changeUserIsLogin(isToken))
+    },
+    getAllTalkRooms: () => {
+        dispatch(talkAction.getAllTalkRooms())
     }
 })
 

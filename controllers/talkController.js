@@ -10,6 +10,20 @@ getTalkRoomParams = (talkRoom,image) => {
         isRock: talkRoom.isRock,
         image
     }
+},
+getParam = (data) => {
+    return new Promise(resolve => {
+        if(!data.image) {
+            Member.find({}).then(members => {
+                const imageIndex = Math.floor(Math.random() * members.length);
+                const imageId = members[imageIndex]._id;
+                data.image = imageId;
+                resolve(data);
+            });
+        } else {
+            resolve(data);
+        }
+    })
 };
 
 module.exports = {
@@ -58,7 +72,6 @@ module.exports = {
         });
     },
     getRoom: (room, req, res, next) => {
-        console.log(room);
         const returnData = {
             _id: room._id,
             roomName: room.roomName,
@@ -71,28 +84,20 @@ module.exports = {
             data: returnData
         });
     },
-    createRoom: (req, res, next) => {
-        Talk.create(req.body).then(() => {
+    createRoom: async (req, res, next) => {
+        const data = await getParam(req.body)
+        Talk.create(data).then((room) => {
             Talk.find({}).populate("image").then(rooms => {
-                Member.find({}).then(members => {
-                    let newRooms = []
-                    rooms.forEach(room => {
-                        if(room.image.length > 0) {
-                            const image = room.image[0].image
-                            const newRoom = getTalkRoomParams(room, image);
-                            newRooms.push(newRoom);
-                        } else {
-                            const imageIndex = Math.floor(Math.random() * members.length);
-                            const image = members[imageIndex].image;
-                            const newRoom = getTalkRoomParams(room, image);
-                            newRooms.push(newRoom);
-                        }
-                    });
-                    res.send({
-                        isSuccess: true,
-                        data: newRooms
-                    });
-                })
+                let newRooms = []
+                rooms.forEach(room => {
+                    const image = room.image[0].image
+                    const newRoom = getTalkRoomParams(room, image);
+                    newRooms.push(newRoom);
+                });
+                res.send({
+                    isSuccess: true,
+                    data: newRooms
+                });
             }).catch(error => {
                 res.send({
                     isSuccess: false,

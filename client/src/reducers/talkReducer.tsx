@@ -23,7 +23,7 @@ export const initialState = {
         roomName: '',
         description: '',
         image: '',
-        talk: [] as chatState[],
+        chat: [] as chatState[],
     }
 }
 

@@ -59,7 +59,8 @@ module.exports = {
             if(room.isRock) {
                 const roomPassword = room.password;
                 if(roomPassword === data.password) {
-                    next(room);
+                    res.locals.roomInfo = room;
+                    next();
                 } else {
                     res.send({
                         isSuccess: false,
@@ -67,18 +68,20 @@ module.exports = {
                     });
                 }
             } else {
-                next(room);
+                res.locals.roomInfo = room;
+                next();
             }
         });
     },
-    getRoom: (room, req, res, next) => {
+    getRoom: (req, res, next) => {
+        const room = res.locals.roomInfo; 
         const returnData = {
             _id: room._id,
             roomName: room.roomName,
             description: room.description,
             image: room.image[0].image,
-
-        }
+            chat: room.chat
+        };
         res.send({
             isSuccess: true,
             data: returnData
@@ -86,7 +89,7 @@ module.exports = {
     },
     createRoom: async (req, res, next) => {
         const data = await getParam(req.body)
-        Talk.create(data).then((room) => {
+        Talk.create(data).then(() => {
             Talk.find({}).populate("image").then(rooms => {
                 let newRooms = []
                 rooms.forEach(room => {

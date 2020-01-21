@@ -2,7 +2,7 @@ import * as ActionType from './talkConstants'
 import { RoomState as RoomCreateState } from '../../components/Organisms/Header/TalkHeader'
 import { TalkRoomState, chatState } from '../../reducers/talkReducer'
 
-export type RoomState = Omit<TalkRoomState, 'isRock'> & {talk: chatState[]} 
+export type RoomState = Omit<TalkRoomState, 'isRock'> & {chat: chatState[]} 
 export type RoomParam = Pick<TalkRoomState, 'isRock' | '_id'> & {password?: string}
 
 export const getAllTalkRooms = () => ({

@@ -127,7 +127,7 @@ const TalkRoomList: React.FC<Props> = props => {
             password
         }
         props.getTalkRoom(roomParam)
-        setPassword('')
+        cancelRock()
     }
     
     const cardClickHandler = (data : TalkRoomState) => {

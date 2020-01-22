@@ -17,27 +17,27 @@ const ImgBoxWrapper = styled(Wrapper)`
 const cardStyle = {
     position: 'absolute',
     right: '10px',
-    bgColor: '#fff' as '#fff',
+    bgColor: '#fff',
     width: '315px',
     padding: '20px',
-}
+} as const
 
 const buttonStyle = {
-    font_size: '1.4rem' as '1.4rem',
+    font_size: '1.4rem',
     color: '#fff',
     width: '100%',
     padding: '10px',
-    bgColor: '#812990' as '#812990',
-}
+    bgColor: '#812990',
+} as const
 
 const inputStyle = {
     width: '146px',
     border_radius: '3px',
     border: 'none',
-    bgColor: '#EAEAEA' as '#EAEAEA',
+    bgColor: '#EAEAEA',
     padding: '10px 12px',
-    font_size: '1.2rem' as '1.2rem'
-}
+    font_size: '1.2rem'
+} as const
 
 const initialState = {
     roomName: '',

@@ -14,6 +14,7 @@ let chatSchema = new Schema(
         chat: {
             type: String,
             trim: true,
+            max: 120,
             required: true,
         },
 },{

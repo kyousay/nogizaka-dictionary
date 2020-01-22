@@ -4,8 +4,8 @@ import Wrapper, {ElementStyle as WrapperStyle} from '../Atoms/Wrapper'
 
 interface Inputs{
     inputStyle: InputStyle
-    inputWrapperStyle: WrapperStyle
     props: React.InputHTMLAttributes<HTMLInputElement>
+    inputWrapperStyle: WrapperStyle
 }
 
 interface BaseStyle {

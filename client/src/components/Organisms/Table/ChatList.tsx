@@ -19,7 +19,6 @@ interface Props {
 }
 
 const ChatTable: React.FC<Props> = (props) => {
-    console.log(props);
     const chats = props.room.chat
 
     return (

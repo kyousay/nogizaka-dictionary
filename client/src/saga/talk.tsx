@@ -42,6 +42,7 @@ function* getTalkRoom(action: ReturnType<typeof talkAction.getTalkRoom>){
         yield put(userAction.changeLoading(false))
         if(result.data.isSuccess) {
             yield put(talkAction.setTalkRoom(result.data.data))
+            yield put(talkAction.changeIsSetRoom(true))
         } else {
             yield alert(result.data.message)
         }

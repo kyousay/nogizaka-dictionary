@@ -164,7 +164,7 @@ const TalkHeader : React.FC<Props> = (props) => {
                     }
                 },
                 {
-                    buttonStyle: {...buttonStyle,bgColor: '#42b72a' as '#42b72a', margin: '0'},
+                    buttonStyle: {...buttonStyle,bgColor: '#42b72a' as const, margin: '0'},
                     buttonTxt: 'ログアウト',
                     clickHandler: () => {
                         if(window.confirm("ログアウトしてよろしいですか？")) {

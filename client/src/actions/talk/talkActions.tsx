@@ -35,6 +35,12 @@ export const setTalkRoom = (data: RoomState) => ({
     }
 })
 
+export const changeIsSetRoom = (isSetRoom: boolean) => ({
+    type: ActionType.TALK_CHANGE_ISSETROOM as typeof ActionType.TALK_CHANGE_ISSETROOM,
+    payload: {
+        isSetRoom
+    }
+})
 
 export type TalkAction = 
     | ReturnType<typeof getAllTalkRooms>
@@ -42,4 +48,5 @@ export type TalkAction =
     | ReturnType<typeof createTalkRoom>
     | ReturnType<typeof setTalkRooms>
     | ReturnType<typeof setTalkRoom>
+    | ReturnType<typeof changeIsSetRoom>
     

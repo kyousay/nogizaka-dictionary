@@ -14,7 +14,9 @@ interface Props {
 const ImgBox : React.FC<Props> = (props) => (
     <Wrapper styled={{display: 'flex', justify_content: 'center', align_items: 'center', flex_direction: 'column'}} >
         <Img src={props.src} styled={{width: props.width}} />
-        <Paragragh styled={{font_size: props.font_size}}>{props.description}</Paragragh>
+        <Wrapper styled={{margin: props.margin}} >
+            <Paragragh styled={{font_size: props.font_size}}>{props.description}</Paragragh>
+        </Wrapper>
     </Wrapper>
 )
 

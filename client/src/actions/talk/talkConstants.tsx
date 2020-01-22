@@ -1,5 +1,6 @@
-export const TALK_GET_ALLROOMS = 'TALK_GET_ALLROOMS' as 'TALK_GET_ALLROOMS'
-export const TALK_GET_ROOM = 'TALK_GET_ROOM' as 'TALK_GET_ROOM'
-export const TALK_CREATE_ROOM = 'TALK_CREATE_ROOM' as 'TALK_CREATE_ROOM'
-export const TALK_SET_ROOMS = 'TALK_SET_ROOMS' as 'TALK_SET_ROOMS'
-export const TALK_SET_ROOM = 'TALK_SET_ROOM' as 'TALK_SET_ROOM'
+export const TALK_GET_ALLROOMS = 'TALK_GET_ALLROOMS' as const
+export const TALK_GET_ROOM = 'TALK_GET_ROOM' as const
+export const TALK_CREATE_ROOM = 'TALK_CREATE_ROOM' as const
+export const TALK_SET_ROOMS = 'TALK_SET_ROOMS' as const
+export const TALK_SET_ROOM = 'TALK_SET_ROOM' as const
+export const TALK_CHANGE_ISSETROOM = 'TALK_CHANGE_ISSETROOM' as const

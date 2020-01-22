@@ -156,8 +156,11 @@ const TalkRoomList: React.FC<Props> = props => {
                     null
             }
             {   <UnOrderdList styled={{justify_content: "center", flex_wrap: "wrap", padding: '60px 40px 60px 40px' }}>
-                    <Wrapper styled={{margin: '0 0 30px 15px'}}>
+                    <Wrapper styled={{margin: '0 0 30px 15px',display: 'flex'}}>
                         <Link to={"/top"}><Button styled={{...buttonStyle}}>トップページへ</Button></Link>
+                        <Wrapper styled={{margin: '0 0 0 30px'}}>
+                            <Link to={"/chat"}><Button styled={{...buttonStyle, bgColor: '#42b72a' as const}}>トークルームへ</Button></Link>
+                        </Wrapper>
                     </Wrapper>
                     {rooms.map((room,index) => {
                         const iconImage = room.isRock ? icon : undefined

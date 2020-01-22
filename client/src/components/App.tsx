@@ -7,6 +7,7 @@ import Top from '../cotainers/Pages/Top/Top'
 import Login from '../cotainers/Pages/Login/Login'
 import Admin from '../cotainers/Pages/Admin'
 import Talk from '../cotainers/Pages/Talk'
+import Chat from './Pages/Chat'
 import { css } from '@emotion/core'
 import ClipLoader from 'react-spinners/ClipLoader'
 import { userState } from '../reducers/userReducer';
@@ -49,6 +50,7 @@ const App: React.FC<Props> = props => {
           <Route path="/top" component={Top} />
           <Route path="/admin" component={Admin} />
           <Route path="/talk" component={Talk} />
+          <Route path="/chat" component={Chat} />
           <Redirect to="/login" />
         </Switch>
       </Wrapper>

@@ -24,8 +24,11 @@ export const initialState = {
         description: '',
         image: '',
         chat: [] as chatState[],
-    }
+    },
+    isSetRoom: false
 }
+
+export type RoomState = typeof initialState.room
 
 export type TalkState = typeof initialState
 
@@ -40,6 +43,11 @@ const TalkReducer : Reducer<TalkState, TalkAction> = (state : TalkState = initia
             return {
                 ...state,
                 room: action.payload
+            }
+        case ActionType.TALK_CHANGE_ISSETROOM :
+            return {
+                ...state,
+                isSetRoom: action.payload.isSetRoom
             }
         default: 
             return state

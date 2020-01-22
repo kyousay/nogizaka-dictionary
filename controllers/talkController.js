@@ -95,7 +95,7 @@ module.exports = {
                 rooms.forEach(room => {
                     const image = room.image[0].image
                     const newRoom = getTalkRoomParams(room, image);
-                    newRooms.push(newRoom);
+                    newRooms.unshift(newRoom);
                 });
                 res.send({
                     isSuccess: true,

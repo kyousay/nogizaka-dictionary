@@ -49,7 +49,6 @@ module.exports = {
     },
     delete: (req, res, next) => {
         let memberId = req.body.memberId;
-        let userJson;
         Member.findByIdAndRemove(memberId).then(() => {
             User.find({}).then(users => {
                 users.forEach(user => {
@@ -67,7 +66,7 @@ module.exports = {
                                 });
                             });
                         }
-                    }) 
+                    });   
                 });
             });
         });

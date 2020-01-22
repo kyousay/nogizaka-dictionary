@@ -4,9 +4,7 @@ app = express(),
 path = require("path"),
 router = require("./routes/index"),
 mongoose = require("mongoose"),
-cookieParser = require("cookie-parser"),
 expressSession = require("express-session"),
-expressValidator = require("express-validator"),
 passport = require("passport"),
 methodOverride = require("method-override"),
 User = require("./models/user")
@@ -83,6 +81,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use("/", router);
 
-app.listen(app.get("port"), () => {
+const server =app.listen(app.get("port"), () => {
     console.log(`The Express.js server has started and is litstening on port number:${app.get("port")}`);
-});
+}),
+io = require("socket.io")(server);
+require("./controllers/chatController")(io);

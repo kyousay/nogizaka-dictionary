@@ -1,12 +1,36 @@
 import React, {useState} from 'react'
+import io from 'socket.io-client'
 import Form from '../../Molecules/Form'
 import Wrapper from '../../Atoms/Wrapper'
+import { userState } from '../../../reducers/userReducer';
+import { RoomState } from '../../../reducers/talkReducer';
 
-const ChatForm = () => {
+const socket = io('localhost:3001');
+
+interface Props {
+    user: userState
+    room: RoomState
+}
+
+const ChatForm: React.FC<Props> = props => {
+    console.log(props)
     const [chatState, setChatState] = useState('')
 
     const PostChatForm = () => {
-        console.log('PostChat')
+        if(checkEmpty(chatState)){
+            socket.emit("message", "client")
+            socket.on("message", (data: {content: string})=> {
+            console.log(data)
+            })
+            setChatState('')
+        }else {
+            alert('未入力では送信できません。')
+        }
+    }
+
+    const checkEmpty = (value: string) => {
+        const isResult = value.length > 0 ? true : false
+        return isResult  
     }
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {

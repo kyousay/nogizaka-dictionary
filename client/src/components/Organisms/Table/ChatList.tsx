@@ -1,7 +1,5 @@
 import React from 'react'
 import Wrapper from '../../Atoms/Wrapper'
-import { Member, membersState } from '../../../reducers/membersReducer'
-import { userState } from '../../../reducers/userReducer'
 import { RoomState } from '../../../reducers/talkReducer'
 import styled from 'styled-components'
 

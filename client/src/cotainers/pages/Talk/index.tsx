@@ -6,7 +6,8 @@ import {State} from '../../../reducers/index'
 import Talk from '../../../components/Pages/Talk'
 
 const mapStateToProps = (state: State) => ({
-    user: state.user
+    user: state.user,
+    talk: state.talk
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

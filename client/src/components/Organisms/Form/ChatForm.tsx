@@ -24,7 +24,7 @@ const ChatForm: React.FC<Props> = props => {
             }
             socket.emit("message", postData)
             socket.on("message", (data: {content: string})=> {
-            console.log(data)
+                console.log(data)
             })
             setChatState('')
         }else {

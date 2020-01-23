@@ -7,7 +7,7 @@ import Top from '../cotainers/Pages/Top/Top'
 import Login from '../cotainers/Pages/Login/Login'
 import Admin from '../cotainers/Pages/Admin'
 import Talk from '../cotainers/Pages/Talk'
-import Chat from './Pages/Chat'
+import Chat from '../cotainers/Pages/Chat'
 import { css } from '@emotion/core'
 import ClipLoader from 'react-spinners/ClipLoader'
 import { userState } from '../reducers/userReducer';

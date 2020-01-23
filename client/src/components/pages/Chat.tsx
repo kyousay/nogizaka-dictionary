@@ -1,10 +1,24 @@
-import React from 'react'
-// import io from 'socket.io-client'
+import React, { useEffect } from 'react'
 import ChatHeader from '../../cotainers/Organisms/Header/ChatHeader'
 import ChatList from '../../cotainers/Pages/Chat/ChatList'
 import ChatForm from '../../cotainers/Organisms/Form/ChatForm'
+import useReactRouter from 'use-react-router'
+import { TalkState } from '../../reducers/talkReducer'
 
-const Chat = () => {
+interface Props {
+    talk: TalkState
+}
+
+const Chat: React.FC<Props> = props => {
+    const {history} = useReactRouter()
+
+    useEffect(() => {
+        const isSetRoom = props.talk.isSetRoom
+        if(!isSetRoom) {
+            history.push("/talk")
+        }
+    },[props.talk.isSetRoom, history])
+
     return(
         <React.Fragment>
             <ChatHeader />

@@ -5,7 +5,7 @@ import {TalkAction} from '../actions/talk/talkActions'
 export interface chatState {
     userName: string
     chat: string
-    Date: string
+    date: string
 }
 
 export interface TalkRoomState {

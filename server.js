@@ -1,6 +1,7 @@
 const port = 3001,
 express = require("express"),
 app = express(),
+cors = require("cors"),
 path = require("path"),
 router = require("./routes/index"),
 mongoose = require("mongoose"),
@@ -28,6 +29,8 @@ db.once("open", () => {
 });
 
 app.set("port", process.env.PORT || 3001);
+
+app.use(cors())
 
 app.use(
     methodOverride("_method", {

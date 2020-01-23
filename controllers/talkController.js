@@ -55,11 +55,11 @@ module.exports = {
     },
     checkPassword: (req, res, next) => {
         const data = req.body;
-        Talk.findById(data._id).populate("image").populate("talk").then(room => {
+        Talk.findById(data._id).populate("image").populate("chat").then(room => {
             if(room.isRock) {
                 const roomPassword = room.password;
                 if(roomPassword === data.password) {
-                    res.locals.roomInfo = room;
+                    res.locals.roomId = room;
                     next();
                 } else {
                     res.send({
@@ -74,13 +74,21 @@ module.exports = {
         });
     },
     getRoom: (req, res, next) => {
-        const room = res.locals.roomInfo; 
+        const room = res.locals.roomInfo;
+        const newChat = room.chat.map(chat => {
+            const date = new Date(chat.createdAt)
+            return {
+                userName: chat.userName,
+                chat: chat.chat,
+                date: `${date.getHours()}:${date.getMinutes()}`
+            }
+        })
         const returnData = {
             _id: room._id,
             roomName: room.roomName,
             description: room.description,
             image: room.image[0].image,
-            chat: room.chat
+            chat: newChat
         };
         res.send({
             isSuccess: true,

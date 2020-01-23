@@ -13,7 +13,7 @@ interface apiOption {
 }
 
 const DEFAULT_API_CONFIG = {
-    baseURL: 'http://localhost:3000/talk',
+    baseURL: 'http://localhost:3001/talk',
     timeout: 7000,
 };
 

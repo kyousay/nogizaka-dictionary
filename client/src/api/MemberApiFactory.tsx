@@ -12,7 +12,7 @@ interface apiOption {
 }
 
 const DEFAULT_API_CONFIG = {
-    baseURL: 'http://localhost:3000/member',
+    baseURL: 'http://localhost:3001/member',
     timeout: 7000,
 };
 

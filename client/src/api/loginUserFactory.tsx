@@ -11,7 +11,7 @@ interface optionConfig {
 }
 
 const DEFAULT_API_CONFIG: apiConfig = {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3001',
     timeout: 7000,
 };
 

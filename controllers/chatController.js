@@ -1,5 +1,18 @@
 const Talk = require("../models/talk"),
-Chat = require("../models/chat");
+Chat = require("../models/chat"),
+returnChatParam = (talk) => {
+    const chats = talk.chat;
+    let chatsArray = chats.map(chat => {
+        const date = new Date(chat.createdAt);
+        const returnDate = `${date.getHours()}:${date.getMinutes()}`
+        return {
+            userName: chat.userName,
+            chat: chat.chat,
+            date: returnDate
+        }
+    });
+    return chatsArray;
+};
 
 module.exports = io => {
     io.on("connection", client => {
@@ -9,8 +22,7 @@ module.exports = io => {
             console.log("user disconnected");
         });
 
-        client.on("message", data => {
-            console.log(data)
+        client.on("chat", data => {
             const chatData = {
                 userName: data.userName,
                 chat: data.chat
@@ -21,8 +33,9 @@ module.exports = io => {
                     $addToSet: {chat: newChat._id}
                 }).then(() => {
                     Talk.findById(roomId).populate("chat").then(talk => {
-                        io.emit('message', {
-                            content: talk.chat
+                        const newValue = returnChatParam(talk);
+                        client.emit('return chat', {
+                            content: newValue
                         });
                     });
                 })

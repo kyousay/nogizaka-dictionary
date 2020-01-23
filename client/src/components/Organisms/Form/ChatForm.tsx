@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
-import io from 'socket.io-client'
+import socket from '../../../websocket/'
 import Form from '../../Molecules/Form'
 import Wrapper from '../../Atoms/Wrapper'
 import { userState } from '../../../reducers/userReducer';
 import { RoomState } from '../../../reducers/talkReducer';
 
-const socket = io('localhost:3001');
+
 
 interface Props {
     user: userState
@@ -22,8 +22,8 @@ const ChatForm: React.FC<Props> = props => {
                 chat: chatState,
                 roomId: props.room._id
             }
-            socket.emit("message", postData)
-            socket.on("message", (data: {content: string})=> {
+            socket.emit("chat", postData)
+            socket.on("return chat", (data: {content: RoomState}) => {
                 console.log(data)
             })
             setChatState('')

@@ -10,13 +10,23 @@ module.exports = io => {
         });
 
         client.on("message", data => {
-            console.log(data);
-            // Chat.create(data).then(chat => {
-
-            // })
-            io.emit('message', {
-                content: 'Hello'
-            });
+            console.log(data)
+            const chatData = {
+                userName: data.userName,
+                chat: data.chat
+            }
+            const roomId = data.roomId
+            Chat.create(chatData).then(newChat => {
+                Talk.findByIdAndUpdate(roomId, {
+                    $addToSet: {chat: newChat._id}
+                }).then(() => {
+                    Talk.findById(roomId).populate("chat").then(talk => {
+                        io.emit('message', {
+                            content: talk.chat
+                        });
+                    });
+                })
+            })
         });
     });
 }

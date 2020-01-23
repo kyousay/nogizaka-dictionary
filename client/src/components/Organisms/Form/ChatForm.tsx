@@ -13,12 +13,16 @@ interface Props {
 }
 
 const ChatForm: React.FC<Props> = props => {
-    console.log(props)
     const [chatState, setChatState] = useState('')
 
     const PostChatForm = () => {
         if(checkEmpty(chatState)){
-            socket.emit("message", "client")
+            const postData = {
+                userName: props.user.nickName,
+                chat: chatState,
+                roomId: props.room._id
+            }
+            socket.emit("message", postData)
             socket.on("message", (data: {content: string})=> {
             console.log(data)
             })

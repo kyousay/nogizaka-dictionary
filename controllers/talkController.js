@@ -59,7 +59,7 @@ module.exports = {
             if(room.isRock) {
                 const roomPassword = room.password;
                 if(roomPassword === data.password) {
-                    res.locals.roomId = room;
+                    res.locals.roomInfo = room;
                     next();
                 } else {
                     res.send({

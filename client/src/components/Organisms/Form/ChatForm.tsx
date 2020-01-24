@@ -16,13 +16,15 @@ interface Props {
 const ChatForm: React.FC<Props> = props => {
     const [chatState, setChatState] = useState('')
 
-    if(!socket) {
-        socket = io("localhost:3001")
-        socket.on("return chat", (data: {content: chatState[]}) => {
-            const chatData = data.content
-            props.setChat(chatData)
-        })
-    }
+    useEffect(() => {
+        if(!socket) {
+            socket = io("localhost:3001")
+            socket.on("return chat", (data: {content: chatState[]}) => {
+                const chatData = data.content
+                props.setChat(chatData)
+            })
+        }
+    })
 
     const PostChatForm = () => {
         if(checkEmpty(chatState)){

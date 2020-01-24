@@ -17,9 +17,13 @@ returnChatParam = (talk) => {
 module.exports = io => {
     io.on("connection", client => {
         console.log("new connection");
+        let usr = Object.keys(io.sockets.sockets).length
+        console.log(`now:${usr}`)
         
         client.on("disconnect",() => {
             console.log("user disconnected");
+            usr = Object.keys(io.sockets.sockets).length
+            console.log(`now:${usr}`)
         });
 
         client.on("chat", data => {
@@ -34,7 +38,7 @@ module.exports = io => {
                 }).then(() => {
                     Talk.findById(roomId).populate("chat").then(talk => {
                         const newValue = returnChatParam(talk);
-                        client.emit('return chat', {
+                        io.emit('return chat', {
                             content: newValue
                         });
                     });

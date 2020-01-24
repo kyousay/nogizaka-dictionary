@@ -49,6 +49,15 @@ const TalkReducer : Reducer<TalkState, TalkAction> = (state : TalkState = initia
                 ...state,
                 isSetRoom: action.payload.isSetRoom
             }
+        case ActionType.TALK_SET_CHAT : 
+            console.log(action.payload)
+            return {
+                ...state,
+                room: {
+                    ...state.room,
+                    chat: action.payload.chat
+                }
+            }
         default: 
             return state
     }

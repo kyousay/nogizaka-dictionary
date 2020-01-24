@@ -26,7 +26,7 @@ const TalkHeader: React.FC<Props> = props => {
     }
 
     return(
-        <Wrapper styled={{display:'flex', align_items:"center", justify_content:"space-between", bgColor:'#fff', padding: '0px 20px'}}>
+        <Wrapper styled={{position: 'absolute', top: '0', right: '0', left: '0', display:'flex', align_items:"center", justify_content:"space-between", bgColor:'#fff', padding: '0px 20px'}}>
             <Img src={logo} styled={{width:"300px"}}/>
             <Wrapper styled={{display: 'flex', justify_content: 'space-between'}}>
                 <ImgBoxWrapper styled={{margin: '0 20px 0 0'}} onClick={() => backToRoomHandler()}>

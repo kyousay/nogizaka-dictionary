@@ -1,18 +1,30 @@
 import React from 'react'
 import Wrapper from '../../Atoms/Wrapper'
+import Message from '../../Molecules/Message'
 import { RoomState } from '../../../reducers/talkReducer'
 import styled from 'styled-components'
+import { userState } from '../../../reducers/userReducer'
 
 const UnOrderdList = Wrapper.withComponent('ul')
 
-const ListItem = Wrapper.withComponent('li')
-
 const ChatField = styled(Wrapper)`
     overflow-y: scroll;
-    border: 1px solid #dfdfdf;
 `
 
+const userMessage = {
+    bgColor: '#FFEEFF',
+    max_width: '80%',
+    margin: '0 0 0 auto'
+} as const
+
+const otherMessage = {
+    bgColor: '#fff',
+    max_width: '80%',
+    margin: '0 0 0'
+} as const
+
 interface Props {
+    user: userState
     room: RoomState
 }
 
@@ -21,12 +33,17 @@ const ChatTable: React.FC<Props> = (props) => {
 
     return (
         <React.Fragment>
-            <ChatField styled={{margin: '30px auto 0', bgColor: '#fff' as const, padding: '50px', max_width: '700px', height: '400px'}}>
-            {   <UnOrderdList styled={{justify_content: "center", flex_wrap: "wrap", padding: '60px 40px 60px 40px' }}>
+            <ChatField styled={{max_height: '100vh'}}>
+            {   <UnOrderdList styled={{padding: '100px 40px 100px 40px', max_width: '670px', margin: '0 auto'}}>
                     {chats.map((chat,index) => {
+                        const isUser = props.user.nickName === chat.userName
+                        const style = isUser ? userMessage : otherMessage
+                        const align = isUser ? 'right' : 'left'
+                        
                         return(
-                            <ListItem styled={{}} key={index}>
-                            </ListItem>
+                            <Wrapper as="li" styled={{display: 'flex', justify_content: align, margin: '10px 0 0 0'} as const} key={index}>
+                                <Message chat={chat} style={style}/>
+                            </Wrapper>
                         )})
                     }
                 </UnOrderdList>

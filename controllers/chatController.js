@@ -11,7 +11,7 @@ returnChatParam = (talk) => {
             date: returnDate
         }
     });
-    return chatsArray;
+    return chatsArray.reverse();
 };
 
 module.exports = io => {

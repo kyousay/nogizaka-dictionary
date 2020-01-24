@@ -1,35 +1,45 @@
-import React, {useState} from 'react'
-import socket from '../../../websocket/'
+import React, {useState, useEffect} from 'react'
+import io from 'socket.io-client'
 import Form from '../../Molecules/Form'
 import Wrapper from '../../Atoms/Wrapper'
 import { userState } from '../../../reducers/userReducer';
-import { RoomState } from '../../../reducers/talkReducer';
+import { RoomState, chatState } from '../../../reducers/talkReducer';
 
-
+let socket : SocketIOClient.Socket;
 
 interface Props {
     user: userState
     room: RoomState
+    setChat: (data: chatState[]) => void
 }
 
 const ChatForm: React.FC<Props> = props => {
     const [chatState, setChatState] = useState('')
 
+    if(!socket) {
+        socket = io("localhost:3001")
+        socket.on("return chat", (data: {content: chatState[]}) => {
+            const chatData = data.content
+            props.setChat(chatData)
+        })
+    }
+
     const PostChatForm = () => {
         if(checkEmpty(chatState)){
-            const postData = {
-                userName: props.user.nickName,
-                chat: chatState,
-                roomId: props.room._id
-            }
-            socket.emit("chat", postData)
-            socket.on("return chat", (data: {content: RoomState}) => {
-                console.log(data)
-            })
+            sendChat()
             setChatState('')
         }else {
             alert('未入力では送信できません。')
         }
+    }
+
+    const sendChat = () => {
+        const postData = {
+            userName: props.user.nickName,
+            chat: chatState,
+            roomId: props.room._id
+        }
+        socket.emit("chat", postData)
     }
 
     const checkEmpty = (value: string) => {
@@ -49,6 +59,7 @@ const ChatForm: React.FC<Props> = props => {
                     props: {
                         type: 'text',
                         maxLength: 120,
+                        placeholder: 'メッセージを送る',
                         value: chatState,
                         onChange: (e : React.ChangeEvent<HTMLInputElement>) => setChatState(e.target.value)
                     }
@@ -72,7 +83,7 @@ const ChatForm: React.FC<Props> = props => {
     }
 
     return(
-        <Wrapper styled={{margin: '20px 0 0', }}>
+        <Wrapper styled={{position: 'absolute', bottom: '0', left: '0', right: '0', padding: '20px 0', bgColor: '#fff' as const}}>
             <Form {...FormProps}/>
         </Wrapper>
     )

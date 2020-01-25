@@ -4,14 +4,21 @@ returnChatParam = (talk) => {
     const chats = talk.chat;
     let chatsArray = chats.map(chat => {
         const date = new Date(chat.createdAt);
-        const returnDate = `${date.getHours()}:${date.getMinutes()}`
+        const returnDate = `${checkTime(date.getHours())}: ${checkTime(date.getMinutes())}`
         return {
             userName: chat.userName,
             chat: chat.chat,
             date: returnDate
         }
     });
-    return chatsArray.reverse();
+    return chatsArray;
+},
+checkTime = (time) => {
+    if(time < 10) {
+        const newTime = '0' + time;
+        return newTime
+    }
+    return time
 };
 
 module.exports = io => {

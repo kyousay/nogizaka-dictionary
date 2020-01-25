@@ -88,7 +88,7 @@ module.exports = {
             roomName: room.roomName,
             description: room.description,
             image: room.image[0].image,
-            chat: newChat.reverse()
+            chat: newChat
         };
         res.send({
             isSuccess: true,

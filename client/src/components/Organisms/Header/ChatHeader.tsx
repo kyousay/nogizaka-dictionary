@@ -1,4 +1,5 @@
 import React from 'react'
+import socket from '../../../websocket'
 import styled from 'styled-components'
 import Wrapper from '../../Atoms/Wrapper'
 import Img from '../../Atoms/Img'
@@ -20,6 +21,7 @@ const TalkHeader: React.FC<Props> = props => {
 
     const backToRoomHandler = () => {
         if(window.confirm('ルーム選択に戻りますがよろしいですか？')){
+            socket.emit("leaveRoom")
             props.changeIsSetRoom(false)
             history.push('/talk')
         }

@@ -23,15 +23,31 @@ checkTime = (time) => {
 
 module.exports = io => {
     io.on("connection", client => {
+
         console.log("new connection");
         let usr = Object.keys(io.sockets.sockets).length
         console.log(`now:${usr}`)
+
+        let room = ''
         
         client.on("disconnect",() => {
             console.log("user disconnected");
-            usr = Object.keys(io.sockets.sockets).length
-            console.log(`now:${usr}`)
+            client.leave(room);
+            console.log(`clientLeave: ${room}`)
+            usr = Object.keys(io.sockets.sockets).length;
+            console.log(`now:${usr}`);
         });
+
+        client.on("joinRoom", data => {
+            room = data.data;
+            client.join(`${room}`)
+            console.log(`clientJoin: ${room}`)
+        })
+
+        client.on("leaveRoom", () => {
+            client.leave(`${room}`)
+            console.log(`clientLeave: ${room}`)
+        })
 
         client.on("chat", data => {
             const chatData = {
@@ -45,7 +61,7 @@ module.exports = io => {
                 }).then(() => {
                     Talk.findById(roomId).populate("chat").then(talk => {
                         const newValue = returnChatParam(talk);
-                        io.emit('return chat', {
+                        io.to(room).emit('return chat', {
                             content: newValue
                         });
                     });

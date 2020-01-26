@@ -1,12 +1,9 @@
-import 
-    { 
-        // all,  fork, 
-        put, call, takeLatest} 
+import { put, call, takeLatest} 
 from 'redux-saga/effects'
 import * as Action from '../actions/login/loginConstants'
 import * as LoginAction from '../actions/login/loginActions'
 import * as userAction from '../actions/user/userActions'
-import { loginUserFactory } from '../api/loginUserFactory'
+import { loginUserFactory } from '../api/loginApiFactory'
 
 function* createAcount(action : ReturnType<typeof LoginAction.createAcount>){
     const userData = action.payload;

@@ -6,7 +6,7 @@ from 'redux-saga/effects'
 import * as Action from '../actions/user/userConstants'
 import * as loginAction from '../actions/login/loginActions'
 import * as userAction from '../actions/user/userActions'
-import { userDataFactory } from '../api/userDataFactory'
+import { userDataFactory } from '../api/userApiFactory'
 
 function* upDateUserData(action : ReturnType<typeof userAction.upDateUserData>){
     const userData = action.payload;

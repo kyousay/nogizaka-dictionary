@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react'
-import TalkHeader from '../../cotainers/Organisms/Header/TalkHeader'
-import TalkRoomList from '../../cotainers/Pages/Talk/TalkRoomList'
-import { userState } from '../../reducers/userReducer'
+import TalkHeader from '../../../cotainers/Organisms/Header/TalkHeader'
+import TalkRoomList from '../../../cotainers/Organisms/Table/TalkRoomList'
+import { userState } from '../../../reducers/userReducer'
 import useReactRouter from 'use-react-router'
-import { TalkState } from '../../reducers/talkReducer'
+import { TalkState } from '../../../reducers/talkReducer'
 
 interface Props {
     user: userState

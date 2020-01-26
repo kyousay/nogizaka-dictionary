@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import Wrapper from '../Atoms/Wrapper'
-import AdminForm from '../../cotainers/Organisms/Form/AdminForm'
-import UpdateForm from '../../cotainers/Organisms/Form/UpdateForm'
-import {userState} from '../../reducers/userReducer'
+import Wrapper from '../../Atoms/Wrapper'
+import AdminForm from '../../../cotainers/Organisms/Form/AdminForm'
+import UpdateForm from '../../../cotainers/Organisms/Form/UpdateForm'
+import {userState} from '../../../reducers/userReducer'
 import {Route, Switch} from 'react-router'
 import useReactRouter from 'use-react-router'
 

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import socket from '../../websocket'
-import ChatHeader from '../../cotainers/Organisms/Header/ChatHeader'
-import ChatList from '../../cotainers/Pages/Chat/ChatList'
-import ChatForm from '../../cotainers/Organisms/Form/ChatForm'
+import socket from '../../../websocket'
+import ChatHeader from '../../../cotainers/Organisms/Header/ChatHeader'
+import ChatList from '../../../cotainers/Organisms/Table/ChatList'
+import ChatForm from '../../../cotainers/Organisms/Form/ChatForm'
 import useReactRouter from 'use-react-router'
-import { TalkState, chatState } from '../../reducers/talkReducer'
+import { TalkState, chatState } from '../../../reducers/talkReducer'
 
 interface Props {
     talk: TalkState

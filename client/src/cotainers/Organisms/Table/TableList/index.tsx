@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
-import TableList from '../../../components/Organisms/Table/TableList'
-import * as userAction from '../../../actions/user/userActions'
-import * as searchAction from '../../../actions/search/searchActions'
-import * as memberAction from '../../../actions/members/membersActions'
-import { State } from '../../../reducers'
+import TableList from '../../../../components/Organisms/Table/TableList'
+import * as userAction from '../../../../actions/user/userActions'
+import * as searchAction from '../../../../actions/search/searchActions'
+import * as memberAction from '../../../../actions/members/membersActions'
+import { State } from '../../../../reducers'
 import { Dispatch } from 'redux';
-import { membersState } from '../../../reducers/membersReducer';
+import { membersState } from '../../../../reducers/membersReducer';
 
 const mapStateToProps = (state : State)  =>  ({
     ...state.members,

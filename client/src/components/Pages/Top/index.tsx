@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
-import TopHeader from '../../cotainers/Organisms/Header/TopHeader'
-import TableList from '../../cotainers/Pages/Top/TableList'
-import {userState} from '../../reducers/userReducer'
+import TopHeader from '../../../cotainers/Organisms/Header/TopHeader'
+import TableList from '../../../cotainers/Organisms/Table/TableList'
+import {userState} from '../../../reducers/userReducer'
 import useReactRouter from 'use-react-router'
 
 interface PageProps {

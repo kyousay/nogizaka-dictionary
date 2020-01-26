@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
-import LoginHeader from '../Organisms/Header/LoginHeader'
-import LoginForm from '../../cotainers/Organisms/Form/LoginForm'
-import {userState} from '../../reducers/userReducer'
+import LoginHeader from '../../Organisms/Header/LoginHeader'
+import LoginForm from '../../../cotainers/Organisms/Form/LoginForm'
+import {userState} from '../../../reducers/userReducer'
 import useReactRouter from 'use-react-router'
 
 interface PageProps {

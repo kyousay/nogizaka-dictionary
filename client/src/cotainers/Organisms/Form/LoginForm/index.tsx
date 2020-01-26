@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { DataType } from '../../../actions/login/loginActions'
-import { userState } from '../../../reducers/userReducer'
-import * as userAction from '../../../actions/login/loginActions'
-import LoginForm from '../../../components/Organisms/Form/LoginForm'
+import { DataType } from '../../../../actions/login/loginActions'
+import { userState } from '../../../../reducers/userReducer'
+import * as userAction from '../../../../actions/login/loginActions'
+import LoginForm from '../../../../components/Organisms/Form/LoginForm'
 
 const mapStateToProps = (user : userState) => user
 

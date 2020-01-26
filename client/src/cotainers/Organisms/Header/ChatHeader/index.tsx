@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
-import ChatHeader from '../../../components/Organisms/Header/ChatHeader'
-import * as talkAction from '../../../actions/talk/talkActions'
+import ChatHeader from '../../../../components/Organisms/Header/ChatHeader'
+import * as talkAction from '../../../../actions/talk/talkActions'
 import { Dispatch } from 'redux'
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

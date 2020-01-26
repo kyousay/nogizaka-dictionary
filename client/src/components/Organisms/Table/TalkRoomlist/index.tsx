@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
-import Wrapper from '../../Atoms/Wrapper'
-import Button from '../../Atoms/Button'
-import TalkRoomCard from '../../Molecules/TalkRoomCard'
-import icon from '../../../style/img/lock_icon.svg'
-import { TalkState, TalkRoomState } from '../../../reducers/talkReducer'
+import Wrapper from '../../../Atoms/Wrapper'
+import Button from '../../../Atoms/Button'
+import TalkRoomCard from '../../../Molecules/TalkRoomCard'
+import icon from '../../../../style/img/lock_icon.svg'
+import { TalkState, TalkRoomState } from '../../../../reducers/talkReducer'
 import { Link } from 'react-router-dom'
-import { RoomParam } from '../../../actions/talk/talkActions'
-import InputCard from '../../Molecules/InputCard'
+import { RoomParam } from '../../../../actions/talk/talkActions'
+import InputCard from '../../../Molecules/InputCard'
 
 
 const UnOrderdList = Wrapper.withComponent('ul')

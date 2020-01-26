@@ -1,9 +1,9 @@
 import React from 'react'
-import Wrapper from '../../Atoms/Wrapper'
-import Message from '../../Molecules/Message'
-import { RoomState } from '../../../reducers/talkReducer'
+import Wrapper from '../../../Atoms/Wrapper'
+import Message from '../../../Molecules/Message'
+import { RoomState } from '../../../../reducers/talkReducer'
 import styled from 'styled-components'
-import { userState } from '../../../reducers/userReducer'
+import { userState } from '../../../../reducers/userReducer'
 
 const UnOrderdList = Wrapper.withComponent('ul')
 

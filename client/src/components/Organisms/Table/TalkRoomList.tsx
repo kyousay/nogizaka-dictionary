@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Wrapper from '../../Atoms/Wrapper'
 import Button from '../../Atoms/Button'
-import TalkRoomCard from '../../../components/Molecules/TalkRoomCard'
+import TalkRoomCard from '../../Molecules/TalkRoomCard'
 import icon from '../../../style/img/lock_icon.svg'
 import { TalkState, TalkRoomState } from '../../../reducers/talkReducer'
 import { Link } from 'react-router-dom'

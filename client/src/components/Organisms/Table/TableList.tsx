@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import MembersCard from '../../Molecules/MembersCard'
-import ZoomCard from '../../Molecules/ZoomCard'
+import ZoomCard from '../../Molecules/zoomCard'
 import Wrapper from '../../Atoms/Wrapper'
 import Selects from '../../Molecules/Selects'
 import Button from '../../Atoms/Button'

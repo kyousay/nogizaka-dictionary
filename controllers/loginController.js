@@ -12,6 +12,7 @@ const User = require("../models/user"),
     },
     getUserData = data => {
         return {
+            userId: data._id,
             permission: data.permission,
             favoriteMembers: data.favoriteMembers,
             nickName: data.nickName,

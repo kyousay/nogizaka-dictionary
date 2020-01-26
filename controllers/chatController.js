@@ -6,6 +6,7 @@ returnChatParam = (talk) => {
         const date = new Date(chat.createdAt);
         const returnDate = `${checkTime(date.getHours())}: ${checkTime(date.getMinutes())}`
         return {
+            userId: chat.userId[0],
             userName: chat.userName,
             chat: chat.chat,
             date: returnDate
@@ -51,6 +52,7 @@ module.exports = io => {
 
         client.on("chat", data => {
             const chatData = {
+                userId: data.userId,
                 userName: data.userName,
                 chat: data.chat
             }

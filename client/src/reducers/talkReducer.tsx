@@ -3,6 +3,7 @@ import * as ActionType from '../actions/talk/talkConstants'
 import {TalkAction} from '../actions/talk/talkActions'
 
 export interface chatState {
+    userId: string
     userName: string
     chat: string
     date: string

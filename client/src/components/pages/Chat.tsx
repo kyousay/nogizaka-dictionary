@@ -18,15 +18,26 @@ const Chat: React.FC<Props> = props => {
         const isSetRoom = props.talk.isSetRoom
         const roomId = props.talk.room._id
         const setChat = props.setChat
+        const scrollList = document.getElementById('js-chatList')
+        const scrollField = document.getElementById('js-chatField')
+
         if(!isSetRoom) {
             history.push("/talk")
             socket.emit("leaveRoom")
+        } else {
+            socket.emit('joinRoom', {data: roomId})
+            socket.on("return chat", (data: {content: chatState[]}) => {
+                const chatData = data.content
+                setChat(chatData)
+            })
         }
-        socket.emit('joinRoom', {data: roomId})
-        socket.on("return chat", (data: {content: chatState[]}) => {
-            const chatData = data.content
-            setChat(chatData)
-        })
+
+        if(scrollList !== null && scrollField !== null) {
+            const screenHeight = window.screen.height
+            const scrollHeight = scrollList.clientHeight
+            const scrollQty = scrollHeight > screenHeight ? scrollHeight - screenHeight : 0
+            scrollField.scrollTop = scrollQty
+        }
     },[props.talk.isSetRoom, props.talk.room._id, props.setChat, history])
 
     return(

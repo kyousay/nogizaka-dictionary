@@ -1,5 +1,5 @@
 import React from 'react'
-import Wrapper, {ElementStyle as WrapperStyle} from '../Atoms/Wrapper'
+import Wrapper from '../Atoms/Wrapper'
 import Txt from '../Atoms/Txt'
 import { Paragragh } from '../Atoms/Paragragh'
 import { chatState } from '../../reducers/talkReducer'

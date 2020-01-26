@@ -5,6 +5,9 @@ const mongoose = require("mongoose"),
 
 let chatSchema = new Schema(
     {
+        userId: {
+            type: [{ type: Schema.Types.ObjectId, ref: "User" }]
+        },
         userName: {
             type: String,
             trim: true,

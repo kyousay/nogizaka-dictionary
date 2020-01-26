@@ -78,6 +78,7 @@ module.exports = {
         const newChat = room.chat.map(chat => {
             const date = new Date(chat.createdAt)
             return {
+                userId: chat.userId[0],
                 userName: chat.userName,
                 chat: chat.chat,
                 date: `${date.getHours()}:${date.getMinutes()}`

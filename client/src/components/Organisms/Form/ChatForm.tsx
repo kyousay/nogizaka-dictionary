@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState } from 'react'
 import socket from '../../../websocket'
 import Form from '../../Molecules/Form'
 import Wrapper from '../../Atoms/Wrapper'
@@ -16,6 +16,7 @@ const ChatForm: React.FC<Props> = props => {
     const PostChatForm = () => {
         if(checkEmpty(chatState)){
             const postData = {
+                userId: props.user.userId,
                 userName: props.user.nickName,
                 chat: chatState,
                 roomId: props.room._id

@@ -33,10 +33,10 @@ const ChatTable: React.FC<Props> = (props) => {
 
     return (
         <React.Fragment>
-            <ChatField styled={{max_height: '100vh'}}>
-            {   <UnOrderdList styled={{padding: '100px 40px 100px 40px', max_width: '670px', margin: '0 auto'}}>
+            <ChatField id={"js-chatField"} styled={{max_height: '100vh'}}>
+            {   <UnOrderdList id={"js-chatList"} styled={{padding: '100px 40px 100px 40px', max_width: '670px', margin: '0 auto'}}>
                     {chats.map((chat,index) => {
-                        const isUser = props.user.nickName === chat.userName
+                        const isUser = props.user.userId === chat.userId
                         const style = isUser ? userMessage : otherMessage
                         const align = isUser ? 'right' : 'left'
                         

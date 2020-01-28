@@ -1,26 +1,23 @@
-const port = 3001,
-express = require("express"),
+const express = require("express"),
 app = express(),
 cors = require("cors"),
 path = require("path"),
 router = require("./routes/index"),
-mongoose = require("mongoose"),
-expressSession = require("express-session"),
-passport = require("passport"),
-methodOverride = require("method-override"),
-User = require("./models/user")
+mongoose = require("mongoose");
 
 mongoose.Promise = global.Promise;
 
+//mongoose'sのfindOneAndUpdateはmongoDBのfindOneAndUpdateより圧倒的に前に出来上がったものなので、
+//何も指定していないと勝手に最新のmongoDBの方を使うので、ここで使わないように設定する
 mongoose.connect(
     "mongodb://localhost:27017/Dictionary",
-    { useNewUrlParser: true,
+    { 
+        useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true, 
+        useFindAndModify: false
     }, 
 )
-
-mongoose.set('useFindAndModify', false);
 
 const db = mongoose.connection;
 
@@ -32,12 +29,6 @@ app.set("port", process.env.PORT || 3001);
 
 app.use(cors())
 
-app.use(
-    methodOverride("_method", {
-            methods: ["POST", "GET"]
-        })
-);
-
 app.use(express.static(path.join(__dirname, "client/build")));
 
 app.use(
@@ -48,39 +39,6 @@ app.use(
 );
 
 app.use(express.json({limit: '10mb'}));
-
-//version 1.5.0からcookie-parserいらない
-// app.use(cookieParser("nogizaka46_2011_8_21"));
-app.use(
-    expressSession({
-        secret:"nogizaka46_2011_8_21",
-        cookie: {
-            maxAge: 4000000
-        },
-        //セッションストアにアクセスするたびに新しいセッションを作成するか
-        resave: false,
-        //セッションが初期化されずにストアに保存してもいいか
-        //デフォルトではtrueに設定されているが、将来のバージョンでfalseをデフォルトにするように変更予定
-        saveUninitialized: false,
-    })
-)
-
-app.use(passport.initialize());
-//sessionでアクセス認証を行っています。
-app.use(passport.session());
-passport.use(User.createStrategy());
-/*
-これらの行は、セッションに格納されたユーザーデータを直列化・暗号化し、
-それをまた複合する処理を指定するものです。
-シリアライズで直列化・暗号化されたデータがクッキーを通してユーザーに送られる。
-クッキーを通して、サーバーに送られてきたデータをデシリアライズで複合し、セッションに保存されたデータと照合する
-*/
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
-
-//secure属性があると、httpsのときだけやりとりされます。
-//HttpOnly属性があると、jsから読み取れないようにできます。
 
 app.use("/", router);
 

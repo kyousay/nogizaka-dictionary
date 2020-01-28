@@ -6,7 +6,7 @@ from 'redux-saga/effects'
 import * as Action from '../actions/members/membersConstants'
 import * as MembersAction from '../actions/members/membersActions'
 import * as userAction from '../actions/user/userActions'
-import { MemberApiFactory } from '../api/MemberApiFactory'
+import { MemberApiFactory } from '../api/memberApiFactory'
 
 function* addMember(action : ReturnType<typeof MembersAction.addMember>){
     const memberData = action.payload;

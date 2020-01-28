@@ -13,7 +13,7 @@ User = require("./models/user")
 mongoose.Promise = global.Promise;
 
 mongoose.connect(
-    "mongodb://localhost:27017/Dictionary",
+    "mongodb://heroku_3vtkd4wf:p1sqtmo7636rf0t4695qpq1df0@ds019076.mlab.com:19076/heroku_3vtkd4wf",
     { useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true, 

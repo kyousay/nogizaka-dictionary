@@ -18,7 +18,7 @@ interface apiOption {
 
 const DEFAULT_API_CONFIG: apiConfig = {
     baseURL: 'http://localhost:3001/user',
-    timeout: 7000,
+    timeout: 6000,
 };
 
 export const userDataFactory = (optionConfig? : optionConfig) => {

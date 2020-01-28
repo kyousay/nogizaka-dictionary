@@ -12,7 +12,7 @@ interface apiOption {
 }
 
 const DEFAULT_API_CONFIG = {
-    baseURL: 'http://localhost:3001/search',
+    baseURL: '/search',
     timeout: 60000,
 };
 

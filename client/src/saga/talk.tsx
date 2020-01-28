@@ -5,6 +5,7 @@ import
 from 'redux-saga/effects'
 import * as Action from '../actions/talk/talkConstants'
 import * as talkAction from '../actions/talk/talkActions'
+import * as loginAction from '../actions/login/loginActions'
 import * as userAction from '../actions/user/userActions'
 import { talkApiFactory } from '../api/talkApiFactiory'
 
@@ -18,10 +19,16 @@ function* getAllTalkRooms(){
         yield put(userAction.changeLoading(true))
         const result = yield call(api, apiOption)
         yield put(userAction.changeLoading(false))
-        if(result.data.isSuccess) {
-            yield put(talkAction.setTalkRooms(result.data.data))
+        if(result.data.error){
+            alert(result.data.message)
+            yield localStorage.removeItem('ticket')
+            yield put(loginAction.changeUserIsLogin({isLogin: false}))
         } else {
-            yield alert(result.data.message)
+            if(result.data.isSuccess) {
+                yield put(talkAction.setTalkRooms(result.data.data))
+            } else {
+                yield alert(result.data.message)
+            }
         }
     }catch(error) {
         yield alert(error)
@@ -40,11 +47,17 @@ function* getTalkRoom(action: ReturnType<typeof talkAction.getTalkRoom>){
         yield put(userAction.changeLoading(true))
         const result = yield call(api, apiOption)
         yield put(userAction.changeLoading(false))
-        if(result.data.isSuccess) {
-            yield put(talkAction.setTalkRoom(result.data.data))
-            yield put(talkAction.changeIsSetRoom(true))
+        if(result.data.error){
+            alert(result.data.message)
+            yield localStorage.removeItem('ticket')
+            yield put(loginAction.changeUserIsLogin({isLogin: false}))
         } else {
-            yield alert(result.data.message)
+            if(result.data.isSuccess) {
+                yield put(talkAction.setTalkRoom(result.data.data))
+                yield put(talkAction.changeIsSetRoom(true))
+            } else {
+                yield alert(result.data.message)
+            }
         }
     }catch(error) {
         yield alert(error)
@@ -63,10 +76,16 @@ function* createTalkRoom(action : ReturnType<typeof talkAction.createTalkRoom>){
         yield put(userAction.changeLoading(true))
         const result = yield call(api, apiOption)
         yield put(userAction.changeLoading(false))
-        if(result.data.isSuccess) {
-            yield put(talkAction.setTalkRooms(result.data.data))
+        if(result.data.error){
+            alert(result.data.message)
+            yield localStorage.removeItem('ticket')
+            yield put(loginAction.changeUserIsLogin({isLogin: false}))
         } else {
-            yield alert(result.data.message)
+            if(result.data.isSuccess) {
+                yield put(talkAction.setTalkRooms(result.data.data))
+            } else {
+                yield alert(result.data.message)
+            }
         }
     }catch(error) {
         yield alert(error)

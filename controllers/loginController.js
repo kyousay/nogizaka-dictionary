@@ -81,14 +81,14 @@ module.exports = {
                         if(user) {
                             next();
                         } else {
-                            res.status(httpStatus.FORBIDDEN).json({
+                            res.json({
                                 error: true,
                                 message: "ユーザーが見つかりません。新しくアカウントを作成するか、パスワードのリセットをお願いします。"
                             });
                         }
                     });
                 } else {
-                    res.status(httpStatus.UNAUTHORIZED).json({
+                    res.json({
                         error: true,
                         message: "正しく認証が行えませんでした。恐れ入りますが、ログインからやり直してください。"
                     });

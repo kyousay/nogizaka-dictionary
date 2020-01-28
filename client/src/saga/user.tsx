@@ -20,14 +20,20 @@ function* upDateUserData(action : ReturnType<typeof userAction.upDateUserData>){
         }
         yield put(userAction.changeLoading(true))
         const result = yield call(api,apiOption)
-        const data : typeof userData = result.data
+        const data  = result.data
         const props = {
             nickName: data.nickName,
             message: data.message,
             rank: data.rank,
         }
-        yield put(userAction.setUserData({...props}))
-        yield put(userAction.changeLoading(false))
+        if(data.error){
+            alert(data.message)
+            yield localStorage.removeItem('ticket')
+            yield put(loginAction.changeUserIsLogin({isLogin: false}))
+        } else {
+            yield put(userAction.setUserData({...props}))
+            yield put(userAction.changeLoading(false))
+        }
     }catch(error) {
         yield alert(error)
         yield put(userAction.changeLoading(false))
@@ -46,8 +52,14 @@ function* favoriteMember(action: ReturnType<typeof userAction.favoriteMember>) {
         yield put(userAction.changeLoading(true))
         const result = yield call(api, apiOption)
         const data = result.data
-        yield put(loginAction.setUserData(data))
-        yield put(userAction.changeLoading(false))
+        if(data.error){
+            alert(data.message)
+            yield localStorage.removeItem('ticket')
+            yield put(loginAction.changeUserIsLogin({isLogin: false}))
+        } else {
+            yield put(loginAction.setUserData(data))
+            yield put(userAction.changeLoading(false))
+        }
     }catch(error) {
         yield alert(error)
         yield put(userAction.changeLoading(false))
@@ -66,8 +78,14 @@ function* unfavoriteMember(action: ReturnType<typeof userAction.favoriteMember>)
         yield put(userAction.changeLoading(true))
         const result = yield call(api, apiOption)
         const data = result.data
-        yield put(loginAction.setUserData(data))
-        yield put(userAction.changeLoading(false))
+        if(data.error){
+            alert(data.message)
+            yield localStorage.removeItem('ticket')
+            yield put(loginAction.changeUserIsLogin({isLogin: false}))
+        } else {
+            yield put(loginAction.setUserData(data))
+            yield put(userAction.changeLoading(false))
+        }
     }catch(error) {
         yield alert(error)
         yield put(userAction.changeLoading(false))

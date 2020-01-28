@@ -6,6 +6,7 @@ from 'redux-saga/effects'
 import * as Action from '../actions/members/membersConstants'
 import * as MembersAction from '../actions/members/membersActions'
 import * as userAction from '../actions/user/userActions'
+import * as loginAction from '../actions/login/loginActions'
 import { MemberApiFactory } from '../api/MemberApiFactory'
 
 function* addMember(action : ReturnType<typeof MembersAction.addMember>){
@@ -22,8 +23,14 @@ function* addMember(action : ReturnType<typeof MembersAction.addMember>){
         const result = yield call(api, apiOption)
         yield put(userAction.changeLoading(false))
         const data = result.data
-        yield put(MembersAction.storageMembers({members: data.members}))
-        alert(data.message)
+        if(data.error){
+            alert(data.message)
+            yield localStorage.removeItem('ticket')
+            yield put(loginAction.changeUserIsLogin({isLogin: false}))
+        } else {
+            yield put(MembersAction.storageMembers({members: data.members}))
+            alert(data.message)
+        }
     }catch(error) {
         yield alert(error)
         yield put(userAction.changeLoading(false))
@@ -43,8 +50,14 @@ function* updateMember(action : ReturnType<typeof MembersAction.updateMember>){
         const result = yield call(api, apiOption)
         yield put(userAction.changeLoading(false))
         const data = result.data
-        yield alert(data.message)
-        yield put(MembersAction.storageMembers({members: data.members}))
+        if(data.error){
+            alert(data.message)
+            yield localStorage.removeItem('ticket')
+            yield put(loginAction.changeUserIsLogin({isLogin: false}))
+        } else {
+            yield alert(data.message)
+            yield put(MembersAction.storageMembers({members: data.members}))
+        }
     }catch(error) {
         yield alert(error)
         yield put(userAction.changeLoading(false))
@@ -64,10 +77,15 @@ function* deleteMember(action: ReturnType<typeof MembersAction.deleteMember>) {
         const result = yield call(api, apiOption)
         yield put(userAction.changeLoading(false))
         const data = result.data
-        yield console.log(data)
-        yield alert(data.message)
-        yield put(MembersAction.storageMembers({members: data.members}))
-        yield put(userAction.setUserData({...data.user}))
+        if(data.error){
+            alert(data.message)
+            yield localStorage.removeItem('ticket')
+            yield put(loginAction.changeUserIsLogin({isLogin: false}))
+        } else {
+            yield alert(data.message)
+            yield put(MembersAction.storageMembers({members: data.members}))
+            yield put(userAction.setUserData({...data.user}))
+        }
     }catch(error) {
         yield alert(error)
         yield put(userAction.changeLoading(false))
@@ -85,7 +103,13 @@ function* getAllMembers(){
         const result = yield call(api, apiOption)
         yield put(userAction.changeLoading(false))
         const data = result.data
-        yield put(MembersAction.storageMembers({members: data.members}))
+        if(data.error){
+            alert(data.message)
+            yield localStorage.removeItem('ticket')
+            yield put(loginAction.changeUserIsLogin({isLogin: false}))
+        } else {
+            yield put(MembersAction.storageMembers({members: data.members}))
+        }
     }catch(error) {
         yield alert(error)
         yield put(userAction.changeLoading(false))

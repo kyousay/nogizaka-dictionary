@@ -4,6 +4,7 @@ import * as loginAction from '../../../actions/login/loginActions'
 import * as talkAction from '../../../actions/talk/talkActions'
 import {State} from '../../../reducers/index'
 import Talk from '../../../components/Pages/Talk'
+import { TalkRoomState } from '../../../reducers/talkReducer'
 
 const mapStateToProps = (state: State) => ({
     user: state.user,
@@ -16,6 +17,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     },
     getAllTalkRooms: () => {
         dispatch(talkAction.getAllTalkRooms())
+    },
+    setTalkRooms: (rooms: TalkRoomState[]) => {
+        dispatch(talkAction.setTalkRooms(rooms))
     }
 })
 

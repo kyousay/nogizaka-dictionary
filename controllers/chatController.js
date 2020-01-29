@@ -1,5 +1,14 @@
 const Talk = require("../models/talk"),
 Chat = require("../models/chat"),
+getTalkRoomParams = (talkRoom, image) => {
+    return {
+        _id: talkRoom._id,
+        roomName: talkRoom.roomName,
+        description: talkRoom.description,
+        isRock: talkRoom.isRock,
+        image
+    }
+},
 returnChatParam = (talk) => {
     const chats = talk.chat;
     let chatsArray = chats.map(chat => {
@@ -48,6 +57,15 @@ module.exports = io => {
         client.on("leaveRoom", () => {
             client.leave(`${room}`)
             console.log(`clientLeave: ${room}`)
+        })
+
+        client.on("newRoom", () => {
+            Talk.find({}).populate("image").sort({'createdAt':-1}).limit(46).then(newRooms => {
+                let Rooms = newRooms.map(room => {
+                    return getTalkRoomParams(room, room.image[0].image)
+                });
+                client.broadcast.emit("createRoom", Rooms);
+            })
         })
 
         client.on("chat", data => {

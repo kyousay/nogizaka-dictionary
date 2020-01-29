@@ -8,6 +8,7 @@ import * as talkAction from '../actions/talk/talkActions'
 import * as loginAction from '../actions/login/loginActions'
 import * as userAction from '../actions/user/userActions'
 import { talkApiFactory } from '../api/talkApiFactiory'
+import socket from '../websocket'
 
 function* getAllTalkRooms(){
     try{
@@ -83,6 +84,7 @@ function* createTalkRoom(action : ReturnType<typeof talkAction.createTalkRoom>){
         } else {
             if(result.data.isSuccess) {
                 yield put(talkAction.setTalkRooms(result.data.data))
+                yield socket.emit("newRoom");
             } else {
                 yield alert(result.data.message)
             }

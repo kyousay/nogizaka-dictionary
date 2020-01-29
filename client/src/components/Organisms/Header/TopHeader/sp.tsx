@@ -1,6 +1,6 @@
 import React,{ useState } from 'react'
 import styled from 'styled-components'
-import SearchPanel from '../../../Molecules/SearchPanel'
+import SearchCard from '../../../Molecules/SearchCard'
 import TxtCard from '../../../Molecules/TxtCard'
 import InputCard from '../../../Molecules/InputCard'
 import Wrapper from '../../../Atoms/Wrapper'
@@ -45,24 +45,24 @@ const FieldStyle = {
 
 
 const TxtRowSectionStyle = {
-    titelStyle: {font_size: '1.2rem' as '1.2rem', color: '#787878'}, 
-    titleWrapperStyle: {width: '96px'},
-    contentStyle: {font_size: '1.4rem' as '1.4rem'},
-    wrapperStyle: {padding: '20px 40px'},
+    titelStyle: {font_size: '1.4rem', color: '#787878'} as const, 
+    titleWrapperStyle: {width: '96px', display: 'flex', align_items: 'flex-end'} as const,
+    contentStyle: {font_size: '1.8rem'} as const,
+    wrapperStyle: {margin: '30px auto', width: '250px', padding: '0 10px'} as const,
 }
 
 const baseButtonStyle = {
     font_size: '1.4rem' as '1.4rem',
     color: '#fff',
     width: '100%',
-    padding: '10px',
+    padding: '20px',
 }
 
 const buttonStyle = {
     font_size: '1.4rem' as '1.4rem',
     color: '#fff',
     width: '100%',
-    padding: '10px',
+    padding: '20px',
     bgColor: '#812990' as '#812990',
 }
 
@@ -72,7 +72,7 @@ const inputStyle = {
     border: 'none',
     bgColor: '#EAEAEA' as '#EAEAEA',
     padding: '10px 12px',
-    font_size: '1.2rem' as '1.2rem'
+    font_size: '1.4rem' as '1.4rem'
 }
 
 export interface userProfile {
@@ -85,9 +85,11 @@ type Props = userState & {
     upDate: (props: userProfile) => void
     searchWord: (word: string) => void
     logout: () => void
+    search: (url: string) => void
 }
 
 const TopSpHeader: React.FC<Props> = props => {
+    const [selectValue, setSelectValue] = useState('members')
     const [word, changeSearchWord] = useState('')
     const [clickIndex, setClickIndex] = useState(1)
     const [contentIndex, setContentIndex] = useState(1)
@@ -99,6 +101,11 @@ const TopSpHeader: React.FC<Props> = props => {
     }
     const [userState, changeUserState] = useState<userProfile>(initialUserState)
 
+    const selectChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectValue(event.target.value);
+        props.search(event.target.value);
+    }
+
     const changeInputValueHandler = (state : typeof userState) => {
         changeUserState(state)
     }
@@ -108,7 +115,10 @@ const TopSpHeader: React.FC<Props> = props => {
     }
 
     const searchActionHandler = () => {
-        props.searchWord(word)
+        if(word.length > 0) {
+            props.searchWord(word)
+        }
+        setClick(false)
     }
 
     const logoutHandler = () => {
@@ -197,12 +207,13 @@ const TopSpHeader: React.FC<Props> = props => {
             ],
             baseInputStyle: inputStyle,
             baseInputTitleStyle: {
-                font_size: '1.2rem',
+                font_size: '1.4rem',
                 color: '#787878',
                 width: '98px'
             } as const,
             baseWrapperStyle: {
-                padding: '15px',
+                margin: '20px auto 0',
+                width: '250px',
                 display: 'flex',
                 align_items: 'center'
             } as const
@@ -236,9 +247,76 @@ const TopSpHeader: React.FC<Props> = props => {
         }
     }
 
+    const SearchCardProps = {
+        value: word,
+        changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => changeSearchWord(e.target.value),
+        clickHandler: searchActionHandler,
+        selectsProps: {
+            options: [
+                {
+                    txt: '全メンバー',
+                    props: {
+                        value: 'members'
+                    }
+                },
+                {
+                    txt: '一期生',
+                    props: {
+                        value: 'segment=1期生'
+                    }
+                },
+                {
+                    txt: '二期生',
+                    props: {
+                        value: 'segment=2期生'
+                    }
+                },
+                {
+                    txt: '三期生',
+                    props: {
+                        value: 'segment=3期生'
+                    }
+                },
+                {
+                    txt: '四期生',
+                    props: {
+                        value: 'segment=4期生'
+                    }
+                },
+                {
+                    txt: '卒業生',
+                    props: {
+                        value: 'segment=卒業生'
+                    }
+                },
+                {
+                    txt: '推しメン',
+                    props: {
+                        value: 'favorite'
+                    }
+                }
+        ],
+        wrapperStyle: {
+            margin: '20px 0'
+        },
+        selectStyle: {
+            padding: '10px 30px',
+            width: '100%',
+            font_size: '1.4rem' as '1.4rem',
+            color: '#888888',
+            appearance: 'none',
+            bgColor: '#F9F9F9' as '#F9F9F9'
+        },
+        selectProps: {
+            value: selectValue,
+            onChange: selectChangeHandler
+        }
+    }
+    }
+
     return(
-        <Wrapper styled={{display:'flex', align_items:"center", justify_content:"space-between", bgColor:'#fff', padding: '0 20px 0 0'}}>
-            <Img src={logo} styled={{width:"45vw"}}/>
+        <Wrapper styled={{display:'flex', align_items:"center", justify_content:"space-between", bgColor:'#fff', padding: '10px 20px 10px 0'}}>
+            <Img src={logo} styled={{width:"55vw"}}/>
             <Wrapper styled={{display: 'flex', justify_content: 'space-between', width: '20vw'}}>
                 <ImgBoxWrapper styled={{}} onClick={() => {setContentIndex(2);setClick(true);}} >
                     <Img src={icon_search} styled={{width: '5vw'}} />
@@ -252,8 +330,8 @@ const TopSpHeader: React.FC<Props> = props => {
                 <Wrapper styled={{...FieldStyle}}>
                     <Wrapper styled={{position: 'relative', z_index: '550'}}>
                         <CardTitle styled={{font_size:'1.8rem', font_weight: 'bold', text_align: 'center'} as const}>{contentIndex === 1 ? `${props.nickName}さん`: '検索条件'}</CardTitle>
-                        <Wrapper styled={{position: 'absolute', right: '5px', top: '5px', padding:'5px'}} onClick={() => {setClick(false);}}>
-                            <Img styled={{width:'5vw'}} src={icon_close} />
+                        <Wrapper styled={{position: 'absolute', right: '5px', top: '0', padding:'5px'}} onClick={() => {setClick(false);setClickIndex(1);}}>
+                            <Img styled={{width:'20px'}} src={icon_close} />
                         </Wrapper>
                     </Wrapper>
                     {
@@ -262,7 +340,7 @@ const TopSpHeader: React.FC<Props> = props => {
                                 clickIndex === 1 ?
                                     <TxtCard {...UserCardProps}/>
                                     :<InputCard {...UserEditCardProps} />
-                            : null
+                            : <SearchCard {...SearchCardProps} />
                     }
                 </Wrapper>
                     : null

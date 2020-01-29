@@ -18,7 +18,7 @@ const LoadingWrapper = styled.div`
   right: 0;
   top: 0;
   bottom: 0;
-  z-inex: 1000;
+  z-inex: 1000000000;
   background-color: rgba(255,255,255,0.5);
 `
 
@@ -36,6 +36,8 @@ interface Props {
 const App: React.FC<Props> = props => {
   return (
     <>
+      <GlobalStyle />
+      <Wrapper styled={{bgColor:'#F9F9F9',min_height:"100vh", position: 'relative'}}>
       {
         props.user.loading? 
         <LoadingWrapper>
@@ -43,8 +45,7 @@ const App: React.FC<Props> = props => {
         </LoadingWrapper>
         : null
       }
-      <GlobalStyle />
-      <Wrapper styled={{bgColor:'#F9F9F9',min_height:"100vh"}}>
+      
         <Switch>
           <Route path='/login' component={Login} />
           <Route path="/top" component={Top} />

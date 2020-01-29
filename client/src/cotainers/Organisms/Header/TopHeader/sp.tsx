@@ -21,6 +21,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     },
     logout: () => {
         dispatch(loginAction.setUserData(initialState))
+    },
+    search: (url: string) => {
+        dispatch(searchAction.searchSelect(url))
     }
 })
 

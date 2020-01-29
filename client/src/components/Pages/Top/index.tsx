@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import TopHeader from '../../../cotainers/Organisms/Header/TopHeader'
 import TableList from '../../../cotainers/Organisms/Table/TableList'
 import {userState} from '../../../reducers/userReducer'
+import { Helmet } from 'react-helmet'
 import useReactRouter from 'use-react-router'
 
 interface PageProps {
@@ -27,6 +28,12 @@ const Top : React.FC<PageProps> = props => {
 
     return(
         <>
+            <Helmet>
+                <title>
+                    Nogizaka-Dictinary ~TopPage~
+                </title>
+            </Helmet>
+
             <TopHeader />
             <TableList />
         </>

@@ -164,7 +164,7 @@ const ListTable: React.FC<Props> = (props) => {
     }
 
     return (
-        <React.Fragment>
+        <>
             { zoom ? 
                         <ZoomCard zoomOutHandler={() => zoomOutHandler(false)} member={state} image={zoomProps.src}
                         iconClickHandler={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -177,13 +177,13 @@ const ListTable: React.FC<Props> = (props) => {
                     
                         null
             }
-            {   <UnOrderdList styled={{justify_content: "center", flex_wrap: "wrap", padding: '60px 40px 60px 40px' }}>
-                    <Wrapper styled={{margin: '0 0 30px 20px', display: 'flex'}}>
-                        <Selects {...SelectsProps} />
-                        <Wrapper styled={{margin: '0 0 0 20px'}}>
-                            <Link to={"/talk"}><Button styled={{...buttonStyle}}>トークルームへ</Button></Link>
-                        </Wrapper>
-                    </Wrapper>
+            <Wrapper styled={{margin: '60px 0 30px 20px', display: 'flex'}}>
+                <Selects {...SelectsProps} />
+                <Wrapper styled={{margin: '0 0 0 20px'}}>
+                    <Link to={"/talk"}><Button styled={{...buttonStyle}}>トークルームへ</Button></Link>
+                </Wrapper>
+            </Wrapper>
+            {   <UnOrderdList as="ul" styled={{display:'flex', justify_content: "center", flex_wrap: "wrap"}}>
                     {members.map((member,index) => {
                         const isFavorite = checkFavoriteId(member._id)
                         const src = isFavorite? Heart : grayHeart
@@ -195,7 +195,7 @@ const ListTable: React.FC<Props> = (props) => {
                     }
                 </UnOrderdList>
             }
-        </React.Fragment>
+        </>
     )
 }
 

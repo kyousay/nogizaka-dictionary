@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import TalkHeader from '../../../cotainers/Organisms/Header/TalkHeader'
 import TalkRoomList from '../../../cotainers/Organisms/Table/TalkRoomList'
 import { userState } from '../../../reducers/userReducer'
+import { Helmet } from 'react-helmet'
 import useReactRouter from 'use-react-router'
 import { TalkState } from '../../../reducers/talkReducer'
 
@@ -31,10 +32,16 @@ const Talk: React.FC<Props> = (props) => {
         }
     },[history, getAllTalkRooms, props.user.login, props.isStorageToken, props.talk.isSetRoom])
     return(
-        <React.Fragment>
+        <>
+            <Helmet>
+                <title>
+                    Nogizaka-Dictinary ~TalkRoomPage~
+                </title>
+            </Helmet>
+
             <TalkHeader />
             <TalkRoomList />
-        </React.Fragment>
+        </>
     )
 }
 

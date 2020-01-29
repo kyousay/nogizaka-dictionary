@@ -3,6 +3,7 @@ import socket from '../../../websocket'
 import ChatHeader from '../../../cotainers/Organisms/Header/ChatHeader'
 import ChatList from '../../../cotainers/Organisms/Table/ChatList'
 import ChatForm from '../../../cotainers/Organisms/Form/ChatForm'
+import { Helmet } from 'react-helmet'
 import useReactRouter from 'use-react-router'
 import { TalkState, chatState } from '../../../reducers/talkReducer'
 
@@ -42,11 +43,17 @@ const Chat: React.FC<Props> = props => {
     }
 
     return(
-        <React.Fragment>
+        <>
+            <Helmet>
+                <title>
+                    Nogizaka-Dictinary ~ChatPage~ 
+                </title>
+            </Helmet>
+            
             <ChatHeader />
             <ChatList />
             <ChatForm />
-        </React.Fragment>
+        </>
     )
 }
 

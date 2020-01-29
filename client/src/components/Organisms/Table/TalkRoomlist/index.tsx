@@ -155,7 +155,7 @@ const TalkRoomList: React.FC<Props> = props => {
                     :
                     null
             }
-            {   <UnOrderdList styled={{justify_content: "center", flex_wrap: "wrap", padding: '60px 40px 60px 40px' }}>
+            {   <UnOrderdList styled={{display:'flex', justify_content: "center", flex_wrap: "wrap"}}>
                     <Wrapper styled={{margin: '0 0 30px 15px',display: 'flex'}}>
                         <Link to={"/top"}><Button styled={{...buttonStyle}}>トップページへ</Button></Link>
                     </Wrapper>

@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import constantStyle from '../../../style/styleModel'
-import {mediaMobile} from '../../../style/commonStyle'
 
 interface FormStyle {
     [k : string] : string
@@ -18,13 +17,5 @@ const Form = styled.form<FormProps>`
     text-align: ${props => props.styled.text_align};
     padding: ${props => props.styled.padding};
 `
-
-export const withSPStyle = (Component : typeof Form, spStyle: ElementStyle) => {
-    return styled(Component)`
-      ${mediaMobile`
-        ${spStyle}
-      `};
-    `;
-};
 
 export default Form

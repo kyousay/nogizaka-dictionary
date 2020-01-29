@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react'
 import TopHeader from '../../../cotainers/Organisms/Header/TopHeader'
+import TopSpHeader from '../../../cotainers/Organisms/Header/TopHeader/sp'
 import TableList from '../../../cotainers/Organisms/Table/TableList'
+import MediaQuery from 'react-responsive'
 import {userState} from '../../../reducers/userReducer'
 import { Helmet } from 'react-helmet'
 import useReactRouter from 'use-react-router'
@@ -34,7 +36,12 @@ const Top : React.FC<PageProps> = props => {
                 </title>
             </Helmet>
 
-            <TopHeader />
+            <MediaQuery minDeviceWidth={769}>
+                <TopHeader />
+            </MediaQuery>
+            <MediaQuery maxDeviceWidth={768}>
+                <TopSpHeader />
+            </MediaQuery>
             <TableList />
         </>
     )

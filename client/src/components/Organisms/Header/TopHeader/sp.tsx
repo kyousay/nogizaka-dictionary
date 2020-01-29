@@ -3,31 +3,52 @@ import styled from 'styled-components'
 import SearchPanel from '../../../Molecules/SearchPanel'
 import TxtCard from '../../../Molecules/TxtCard'
 import InputCard from '../../../Molecules/InputCard'
-import ImgBox from '../../../Molecules/ImgBox'
 import Wrapper from '../../../Atoms/Wrapper'
 import Img from '../../../Atoms/Img'
 import { persistor } from '../../../../store'
 import logo from '../../../../style/img/logo.jpg'
-import icon from '../../../../style/img/user_icon.svg'
+import icon_close from '../../../../style/img/close_icon_black.svg'
+import icon_user from '../../../../style/img/user_icon.svg'
+import icon_search from '../../../../style/img/search_icon.svg'
 import {userState} from '../../../../reducers/userReducer'
+import { Heading3 } from '../../../Atoms/Heading'
 
 const ImgBoxWrapper = styled(Wrapper)`
     cursor: pointer;
 `
 
+const CardTitle = styled(Heading3)`
+    border-bottom: 1px solid #E3E1E1;
+    padding: 10px
+`
 const cardStyle = {
     position: 'absolute',
-    right: '10px',
+    top: '0',
+    right: '0',
+    bottom: '0',
+    left:'0',
+    width: '100vw',
+    padding: '100px 0 0 0'
+}
+
+const FieldStyle = {
+    position: 'fixed',
+    top: '0',
+    right: '0',
+    bottom: '0',
+    left:'0',
     bgColor: '#fff' as '#fff',
-    width: '315px',
+    width: '100vw',
+    z_index: '500',
     padding: '20px',
 }
+
 
 const TxtRowSectionStyle = {
     titelStyle: {font_size: '1.2rem' as '1.2rem', color: '#787878'}, 
     titleWrapperStyle: {width: '96px'},
     contentStyle: {font_size: '1.4rem' as '1.4rem'},
-    wrapperStyle: {padding: '20px'},
+    wrapperStyle: {padding: '20px 40px'},
 }
 
 const baseButtonStyle = {
@@ -66,10 +87,11 @@ type Props = userState & {
     logout: () => void
 }
 
-const TopHeader: React.FC<Props> = props => {
+const TopSpHeader: React.FC<Props> = props => {
     const [word, changeSearchWord] = useState('')
-    const [isHover, changeHover] = useState(false)
-    const [isClick, changeClick] = useState(false)
+    const [clickIndex, setClickIndex] = useState(1)
+    const [contentIndex, setContentIndex] = useState(1)
+    const [isClick, setClick] = useState(false)
     let initialUserState = {
         nickName: props.nickName,
         message: props.message,
@@ -77,15 +99,6 @@ const TopHeader: React.FC<Props> = props => {
     }
     const [userState, changeUserState] = useState<userProfile>(initialUserState)
 
-    const changeClickStateHandler = (state: boolean) => {
-        var newState = state ? false : true
-        changeClick(newState)
-    }
-    
-    const changeHoverStateHandler = (state: boolean) => {
-        changeClick(false)
-        changeHover(state)
-    }
     const changeInputValueHandler = (state : typeof userState) => {
         changeUserState(state)
     }
@@ -136,7 +149,7 @@ const TopHeader: React.FC<Props> = props => {
                 {
                     buttonTxt: 'プロフィールを編集する',
                     buttonStyle,
-                    clickHandler: () => changeClickStateHandler(isClick),
+                    clickHandler: () => setClickIndex(2),
                 },
                 {
                     buttonTxt: 'ログアウト',
@@ -204,7 +217,7 @@ const TopHeader: React.FC<Props> = props => {
                         if(emptyCheck(userState)) {
                             upDateUserData(userState);
                             initialUserState = userState;
-                            changeClickStateHandler(isClick);
+                            setClickIndex(1)
                         }else {
                             alert("必要な項目が入力されていません")
                         }
@@ -214,7 +227,7 @@ const TopHeader: React.FC<Props> = props => {
                     buttonStyle: {...buttonStyle,bgColor: '#FFFFFF' as '#FFFFFF', margin: '0', color: '#0000000', border: '1px solid #000000'},
                     buttonTxt: 'キャンセル',
                     clickHandler: () => {
-                        changeClickStateHandler(isClick);
+                        setClickIndex(1);
                         changeUserState(initialUserState);
                     }
                 }
@@ -224,32 +237,38 @@ const TopHeader: React.FC<Props> = props => {
     }
 
     return(
-        <Wrapper styled={{display:'flex', align_items:"center", justify_content:"space-between", bgColor:'#fff', padding: '0px 20px'}}>
-            <Img src={logo} styled={{width:"300px"}}/>
-            <Wrapper styled={{display: 'flex', justify_content: 'space-between', min_width: '420px'}}>
-                <SearchPanel value={word} changeHandler={(e: React.ChangeEvent<HTMLInputElement>) => changeSearchWord(e.target.value)} clickHandler={searchActionHandler}/>
-                <ImgBoxWrapper styled={{margin: '0 0 0 20px', position: 'relative', z_index: '50'}} 
-                onMouseEnter={() => changeHoverStateHandler(true)}
-                onMouseLeave={() => {
-                    changeHoverStateHandler(false);
-                    changeUserState(initialUserState);
-                }}>
-                    <ImgBox src={icon} width={'20px'} font_size={'1.2rem'} margin={'10px 0 0 0'}description={props.nickName}/>
-                    
-                    {
-                        isHover ?
-                            isClick?
-
-                            <InputCard {...UserEditCardProps} />
-
-                            :<TxtCard {...UserCardProps}/>
-                            
-                        : null
-                    }
+        <Wrapper styled={{display:'flex', align_items:"center", justify_content:"space-between", bgColor:'#fff', padding: '0 20px 0 0'}}>
+            <Img src={logo} styled={{width:"45vw"}}/>
+            <Wrapper styled={{display: 'flex', justify_content: 'space-between', width: '20vw'}}>
+                <ImgBoxWrapper styled={{}} onClick={() => {setContentIndex(2);setClick(true);}} >
+                    <Img src={icon_search} styled={{width: '5vw'}} />
+                </ImgBoxWrapper>
+                <ImgBoxWrapper styled={{}} onClick={() => {setContentIndex(1);setClick(true);}}>
+                    <Img src={icon_user} styled={{width: '5vw'}} />
                 </ImgBoxWrapper>
             </Wrapper>
+            {
+                isClick?
+                <Wrapper styled={{...FieldStyle}}>
+                    <Wrapper styled={{position: 'relative', z_index: '550'}}>
+                        <CardTitle styled={{font_size:'1.8rem', font_weight: 'bold', text_align: 'center'} as const}>{contentIndex === 1 ? `${props.nickName}さん`: '検索条件'}</CardTitle>
+                        <Wrapper styled={{position: 'absolute', right: '5px', top: '5px', padding:'5px'}} onClick={() => {setClick(false);}}>
+                            <Img styled={{width:'5vw'}} src={icon_close} />
+                        </Wrapper>
+                    </Wrapper>
+                    {
+                        
+                            contentIndex === 1 ?
+                                clickIndex === 1 ?
+                                    <TxtCard {...UserCardProps}/>
+                                    :<InputCard {...UserEditCardProps} />
+                            : null
+                    }
+                </Wrapper>
+                    : null
+            }
         </Wrapper>
     )
 }
 
-export default TopHeader
+export default TopSpHeader

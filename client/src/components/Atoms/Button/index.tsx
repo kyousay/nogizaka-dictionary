@@ -1,7 +1,5 @@
-import React from 'react'
 import styled from 'styled-components'
 import constantStyle from '../../../style/styleModel'
-import {mediaMobile} from '../../../style/commonStyle'
 
 interface ButtonStyle {
     [k : string] : string
@@ -24,19 +22,5 @@ const Button = styled.button<ButtonProps>`
   padding: ${props => props.styled.padding};
   background-color: ${props => props.styled.bgColor};
 `
-
-export const ActionButton = (children : string) => (
-  <Button styled={{
-    font_size: '1.4rem'
-  }}>{children}</Button>
-)
-
-export const withSPStyle = (Component : typeof Button, spStyle: ElementStyle) => {
-    return styled(Component)`
-      ${mediaMobile`
-        ${spStyle}
-      `};
-    `;
-};
 
 export default Button

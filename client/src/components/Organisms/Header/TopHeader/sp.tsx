@@ -1,58 +1,79 @@
 import React,{ useState } from 'react'
 import styled from 'styled-components'
-import SearchPanel from '../../../Molecules/SearchPanel'
+import SearchCard from '../../../Molecules/SearchCard'
 import TxtCard from '../../../Molecules/TxtCard'
 import InputCard from '../../../Molecules/InputCard'
-import ImgBox from '../../../Molecules/ImgBox'
 import Wrapper from '../../../Atoms/Wrapper'
 import Img from '../../../Atoms/Img'
 import { persistor } from '../../../../store'
 import logo from '../../../../style/img/logo.jpg'
-import icon from '../../../../style/img/user_icon.svg'
+import icon_close from '../../../../style/img/close_icon_black.svg'
+import icon_user from '../../../../style/img/user_icon.svg'
+import icon_search from '../../../../style/img/search_icon.svg'
 import {userState} from '../../../../reducers/userReducer'
+import { Heading3 } from '../../../Atoms/Heading'
 
 const ImgBoxWrapper = styled(Wrapper)`
     cursor: pointer;
 `
 
+const CardTitle = styled(Heading3)`
+    border-bottom: 1px solid #E3E1E1;
+    padding: 10px
+`
 const cardStyle = {
     position: 'absolute',
-    right: '10px',
-    bgColor: '#fff' as '#fff',
-    width: '315px',
-    padding: '20px',
+    top: '0',
+    right: '0',
+    bottom: '0',
+    left:'0',
+    width: '100vw',
+    padding: '100px 0 0 0'
 }
 
+const FieldStyle = {
+    position: 'fixed',
+    top: '0',
+    right: '0',
+    bottom: '0',
+    left:'0',
+    bgColor: '#fff',
+    width: '100vw',
+    z_index: '500',
+    padding: '20px',
+} as const
+
+
 const TxtRowSectionStyle = {
-    titelStyle: {font_size: '1.2rem' as '1.2rem', color: '#787878'}, 
-    titleWrapperStyle: {width: '96px'},
-    contentStyle: {font_size: '1.4rem' as '1.4rem'},
-    wrapperStyle: {padding: '20px'},
+    titelStyle: {font_size: '1.4rem', color: '#787878'} as const, 
+    titleWrapperStyle: {width: '96px', display: 'flex', align_items: 'flex-end'} as const,
+    contentStyle: {font_size: '1.8rem'} as const,
+    wrapperStyle: {margin: '30px auto', width: '250px', padding: '0 10px'} as const,
 }
 
 const baseButtonStyle = {
-    font_size: '1.4rem' as '1.4rem',
+    font_size: '1.4rem',
     color: '#fff',
     width: '100%',
-    padding: '10px',
-}
+    padding: '20px',
+} as const
 
 const buttonStyle = {
-    font_size: '1.4rem' as '1.4rem',
+    font_size: '1.4rem',
     color: '#fff',
     width: '100%',
-    padding: '10px',
-    bgColor: '#812990' as '#812990',
-}
+    padding: '20px',
+    bgColor: '#812990',
+} as const
 
 const inputStyle = {
     width: '146px',
     border_radius: '3px',
     border: 'none',
-    bgColor: '#EAEAEA' as '#EAEAEA',
+    bgColor: '#EAEAEA',
     padding: '10px 12px',
-    font_size: '1.2rem' as '1.2rem'
-}
+    font_size: '1.4rem'
+} as const
 
 export interface userProfile {
     nickName: string
@@ -64,12 +85,15 @@ type Props = userState & {
     upDate: (props: userProfile) => void
     searchWord: (word: string) => void
     logout: () => void
+    search: (url: string) => void
 }
 
-const TopHeader: React.FC<Props> = props => {
+const TopSpHeader: React.FC<Props> = props => {
+    const [selectValue, setSelectValue] = useState('members')
     const [word, changeSearchWord] = useState('')
-    const [isHover, changeHover] = useState(false)
-    const [isClick, changeClick] = useState(false)
+    const [clickIndex, setClickIndex] = useState(1)
+    const [contentIndex, setContentIndex] = useState(1)
+    const [isClick, setClick] = useState(false)
     let initialUserState = {
         nickName: props.nickName,
         message: props.message,
@@ -77,15 +101,11 @@ const TopHeader: React.FC<Props> = props => {
     }
     const [userState, changeUserState] = useState<userProfile>(initialUserState)
 
-    const changeClickStateHandler = (state: boolean) => {
-        var newState = state ? false : true
-        changeClick(newState)
+    const selectChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectValue(event.target.value);
+        props.search(event.target.value);
     }
-    
-    const changeHoverStateHandler = (state: boolean) => {
-        changeClick(false)
-        changeHover(state)
-    }
+
     const changeInputValueHandler = (state : typeof userState) => {
         changeUserState(state)
     }
@@ -95,7 +115,11 @@ const TopHeader: React.FC<Props> = props => {
     }
 
     const searchActionHandler = () => {
-        props.searchWord(word)
+        if(word.length > 0) {
+            props.searchWord(word)
+        }
+        setClick(false)
+        changeSearchWord('')
     }
 
     const logoutHandler = () => {
@@ -136,7 +160,7 @@ const TopHeader: React.FC<Props> = props => {
                 {
                     buttonTxt: 'プロフィールを編集する',
                     buttonStyle,
-                    clickHandler: () => changeClickStateHandler(isClick),
+                    clickHandler: () => setClickIndex(2),
                 },
                 {
                     buttonTxt: 'ログアウト',
@@ -184,12 +208,13 @@ const TopHeader: React.FC<Props> = props => {
             ],
             baseInputStyle: inputStyle,
             baseInputTitleStyle: {
-                font_size: '1.2rem',
+                font_size: '1.4rem',
                 color: '#787878',
                 width: '98px'
             } as const,
             baseWrapperStyle: {
-                padding: '15px',
+                margin: '20px auto 0',
+                width: '250px',
                 display: 'flex',
                 align_items: 'center'
             } as const
@@ -204,7 +229,7 @@ const TopHeader: React.FC<Props> = props => {
                         if(emptyCheck(userState)) {
                             upDateUserData(userState);
                             initialUserState = userState;
-                            changeClickStateHandler(isClick);
+                            setClickIndex(1)
                         }else {
                             alert("必要な項目が入力されていません")
                         }
@@ -214,7 +239,7 @@ const TopHeader: React.FC<Props> = props => {
                     buttonStyle: {...buttonStyle,bgColor: '#FFFFFF' as '#FFFFFF', margin: '0', color: '#0000000', border: '1px solid #000000'},
                     buttonTxt: 'キャンセル',
                     clickHandler: () => {
-                        changeClickStateHandler(isClick);
+                        setClickIndex(1);
                         changeUserState(initialUserState);
                     }
                 }
@@ -223,33 +248,106 @@ const TopHeader: React.FC<Props> = props => {
         }
     }
 
-    return(
-        <Wrapper styled={{display:'flex', align_items:"center", justify_content:"space-between", bgColor:'#fff', padding: '0px 20px'}}>
-            <Img src={logo} styled={{width:"300px"}}/>
-            <Wrapper styled={{display: 'flex', justify_content: 'space-between', min_width: '420px'}}>
-                <SearchPanel value={word} changeHandler={(e: React.ChangeEvent<HTMLInputElement>) => changeSearchWord(e.target.value)} clickHandler={searchActionHandler}/>
-                <ImgBoxWrapper styled={{margin: '0 0 0 20px', position: 'relative', z_index: '50'}} 
-                onMouseEnter={() => changeHoverStateHandler(true)}
-                onMouseLeave={() => {
-                    changeHoverStateHandler(false);
-                    changeUserState(initialUserState);
-                }}>
-                    <ImgBox src={icon} width={'20px'} font_size={'1.2rem'} margin={'10px 0 0 0'}description={props.nickName}/>
-                    
-                    {
-                        isHover ?
-                            isClick?
-
-                            <InputCard {...UserEditCardProps} />
-
-                            :<TxtCard {...UserCardProps}/>
-                            
-                        : null
+    const SearchCardProps = {
+        value: word,
+        changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => changeSearchWord(e.target.value),
+        clickHandler: searchActionHandler,
+        selectsProps: {
+            options: [
+                {
+                    txt: '全メンバー',
+                    props: {
+                        value: 'members'
                     }
+                },
+                {
+                    txt: '一期生',
+                    props: {
+                        value: 'segment=1期生'
+                    }
+                },
+                {
+                    txt: '二期生',
+                    props: {
+                        value: 'segment=2期生'
+                    }
+                },
+                {
+                    txt: '三期生',
+                    props: {
+                        value: 'segment=3期生'
+                    }
+                },
+                {
+                    txt: '四期生',
+                    props: {
+                        value: 'segment=4期生'
+                    }
+                },
+                {
+                    txt: '卒業生',
+                    props: {
+                        value: 'segment=卒業生'
+                    }
+                },
+                {
+                    txt: '推しメン',
+                    props: {
+                        value: 'favorite'
+                    }
+                }
+        ],
+        wrapperStyle: {
+            margin: '20px 0'
+        },
+        selectStyle: {
+            padding: '10px 30px',
+            width: '100%',
+            font_size: '1.4rem' as '1.4rem',
+            color: '#888888',
+            appearance: 'none',
+            bgColor: '#F9F9F9' as '#F9F9F9'
+        },
+        selectProps: {
+            value: selectValue,
+            onChange: selectChangeHandler
+        }
+    }
+    }
+
+    return(
+        <Wrapper styled={{display:'flex', align_items:"center", justify_content:"space-between", bgColor:'#fff', padding: '10px 20px 10px 0'}}>
+            <Img src={logo} styled={{width:"55vw"}}/>
+            <Wrapper styled={{display: 'flex', justify_content: 'space-between', width: '20vw'}}>
+                <ImgBoxWrapper styled={{}} onClick={() => {setContentIndex(2);setClick(true);}} >
+                    <Img src={icon_search} styled={{width: '6vw'}} />
+                </ImgBoxWrapper>
+                <ImgBoxWrapper styled={{}} onClick={() => {setContentIndex(1);setClick(true);}}>
+                    <Img src={icon_user} styled={{width: '6vw'}} />
                 </ImgBoxWrapper>
             </Wrapper>
+            {
+                isClick?
+                <Wrapper styled={{...FieldStyle}}>
+                    <Wrapper styled={{position: 'relative', z_index: '550'}}>
+                        <CardTitle styled={{font_size:'1.8rem', font_weight: 'bold', text_align: 'center'} as const}>{contentIndex === 1 ? `${props.nickName}さん`: '検索条件'}</CardTitle>
+                        <Wrapper styled={{position: 'absolute', right: '5px', top: '0', padding:'5px'}} onClick={() => {setClick(false);setClickIndex(1);}}>
+                            <Img styled={{width:'20px'}} src={icon_close} />
+                        </Wrapper>
+                    </Wrapper>
+                    {
+                        
+                            contentIndex === 1 ?
+                                clickIndex === 1 ?
+                                    <TxtCard {...UserCardProps}/>
+                                    :<InputCard {...UserEditCardProps} />
+                            : <SearchCard {...SearchCardProps} />
+                    }
+                </Wrapper>
+                    : null
+            }
         </Wrapper>
     )
 }
 
-export default TopHeader
+export default TopSpHeader

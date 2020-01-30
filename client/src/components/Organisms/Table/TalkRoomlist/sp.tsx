@@ -29,8 +29,9 @@ const buttonStyle = {
     font_size: '1.4rem',
     font_weight: 'bold',
     color: '#fff',
-    padding: '10px 30px',
+    padding: '20px 0',
     bgColor: '#812990',
+    width: '80vw'
 } as const
 
 interface Props {
@@ -38,7 +39,7 @@ interface Props {
     getTalkRoom: (roomParam: RoomParam) => void
 }
 
-const TalkRoomList: React.FC<Props> = props => {
+const TalkSpRoomList: React.FC<Props> = props => {
     const [isRock, setRock] = useState(false)
     const [password, setPassword] = useState('')
     const [room, setRoomInfo] = useState<TalkRoomState>({
@@ -155,7 +156,7 @@ const TalkRoomList: React.FC<Props> = props => {
                     :
                     null
             }
-            <Wrapper styled={{margin: '60px 0 30px 20px',display: 'flex'}}>
+            <Wrapper styled={{margin: '60px 0 30px', display: 'flex', justify_content: 'center'} as const}>
                 <Link to={"/top"}><Button styled={{...buttonStyle}}>トップページへ</Button></Link>
             </Wrapper>
             {   <UnOrderdList styled={{display:'flex', justify_content: "center", flex_wrap: "wrap"}}>
@@ -173,4 +174,4 @@ const TalkRoomList: React.FC<Props> = props => {
     )
 }
 
-export default TalkRoomList
+export default TalkSpRoomList

@@ -16,7 +16,7 @@ interface Props {
     changeIsSetRoom: (isSetRoom: boolean) => void
 }
 
-const ChatHeader: React.FC<Props> = props => {
+const ChatSpHeader: React.FC<Props> = props => {
     const {history} = useReactRouter()
 
     const backToRoomHandler = () => {
@@ -28,15 +28,15 @@ const ChatHeader: React.FC<Props> = props => {
     }
 
     return(
-        <Wrapper styled={{position: 'absolute', top: '0', right: '0', left: '0', display:'flex', align_items:"center", justify_content:"space-between", bgColor:'#fff', padding: '0px 20px'}}>
-            <Img src={logo} styled={{width:"300px"}}/>
+        <Wrapper styled={{position: 'absolute', top: '0', right: '0', left: '0', display:'flex', align_items:"center", justify_content:"space-between", bgColor:'#fff', padding: '10px 0'}}>
+            <Img src={logo} styled={{width:"55vw"}}/>
             <Wrapper styled={{display: 'flex', justify_content: 'space-between'}}>
                 <ImgBoxWrapper styled={{margin: '0 20px 0 0'}} onClick={() => backToRoomHandler()}>
-                    <ImgBox src={icon} width={'40px'} margin={'10px 0 0 0'} description={'選択画面に戻る'} font_size={'1.2rem' as '1.2rem'} />
+                    <ImgBox src={icon} width={'6vw'} margin={'10px 0 0 0'} description={'選択画面に戻る'} font_size={'1.2rem' as '1.2rem'} />
                 </ImgBoxWrapper>
             </Wrapper>
         </Wrapper>
     )
 }
 
-export default ChatHeader
+export default ChatSpHeader

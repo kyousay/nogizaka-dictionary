@@ -99,12 +99,12 @@ module.exports = {
     createRoom: async (req, res, next) => {
         const data = await getParam(req.body)
         Talk.create(data).then(() => {
-            Talk.find({}).populate("image").then(rooms => {
+            Talk.find({}).populate("image").sort({'createdAt':-1}).limit(46).then(rooms => {
                 let newRooms = []
                 rooms.forEach(room => {
                     const image = room.image[0].image
                     const newRoom = getTalkRoomParams(room, image);
-                    newRooms.unshift(newRoom);
+                    newRooms.push(newRoom);
                 });
                 res.send({
                     isSuccess: true,

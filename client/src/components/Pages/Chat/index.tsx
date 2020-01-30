@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react'
 import socket from '../../../websocket'
 import ChatHeader from '../../../cotainers/Organisms/Header/ChatHeader'
+import ChatSpHeader from '../../../cotainers/Organisms/Header/ChatHeader/sp'
 import ChatList from '../../../cotainers/Organisms/Table/ChatList'
 import ChatForm from '../../../cotainers/Organisms/Form/ChatForm'
+import ChatSpForm from '../../../cotainers/Organisms/Form/ChatForm/sp'
+import MediaQuery from 'react-responsive'
+import { Helmet } from 'react-helmet'
 import useReactRouter from 'use-react-router'
 import { TalkState, chatState } from '../../../reducers/talkReducer'
 
@@ -42,11 +46,24 @@ const Chat: React.FC<Props> = props => {
     }
 
     return(
-        <React.Fragment>
-            <ChatHeader />
-            <ChatList />
-            <ChatForm />
-        </React.Fragment>
+        <>
+            <Helmet>
+                <title>
+                    Nogizaka-Dictinary ~ChatPage~ 
+                </title>
+            </Helmet>
+
+            <MediaQuery minDeviceWidth={769}>
+                <ChatHeader />
+                <ChatList />
+                <ChatForm />
+            </MediaQuery>
+            <MediaQuery maxDeviceWidth={768}>
+                <ChatSpHeader />
+                <ChatList />
+                <ChatSpForm />
+            </MediaQuery>
+        </>
     )
 }
 

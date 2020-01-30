@@ -1,15 +1,21 @@
-/*!
- * The buffer module from node.js, for the browser.
- *
- * @author   Feross Aboukhadijeh <http://feross.org>
- * @license  MIT
- */
+/*
+    object-assign
+    (c) Sindre Sorhus
+    @license MIT
+    */
 
 /*
 object-assign
 (c) Sindre Sorhus
 @license MIT
 */
+
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <http://feross.org>
+ * @license  MIT
+ */
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -60,6 +66,8 @@ and limitations under the License.
  * @license  MIT
  */
 
+/*! https://mths.be/utf8js v2.1.2 by @mathias */
+
 /** @license React v16.9.0
  * react-is.production.min.js
  *
@@ -68,5 +76,3 @@ and limitations under the License.
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-/*! https://mths.be/utf8js v2.1.2 by @mathias */

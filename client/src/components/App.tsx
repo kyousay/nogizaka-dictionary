@@ -8,7 +8,6 @@ import Login from '../cotainers/Pages/Login'
 import Admin from '../cotainers/Pages/Admin'
 import Talk from '../cotainers/Pages/Talk'
 import Chat from '../cotainers/Pages/Chat'
-import { css } from '@emotion/core'
 import ClipLoader from 'react-spinners/ClipLoader'
 import { userState } from '../reducers/userReducer';
 
@@ -18,16 +17,24 @@ const LoadingWrapper = styled.div`
   right: 0;
   top: 0;
   bottom: 0;
-  z-inex: 1000000000;
+  z-index: 10000;
   background-color: rgba(255,255,255,0.5);
 `
 
-const override = css`
-    position: absolute;
-    top: 45%;
-    left: 45%;
-    bordere-color: red;
-`
+// const override = css`
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform:translate(-50%, -50%);
+// `
+
+const wrapperStyle = {
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  z_index: '100000'
+} as const
 
 interface Props {
   user: userState
@@ -37,11 +44,13 @@ const App: React.FC<Props> = props => {
   return (
     <>
       <GlobalStyle />
-      <Wrapper styled={{bgColor:'#F9F9F9',min_height:"100vh", position: 'relative'}}>
+      <Wrapper styled={{bgColor:'#F9F9F9',min_height:"100vh"}}>
       {
         props.user.loading? 
         <LoadingWrapper>
-          <ClipLoader css={override} size={200} color={"#9370db"} loading={true} />
+          <Wrapper styled={{...wrapperStyle}}>
+            <ClipLoader size={200} color={"#9370db"} loading={true} />
+          </Wrapper>
         </LoadingWrapper>
         : null
       }

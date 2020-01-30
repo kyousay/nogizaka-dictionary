@@ -45,5 +45,6 @@ app.use("/", router);
 const server =app.listen(app.get("port"), () => {
     console.log(`The Express.js server has started and is litstening on port number:${app.get("port")}`);
 }),
+
 io = require("socket.io")(server);
 require("./controllers/chatController")(io);

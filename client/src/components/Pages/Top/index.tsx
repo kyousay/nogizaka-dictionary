@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import TopHeader from '../../../cotainers/Organisms/Header/TopHeader'
 import TopSpHeader from '../../../cotainers/Organisms/Header/TopHeader/sp'
+import TableSpList from '../../../cotainers/Organisms/Table/TableList/sp'
 import TableList from '../../../cotainers/Organisms/Table/TableList'
 import MediaQuery from 'react-responsive'
 import {userState} from '../../../reducers/userReducer'
@@ -38,11 +39,13 @@ const Top : React.FC<PageProps> = props => {
 
             <MediaQuery minDeviceWidth={769}>
                 <TopHeader />
+                <TableList />
             </MediaQuery>
             <MediaQuery maxDeviceWidth={768}>
                 <TopSpHeader />
+                <TableSpList />
             </MediaQuery>
-            <TableList />
+            
         </>
     )
 }

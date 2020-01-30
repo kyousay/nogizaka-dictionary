@@ -15,14 +15,18 @@ const inputStyle = {
 
 interface Props {
     value: string
-    selectsProps: SelectsProps
+    selectsProps?: SelectsProps
     changeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void
     clickHandler?: () => void
 }
 
 const SearchCard: React.FC<Props> = (props) => (
     <Wrapper styled={{padding: '10px'}}>
-        <Selects {...props.selectsProps}/>
+        {
+            props.selectsProps ?
+                <Selects {...props.selectsProps}/>
+            : null
+        }
         <Wrapper styled={{margin: '0  0 0'}}>
             <Input styled={{...inputStyle}} type="text" placeholder="フリーワード" value={props.value} onChange={props.changeHandler}/>
         </Wrapper>

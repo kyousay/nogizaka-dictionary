@@ -37,11 +37,11 @@ const FieldStyle = {
     right: '0',
     bottom: '0',
     left:'0',
-    bgColor: '#fff' as '#fff',
+    bgColor: '#fff',
     width: '100vw',
     z_index: '500',
     padding: '20px',
-}
+} as const
 
 
 const TxtRowSectionStyle = {
@@ -52,28 +52,28 @@ const TxtRowSectionStyle = {
 }
 
 const baseButtonStyle = {
-    font_size: '1.4rem' as '1.4rem',
+    font_size: '1.4rem',
     color: '#fff',
     width: '100%',
     padding: '20px',
-}
+} as const
 
 const buttonStyle = {
-    font_size: '1.4rem' as '1.4rem',
+    font_size: '1.4rem',
     color: '#fff',
     width: '100%',
     padding: '20px',
-    bgColor: '#812990' as '#812990',
-}
+    bgColor: '#812990',
+} as const
 
 const inputStyle = {
     width: '146px',
     border_radius: '3px',
     border: 'none',
-    bgColor: '#EAEAEA' as '#EAEAEA',
+    bgColor: '#EAEAEA',
     padding: '10px 12px',
-    font_size: '1.4rem' as '1.4rem'
-}
+    font_size: '1.4rem'
+} as const
 
 export interface userProfile {
     nickName: string
@@ -119,6 +119,7 @@ const TopSpHeader: React.FC<Props> = props => {
             props.searchWord(word)
         }
         setClick(false)
+        changeSearchWord('')
     }
 
     const logoutHandler = () => {
@@ -319,10 +320,10 @@ const TopSpHeader: React.FC<Props> = props => {
             <Img src={logo} styled={{width:"55vw"}}/>
             <Wrapper styled={{display: 'flex', justify_content: 'space-between', width: '20vw'}}>
                 <ImgBoxWrapper styled={{}} onClick={() => {setContentIndex(2);setClick(true);}} >
-                    <Img src={icon_search} styled={{width: '5vw'}} />
+                    <Img src={icon_search} styled={{width: '6vw'}} />
                 </ImgBoxWrapper>
                 <ImgBoxWrapper styled={{}} onClick={() => {setContentIndex(1);setClick(true);}}>
-                    <Img src={icon_user} styled={{width: '5vw'}} />
+                    <Img src={icon_user} styled={{width: '6vw'}} />
                 </ImgBoxWrapper>
             </Wrapper>
             {

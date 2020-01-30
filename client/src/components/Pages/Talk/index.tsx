@@ -1,6 +1,9 @@
 import React, {useEffect} from 'react'
 import TalkHeader from '../../../cotainers/Organisms/Header/TalkHeader'
+import TalkSpHeader from '../../../cotainers/Organisms/Header/TalkHeader/sp'
 import TalkRoomList from '../../../cotainers/Organisms/Table/TalkRoomList'
+import TalkSpRoomList from '../../../cotainers/Organisms/Table/TalkRoomList/sp'
+import MediaQuery from 'react-responsive'
 import { userState } from '../../../reducers/userReducer'
 import { Helmet } from 'react-helmet'
 import useReactRouter from 'use-react-router'
@@ -45,8 +48,14 @@ const Talk: React.FC<Props> = (props) => {
                 </title>
             </Helmet>
 
-            <TalkHeader />
-            <TalkRoomList />
+            <MediaQuery minDeviceWidth={769}>
+                <TalkHeader />
+                <TalkRoomList />
+            </MediaQuery>
+            <MediaQuery maxDeviceWidth={768}>
+                <TalkSpHeader />
+                <TalkSpRoomList />
+            </MediaQuery>
         </>
     )
 }

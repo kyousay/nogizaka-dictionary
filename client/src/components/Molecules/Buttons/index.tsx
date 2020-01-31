@@ -1,5 +1,5 @@
 import React from 'react'
-import Button, {ElementStyle as ButtonStyle} from '../../Atoms/Button'
+import Button, {StyleProps as ButtonStyle} from '../../Atoms/Button'
 import Wrapper, {ElementStyle as WrapperStyle} from '../../Atoms/Wrapper'
 
 export interface Props {

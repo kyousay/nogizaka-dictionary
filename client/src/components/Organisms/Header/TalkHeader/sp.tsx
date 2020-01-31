@@ -8,13 +8,13 @@ import icon_close from '../../../../style/img/close_icon_black.svg'
 import icon_chat from '../../../../style/img/chat_icon.svg'
 import {persistor} from '../../../../store/index'
 import { userState } from '../../../../reducers/userReducer'
-import { Heading3 } from '../../../Atoms/Heading'
+import Heading from '../../../Atoms/Heading'
 
 const ImgBoxWrapper = styled(Wrapper)`
     cursor: pointer;
 `
 
-const CardTitle = styled(Heading3)`
+const CardTitle = styled(Heading)`
     border-bottom: 1px solid #E3E1E1;
     padding: 10px
 `

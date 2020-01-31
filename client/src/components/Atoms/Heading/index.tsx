@@ -1,28 +1,18 @@
 import styled from 'styled-components'
-import constantStyle from '../../../style/styleModel'
-import {mediaMobile} from '../../../style/commonStyle'
+import * as utilStyle from '../../../util/styles'
 
-export type ElementStyle = Partial<Pick<constantStyle, 'font_size' |'font_weight' | 'text_align'>>
+type StyleProps = {
+  [k : string] : string
+}
 
-interface HeadingProps {
-    styled: ElementStyle
+type HeadingProps = {
+  styled: StyleProps
 }
 
 const Heading = styled.h1<HeadingProps>`
-    font-size: ${props => props.styled.font_size};
-    font-weight: ${props => props.styled.font_weight};
-    text-align: ${props => props.styled.text_align};
+    font-size: ${props => props.styled.font_size || utilStyle.font_size.normal};
+    font-weight: ${props => props.styled.font_weight || 'bold'};
+    text-align: ${props => props.styled.text_align || 'left'};
 `
 
-export const Heading1 = Heading.withComponent('h1');
-export const Heading2 = Heading.withComponent('h2');
-export const Heading3 = Heading.withComponent('h3');
-export const Heading4 = Heading.withComponent('h4');
-
-export const withSPStyle = (Component : typeof Heading, spStyle: {[k : string] : string}) => {
-    return styled(Component)`
-      ${mediaMobile`
-        ${spStyle}
-      `};
-    `;
-};
+export default Heading

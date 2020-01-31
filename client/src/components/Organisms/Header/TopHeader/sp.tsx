@@ -11,13 +11,13 @@ import icon_close from '../../../../style/img/close_icon_black.svg'
 import icon_user from '../../../../style/img/user_icon.svg'
 import icon_search from '../../../../style/img/search_icon.svg'
 import {userState} from '../../../../reducers/userReducer'
-import { Heading3 } from '../../../Atoms/Heading'
+import Heading from '../../../Atoms/Heading'
 
 const ImgBoxWrapper = styled(Wrapper)`
     cursor: pointer;
 `
 
-const CardTitle = styled(Heading3)`
+const CardTitle = styled(Heading)`
     border-bottom: 1px solid #E3E1E1;
     padding: 10px
 `
@@ -330,7 +330,7 @@ const TopSpHeader: React.FC<Props> = props => {
                 isClick?
                 <Wrapper styled={{...FieldStyle}}>
                     <Wrapper styled={{position: 'relative', z_index: '550'}}>
-                        <CardTitle styled={{font_size:'1.8rem', font_weight: 'bold', text_align: 'center'} as const}>{contentIndex === 1 ? `${props.nickName}さん`: '検索条件'}</CardTitle>
+                        <CardTitle as="h3" styled={{font_size:'1.8rem', font_weight: 'bold', text_align: 'center'} as const}>{contentIndex === 1 ? `${props.nickName}さん`: '検索条件'}</CardTitle>
                         <Wrapper styled={{position: 'absolute', right: '5px', top: '0', padding:'5px'}} onClick={() => {setClick(false);setClickIndex(1);}}>
                             <Img styled={{width:'20px'}} src={icon_close} />
                         </Wrapper>

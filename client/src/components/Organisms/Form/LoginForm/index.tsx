@@ -1,10 +1,10 @@
 import React,{ useState } from 'react'
 import styled from 'styled-components'
 import Wrapper, {withSPStyle} from '../../../Atoms/Wrapper'
-import {Heading3} from '../../../Atoms/Heading'
+import Heading from '../../../Atoms/Heading'
 import { DataType } from '../../../../actions/login/loginActions'
 import {LineParagragh} from '../../../Atoms/Paragragh'
-import Button from '../../../Atoms/Button/'
+import Button from '../../../Atoms/Button'
 import Form from '../../../Molecules/Form'
 
 const outerWrapperStyle ={
@@ -113,7 +113,7 @@ const LoginForm: React.FC<props> = (props) => {
     return(
         <OuterWrapper styled={{...outerWrapperStyle}}>
             <Wrapper styled={{padding: '18px 0'}}>
-                <Heading3 styled={{font_size: '1.8rem', text_align: 'center'}}>{title}</Heading3>
+                <Heading as="h3" styled={{font_size: '1.8rem', text_align: 'center'}}>{title}</Heading>
             </Wrapper>
             <Form {...FormProps} />
             <Wrapper styled={{margin: '20px 0 0 0', display:'flex', justify_content: 'center'}}>

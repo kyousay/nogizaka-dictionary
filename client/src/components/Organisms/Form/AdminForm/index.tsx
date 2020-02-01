@@ -13,6 +13,7 @@ const wrapperStyle = {
     margin:'0 auto', 
 }
 
+
 const baseInputStyle = {
     font_size: '1.4rem' as '1.4rem', 
     padding: '5px 8px', 

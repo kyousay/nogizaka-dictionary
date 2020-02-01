@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { sagaMiddleWare } from './store'
 import rootSaga from './saga' 
 import App from './cotainers/App';
@@ -11,9 +11,9 @@ import { Provider } from 'react-redux'
 ReactDOM.render(
     <Provider store={store}>
         <PersistGate persistor={persistor}>
-            <BrowserRouter>
+            <HashRouter>
                 <App />
-            </BrowserRouter>
+            </HashRouter>
         </PersistGate>
     </Provider>, 
     document.getElementById('root')

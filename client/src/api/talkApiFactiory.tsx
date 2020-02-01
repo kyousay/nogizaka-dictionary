@@ -13,8 +13,8 @@ interface apiOption {
 }
 
 const DEFAULT_API_CONFIG = {
-    baseURL: 'http://localhost:3001/talk',
-    timeout: 7000,
+    baseURL: '/talk',
+    timeout: 60000,
 };
 
 export const talkApiFactory = (optionConfig? : optionConfig) => {

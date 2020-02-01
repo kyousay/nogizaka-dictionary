@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import * as utilStyle from '../../../util/styles'
-import ActionButton from './ActionButton'
-import TransitionButton from './TransitionButton'
 
 export interface StyleProps {
     [k : string] : string

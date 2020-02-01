@@ -10,11 +10,16 @@ export interface Props  {
     wrapperStyle?: WrapperStyle
     titleWrapperStyle?: WrapperStyle
     titleStyle?: TitleStyle
+    contentWrapperStyle?: WrapperStyle
     contentStyle?: ContentStyle 
 }
 
 const TxtRowWrapper = styled(Wrapper)`
     border-top: ${props => props.styled.border_top}
+`
+
+const TxtRowTxt = styled(Txt)`
+    word-break: ${props => props.styled.word_break};    
 `
 
 
@@ -23,7 +28,9 @@ const TxtRow : React.FC<Props> = props => (
         <Wrapper styled={{...props.titleWrapperStyle}}>
             <Paragragh styled={{...props.titleStyle}}>{props.title}</Paragragh>
         </Wrapper>
-        <Txt styled={{...props.contentStyle}}>{props.content}</Txt>
+        <Wrapper styled={{...props.contentWrapperStyle}}>
+            <TxtRowTxt styled={{...props.contentStyle}}>{props.content}</TxtRowTxt>
+        </Wrapper>
     </TxtRowWrapper>
 )
 

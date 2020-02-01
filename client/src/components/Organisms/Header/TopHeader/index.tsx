@@ -26,7 +26,8 @@ const cardStyle = {
 const TxtRowSectionStyle = {
     titelStyle: {font_size: '1.2rem' as '1.2rem', color: '#787878'}, 
     titleWrapperStyle: {width: '96px'},
-    contentStyle: {font_size: '1.4rem' as '1.4rem'},
+    contentStyle: {font_size: '1.4rem' as '1.4rem', word_break: 'break-word'},
+    contentWrapperStyle: {width: '130px'},
     wrapperStyle: {padding: '20px'},
 }
 

@@ -177,7 +177,7 @@ const ListTable: React.FC<Props> = (props) => {
                     
                         null
             }
-            <Wrapper styled={{margin: '60px 0 30px 20px', display: 'flex'}}>
+            <Wrapper styled={{margin: '60px 0 30px 60px', display: 'flex'}}>
                 <Selects {...SelectsProps} />
                 <Wrapper styled={{margin: '0 0 0 20px'}}>
                     <Link to={"/talk"}><Button styled={{...buttonStyle}}>トークルームへ</Button></Link>

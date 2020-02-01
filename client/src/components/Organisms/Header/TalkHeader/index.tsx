@@ -1,6 +1,5 @@
 import React,{ useState } from 'react'
 import styled from 'styled-components'
-import SearchPanel from '../../../Molecules/SearchPanel'
 import InputCard from '../../../Molecules/InputCard'
 import Wrapper from '../../../Atoms/Wrapper'
 import Img from '../../../Atoms/Img'
@@ -59,11 +58,9 @@ export interface Props {
     user: userState
     createRoom: (date: RoomState) => void
     logout: () => void
-    // searchRoom: (word : string) => void
 }
 
 const TalkHeader : React.FC<Props> = (props) => {
-    const [word, changeSearchWord] = useState('')
     const [isHover, changeHover] = useState(false)
     const [roomState, setTalkRoomState] = useState<InitialState>(initialState)
     
@@ -100,11 +97,6 @@ const TalkHeader : React.FC<Props> = (props) => {
         props.logout()
         localStorage.removeItem('ticket')
         persistor.purge()
-    }
-
-    const searchActionHandler = () => {
-        // props.searchWord(word)
-        console.log('click')
     }
 
     const talkCardProps = {
@@ -181,9 +173,8 @@ const TalkHeader : React.FC<Props> = (props) => {
     return(
         <Wrapper styled={{display:'flex', align_items:"center", justify_content:"space-between", bgColor:'#fff', padding: '0px 20px'}}>
             <Img src={logo} styled={{width:"300px"}}/>
-            <Wrapper styled={{display: 'flex', justify_content: 'space-between', min_width: '420px'}}>
-                <SearchPanel value={word} changeHandler={(e: React.ChangeEvent<HTMLInputElement>) => changeSearchWord(e.target.value)} clickHandler={searchActionHandler}/>
-                <ImgBoxWrapper styled={{margin: '0 0 0 20px', position: 'relative', z_index: '50'}} 
+            <Wrapper styled={{display: 'flex', justify_content: 'space-between'}}>
+                <ImgBoxWrapper styled={{margin: '0 20px 0 0', position: 'relative', z_index: '50'}} 
                 onMouseEnter={() => changeHoverStateHandler(true)}
                 onMouseLeave={() => {
                     changeHoverStateHandler(false);

@@ -46,8 +46,9 @@ const FieldStyle = {
 
 const TxtRowSectionStyle = {
     titelStyle: {font_size: '1.4rem', color: '#787878'} as const, 
-    titleWrapperStyle: {width: '96px', display: 'flex', align_items: 'flex-end'} as const,
-    contentStyle: {font_size: '1.8rem'} as const,
+    titleWrapperStyle: {width: '96px', padding: '5px 0 0 0'},
+    contentStyle: {font_size: '1.8rem', word_break: 'break-word'} as const,
+    contentWrapperStyle: {width: '130px'},
     wrapperStyle: {margin: '30px auto', width: '250px', padding: '0 10px'} as const,
 }
 
@@ -104,6 +105,7 @@ const TopSpHeader: React.FC<Props> = props => {
     const selectChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectValue(event.target.value);
         props.search(event.target.value);
+        setClick(false)
     }
 
     const changeInputValueHandler = (state : typeof userState) => {

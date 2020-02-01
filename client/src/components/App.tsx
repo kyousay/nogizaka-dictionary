@@ -29,10 +29,12 @@ const LoadingWrapper = styled.div`
 // `
 
 const wrapperStyle = {
-  position: 'fixed',
+  position: 'absolute',
+  right: '0',
+  left: '0',
   top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  transform: 'translateY(-50%)',
+  text_align: 'center',
   z_index: '100000'
 } as const
 

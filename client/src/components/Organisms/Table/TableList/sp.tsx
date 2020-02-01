@@ -98,7 +98,7 @@ const TableSpList: React.FC<Props> = (props) => {
                         null
             }
             <Wrapper styled={{margin: '60px 0 30px', display: 'flex', justify_content: 'center'}}>
-                    <Link to={"/talk"}><Button styled={{...buttonStyle}}>トークルームへ</Button></Link>
+                <Link to={"/talk"}><Button styled={{...buttonStyle}}>トークルームへ</Button></Link>
             </Wrapper>
             {   <UnOrderdList as="ul" styled={{display:'flex', justify_content: "center", flex_wrap: "wrap"}}>
                     {members.map((member,index) => {

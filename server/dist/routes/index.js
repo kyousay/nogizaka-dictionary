@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = __importDefault(require("express"));
+var loginRoutes_1 = require("./loginRoutes");
+var userRoutes_1 = require("./userRoutes");
+var errorRoutes_1 = require("./errorRoutes");
+var memberRoutes_1 = require("./memberRoutes");
+var searchRoutes_1 = require("./searchRoutes");
+var talkRoutes_1 = require("./talkRoutes");
+var loginController_1 = __importDefault(require("../controllers/loginController"));
+var router = express_1.default.Router();
+exports.router = router;
+router.use("/login", loginRoutes_1.router);
+router.use("/", loginController_1.default.verifyJWT);
+router.use("/user", userRoutes_1.router);
+router.use("/member", memberRoutes_1.router);
+router.use("/search", searchRoutes_1.router);
+router.use("/talk", talkRoutes_1.router);
+router.use("/", errorRoutes_1.router);

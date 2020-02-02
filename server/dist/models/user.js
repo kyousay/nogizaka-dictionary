@@ -9,19 +9,19 @@ var Schema = mongoose_1.default.Schema;
 var userSchema = new Schema({
     nickName: {
         type: String,
-        default: '新参者',
+        default: "新参者",
         trim: true,
         max: 10
     },
     message: {
         type: String,
-        default: 'こんにちは。',
+        default: "こんにちは。",
         trim: true,
         max: 60
     },
     rank: {
         type: String,
-        default: 'アンダー',
+        default: "アンダー",
         trim: true,
         max: 10
     },
@@ -29,7 +29,7 @@ var userSchema = new Schema({
         type: String,
         required: true,
         lowercase: true,
-        unique: true,
+        unique: true
     },
     favoriteMembers: {
         type: [{ type: Schema.Types.ObjectId, ref: "Member" }],
@@ -37,24 +37,27 @@ var userSchema = new Schema({
     },
     permission: {
         type: String,
-        default: 'user'
+        default: "user"
     },
     password: {
         type: String,
-        default: ''
+        default: ""
     }
 }, {
     timestamps: true
 });
 userSchema.pre("save", function (next) {
     var user = this;
-    if (user.email === 'yusei5884@gmail.com') {
-        user.permission = 'root';
+    if (user.email === "yusei5884@gmail.com") {
+        user.permission = "root";
     }
-    bcrypt_1.default.hash(user.password, 10).then(function (hash) {
+    bcrypt_1.default
+        .hash(user.password, 10)
+        .then(function (hash) {
         user.password = hash;
         next();
-    }).catch(function (error) {
+    })
+        .catch(function (error) {
         console.log("Error in hashing password: " + error.message);
         next(error);
     });

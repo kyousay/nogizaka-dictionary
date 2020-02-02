@@ -1,11 +1,25 @@
 "use strict";
 
-const router = require("express").Router(),
-memberController = require("../controllers/memberController");
+import express from "express";
+import memberController from "../controllers/memberController";
 
-router.post("/upload", memberController.checkPermission, memberController.upload)
-router.put("/update", memberController.checkPermission, memberController.update)
-router.delete("/delete", memberController.checkPermission, memberController.delete)
-router.get("/members", memberController.getAllMembers)
+const router = express.Router();
 
-export {router};
+router.post(
+  "/upload",
+  memberController.checkPermission,
+  memberController.upload
+);
+router.put(
+  "/update",
+  memberController.checkPermission,
+  memberController.update
+);
+router.delete(
+  "/delete",
+  memberController.checkPermission,
+  memberController.delete
+);
+router.get("/members", memberController.getAllMembers);
+
+export default router;

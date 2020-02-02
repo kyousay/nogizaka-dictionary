@@ -1,9 +1,11 @@
 "use strict";
 
-const router = require("express").Router(),
-searchController = require("../controllers/searchController");
+import express from "express";
+import searchController from "../controllers/searchController";
+
+const router = express.Router();
 
 router.post("/select", searchController.searchSegment);
-router.post("/freeword", searchController.test);
+router.post("/freeword", searchController.searchFreeword);
 
-export {router};
+export default router;

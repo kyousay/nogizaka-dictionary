@@ -13,14 +13,14 @@ var chatSchema = new Schema({
         type: String,
         trim: true,
         max: 10,
-        required: true,
+        required: true
     },
     chat: {
         type: String,
         trim: true,
         max: 120,
-        required: true,
-    },
+        required: true
+    }
 }, {
     timestamps: true
 });

@@ -16,6 +16,5 @@ module.exports = {
     internalServerError: function (error, req, res, next) {
         var errorCode = http_status_codes_1.default.INTERNAL_SERVER_ERROR;
         res.sendStatus(errorCode);
-        res.sendStatus(errorCode + " | Sorry, our application is experiencing a problem!");
     }
 };

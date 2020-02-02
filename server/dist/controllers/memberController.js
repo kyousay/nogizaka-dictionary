@@ -18,27 +18,31 @@ var member_1 = __importDefault(require("../models/member"));
 module.exports = {
     checkPermission: function (req, res, next) {
         user_1.default.findById(res.locals.userId).then(function (user) {
-            var permission = user.permission;
-            if (permission === 'root') {
-                next();
-            }
-            else {
-                res.send({
-                    message: "アップロードを行う権限がありません。"
-                });
+            if (user !== null) {
+                var permission = user.permission;
+                if (permission === "root") {
+                    next();
+                }
+                else {
+                    res.send({
+                        message: "アップロードを行う権限がありません。"
+                    });
+                }
             }
         });
     },
     upload: function (req, res, next) {
         var data = req.body;
-        member_1.default.create(__assign({}, data)).then(function () {
+        member_1.default.create(__assign({}, data))
+            .then(function () {
             member_1.default.find({}).then(function (members) {
                 res.send({
-                    message: '正常にデータがアップロードされました。',
+                    message: "正常にデータがアップロードされました。",
                     members: members
                 });
             });
-        }).catch(function (error) {
+        })
+            .catch(function (error) {
             next(error);
         });
     },
@@ -46,14 +50,16 @@ module.exports = {
         var memberId = req.body._id;
         member_1.default.findByIdAndUpdate(memberId, {
             $set: req.body
-        }).then(function () {
+        })
+            .then(function () {
             member_1.default.find({}).then(function (members) {
                 res.send({
-                    message: '正常にデータが正常にアップデートされました。',
+                    message: "正常にデータが正常にアップデートされました。",
                     members: members
                 });
             });
-        }).catch(function (error) {
+        })
+            .catch(function (error) {
             next(error);
         });
     },
@@ -65,16 +71,18 @@ module.exports = {
                     user_1.default.findByIdAndUpdate(user._id, {
                         $pull: { favoriteMembers: memberId }
                     }, { new: true }).then(function (user) {
-                        if (res.locals.userId == user._id) {
-                            member_1.default.find({}).then(function (members) {
-                                res.send({
-                                    message: 'メンバーデータの削除が正常に行われました。',
-                                    members: members,
-                                    user: {
-                                        favoriteMembers: user.favoriteMembers
-                                    }
+                        if (user !== null) {
+                            if (res.locals.userId == user._id) {
+                                member_1.default.find({}).then(function (members) {
+                                    res.send({
+                                        message: "メンバーデータの削除が正常に行われました。",
+                                        members: members,
+                                        user: {
+                                            favoriteMembers: user.favoriteMembers
+                                        }
+                                    });
                                 });
-                            });
+                            }
                         }
                     });
                 });
@@ -82,11 +90,13 @@ module.exports = {
         });
     },
     getAllMembers: function (req, res, next) {
-        member_1.default.find({}).then(function (members) {
+        member_1.default.find({})
+            .then(function (members) {
             res.send({
                 members: members
             });
-        }).catch(function (error) {
+        })
+            .catch(function (error) {
             next(error);
         });
     }

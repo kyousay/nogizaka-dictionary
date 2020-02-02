@@ -34,7 +34,10 @@ module.exports = {
         user_1.default.findByIdAndUpdate(res.locals.userId, {
             $addToSet: { favoriteMembers: favoriteId }
         }, { new: true }).then(function (user) {
-            var userData = getUserData(user);
+            var userData = {};
+            if (user) {
+                userData = getUserData(user);
+            }
             res.send(userData);
         });
     },
@@ -43,7 +46,10 @@ module.exports = {
         user_1.default.findByIdAndUpdate(res.locals.userId, {
             $pull: { favoriteMembers: favoriteId }
         }, { new: true }).then(function (user) {
-            var userData = getUserData(user);
+            var userData = {};
+            if (user) {
+                userData = getUserData(user);
+            }
             res.send(userData);
         });
     }

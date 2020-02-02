@@ -1,9 +1,11 @@
 "use strict";
 
-const router = require("express").Router(),
-loginController = require("../controllers/loginController");
+import express from "express";
+import loginController from "../controllers/loginController";
 
-router.post("/create", loginController.create)
-router.post("/authenticate", loginController.login)
+const router = express.Router();
 
-export {router};
+router.post("/create", loginController.create);
+router.post("/authenticate", loginController.login);
+
+export default router;

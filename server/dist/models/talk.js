@@ -20,13 +20,13 @@ var talkSchema = new Schema({
     },
     isRock: {
         type: Boolean,
-        required: true,
+        required: true
     },
     password: {
-        type: String,
+        type: String
     },
     image: {
-        type: [{ type: Schema.Types.ObjectId, ref: "Member" }],
+        type: [{ type: Schema.Types.ObjectId, ref: "Member" }]
     },
     chat: {
         type: [{ type: Schema.Types.ObjectId, ref: "Chat" }],

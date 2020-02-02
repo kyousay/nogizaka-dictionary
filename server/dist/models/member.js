@@ -37,12 +37,20 @@ var memberSchema = new Schema({
     hash: {
         type: [String],
         trim: true
-    },
+    }
 }, {
     timestamps: true
 });
 memberSchema.virtual("search").get(function () {
-    return [this.name, this.sailium, this.segment, this.dateOfBirth, this.blod, this.height, this.hash];
+    return [
+        this.name,
+        this.sailium,
+        this.segment,
+        this.dateOfBirth,
+        this.blod,
+        this.height,
+        this.hash
+    ];
 });
 memberSchema.set("toJSON", { virtuals: true });
 var Member = mongoose_1.default.model("Member", memberSchema);

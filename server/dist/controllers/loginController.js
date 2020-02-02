@@ -23,18 +23,23 @@ var getUserParams = function (body) {
 module.exports = {
     create: function (req, res, next) {
         var newUser = getUserParams(req.body);
-        user_1.default.create(newUser).then(function (user) {
+        user_1.default.create(newUser)
+            .then(function (user) {
             if (user) {
                 res.send("ユーザーが新規に登録されました。ログインしてください。");
             }
-        }).catch(function (error) {
+        })
+            .catch(function (error) {
             res.send("Error:" + error.message);
         });
     },
     login: function (req, res, next) {
-        user_1.default.findOne({ email: req.body.email }).then(function (user) {
+        user_1.default.findOne({ email: req.body.email })
+            .then(function (user) {
             if (user) {
-                user.passwordComparison(req.body.password).then(function (passwordsMatch) {
+                user
+                    .passwordComparison(req.body.password)
+                    .then(function (passwordsMatch) {
                     if (passwordsMatch) {
                         var signedToken = jsonwebtoken_1.default.sign({
                             data: user._id,
@@ -62,7 +67,8 @@ module.exports = {
                     message: "ログインに失敗しました。アカウントがありません。メールアドレスを確認してください。"
                 });
             }
-        }).catch(function (error) {
+        })
+            .catch(function (error) {
             console.log("Error loggin in user: " + error.message);
             next(error);
         });
@@ -100,5 +106,5 @@ module.exports = {
                 message: "Provide Token"
             });
         }
-    },
+    }
 };

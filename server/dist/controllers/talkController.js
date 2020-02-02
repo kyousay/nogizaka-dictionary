@@ -65,7 +65,9 @@ var getTalkRoomParams = function (talkRoom, image) {
 };
 module.exports = {
     getAllRooms: function (req, res, next) {
-        talk_1.default.find({}).populate("image").then(function (rooms) {
+        talk_1.default.find({})
+            .populate("image")
+            .then(function (rooms) {
             if (rooms.length > 0) {
                 var newRooms_1 = [];
                 rooms.forEach(function (room) {
@@ -84,7 +86,8 @@ module.exports = {
                     data: rooms
                 });
             }
-        }).catch(function (error) {
+        })
+            .catch(function (error) {
             res.send({
                 isSuccess: false,
                 message: error.name + ": " + error.message
@@ -93,23 +96,34 @@ module.exports = {
     },
     checkPassword: function (req, res, next) {
         var data = req.body;
-        talk_1.default.findById(data._id).populate("image").populate("chat").then(function (room) {
-            if (room.isRock) {
-                var roomPassword = room.password;
-                if (roomPassword === data.password) {
+        talk_1.default.findById(data._id)
+            .populate("image")
+            .populate("chat")
+            .then(function (room) {
+            if (room !== null) {
+                if (room.isRock) {
+                    var roomPassword = room.password;
+                    if (roomPassword === data.password) {
+                        res.locals.roomInfo = room;
+                        next();
+                    }
+                    else {
+                        res.send({
+                            isSuccess: false,
+                            message: "パスワードが違います。"
+                        });
+                    }
+                }
+                else {
                     res.locals.roomInfo = room;
                     next();
                 }
-                else {
-                    res.send({
-                        isSuccess: false,
-                        message: 'パスワードが違います。'
-                    });
-                }
             }
             else {
-                res.locals.roomInfo = room;
-                next();
+                res.send({
+                    isSuccess: false,
+                    message: "エラーが発生しました。お手数ですが、時間が経ってから再度試してみてください。"
+                });
             }
         });
     },
@@ -136,15 +150,20 @@ module.exports = {
             data: returnData
         });
     },
-    createRoom: function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    createRoom: function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var data;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, getParam(req.body)];
                 case 1:
                     data = _a.sent();
-                    talk_1.default.create(data).then(function () {
-                        talk_1.default.find({}).populate("image").sort({ 'createdAt': -1 }).limit(46).then(function (rooms) {
+                    talk_1.default.create(data)
+                        .then(function () {
+                        talk_1.default.find({})
+                            .populate("image")
+                            .sort({ createdAt: -1 })
+                            .limit(46)
+                            .then(function (rooms) {
                             var newRooms = [];
                             rooms.forEach(function (room) {
                                 var image = room.image[0].image;
@@ -155,13 +174,15 @@ module.exports = {
                                 isSuccess: true,
                                 data: newRooms
                             });
-                        }).catch(function (error) {
+                        })
+                            .catch(function (error) {
                             res.send({
                                 isSuccess: false,
                                 message: error.name + ": " + error.message
                             });
                         });
-                    }).catch(function (error) {
+                    })
+                        .catch(function (error) {
                         res.send({
                             isSuccess: false,
                             message: error.name + ": " + error.message

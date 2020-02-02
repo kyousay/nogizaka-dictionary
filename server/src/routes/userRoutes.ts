@@ -1,10 +1,12 @@
-"use strict"
+"use strict";
 
-const router = require("express").Router(),
-userController = require("../controllers/userController");
+import express from "express";
+import userController from "../controllers/userController";
+
+const router = express.Router();
 
 router.put("/update", userController.update);
 router.put("/favorite", userController.favorite);
 router.put("/unfavorite", userController.unfavorite);
 
-export {router};
+export default router;

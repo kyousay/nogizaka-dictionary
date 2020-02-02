@@ -1,10 +1,16 @@
 "use strict";
 
-const router = require("express").Router(),
-talkController = require("../controllers/talkController");
+import express from "express";
+import talkController from "../controllers/talkController";
+
+const router = express.Router();
 
 router.get("/getTalkRooms", talkController.getAllRooms);
-router.post("/getTalkRoom", talkController.checkPassword, talkController.getRoom);
+router.post(
+  "/getTalkRoom",
+  talkController.checkPassword,
+  talkController.getRoom
+);
 router.post("/create", talkController.createRoom);
 
-export {router};
+export default router;

@@ -2,7 +2,6 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 var talk_1 = __importDefault(require("../models/talk"));
 var chat_1 = __importDefault(require("../models/chat"));
 var getTalkRoomParams = function (talkRoom, image) {
@@ -13,6 +12,12 @@ var getTalkRoomParams = function (talkRoom, image) {
         isRock: talkRoom.isRock,
         image: image
     };
+}, checkTime = function (time) {
+    if (time < 10) {
+        var newTime = "0" + time;
+        return newTime;
+    }
+    return time;
 }, returnChatParam = function (talk) {
     var chats = talk.chat;
     var chatsArray = chats.map(function (chat) {
@@ -26,19 +31,13 @@ var getTalkRoomParams = function (talkRoom, image) {
         };
     });
     return chatsArray;
-}, checkTime = function (time) {
-    if (time < 10) {
-        var newTime = '0' + time;
-        return newTime;
-    }
-    return time;
 };
 module.exports = function (io) {
     io.on("connection", function (client) {
         console.log("new connection");
         var usr = Object.keys(io.sockets.sockets).length;
         console.log("now:" + usr);
-        var room = '';
+        var room = "";
         client.on("disconnect", function () {
             console.log("user disconnected");
             client.leave(room);
@@ -56,7 +55,11 @@ module.exports = function (io) {
             console.log("clientLeave: " + room);
         });
         client.on("newRoom", function () {
-            talk_1.default.find({}).populate("image").sort({ 'createdAt': -1 }).limit(46).then(function (newRooms) {
+            talk_1.default.find({})
+                .populate("image")
+                .sort({ createdAt: -1 })
+                .limit(46)
+                .then(function (newRooms) {
                 var Rooms = newRooms.map(function (room) {
                     return getTalkRoomParams(room, room.image[0].image);
                 });
@@ -74,11 +77,15 @@ module.exports = function (io) {
                 talk_1.default.findByIdAndUpdate(roomId, {
                     $addToSet: { chat: newChat._id }
                 }).then(function () {
-                    talk_1.default.findById(roomId).populate("chat").then(function (talk) {
-                        var newValue = returnChatParam(talk);
-                        io.to(room).emit('return chat', {
-                            content: newValue
-                        });
+                    talk_1.default.findById(roomId)
+                        .populate("chat")
+                        .then(function (talk) {
+                        if (talk !== null) {
+                            var newValue = returnChatParam(talk);
+                            io.to(room).emit("return chat", {
+                                content: newValue
+                            });
+                        }
                     });
                 });
             });

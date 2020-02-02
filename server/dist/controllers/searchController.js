@@ -8,12 +8,16 @@ module.exports = {
     searchSegment: function (req, res, next) {
         var key = Object.keys(req.query)[0];
         var query = req.query[key];
-        if (key === 'favorite') {
-            user_1.default.findById(res.locals.userId).populate("favoriteMembers").then(function (user) {
-                res.send({ members: user.favoriteMembers });
+        if (key === "favorite") {
+            user_1.default.findById(res.locals.userId)
+                .populate("favoriteMembers")
+                .then(function (user) {
+                if (user !== null) {
+                    res.send({ members: user.favoriteMembers });
+                }
             });
         }
-        else if (key === 'members') {
+        else if (key === "members") {
             member_1.default.find({}).then(function (members) {
                 res.send({ members: members });
             });
@@ -24,7 +28,7 @@ module.exports = {
             });
         }
     },
-    test: function (req, res, next) {
+    searchFreeword: function (req, res, next) {
         var word = req.query.word;
         member_1.default.find({}).then(function (members) {
             var result = [];

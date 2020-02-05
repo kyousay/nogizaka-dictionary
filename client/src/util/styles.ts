@@ -10,3 +10,7 @@ export const color = {
     pink: '#FFEEFF',
     purple: '#812990',
 } as const
+
+export const borderColor = {
+    black: '#000000'
+}

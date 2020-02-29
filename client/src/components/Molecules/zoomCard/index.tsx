@@ -31,6 +31,7 @@ const contentStyle = {
     bgColor: "#fff" as "#fff",
     transform: "translate(-50%,-50%)",
     padding: "20px",
+    z_index: '15'
 }
 
 const WeakTxt = styled(Txt)`
@@ -86,7 +87,8 @@ const ZoomCard : React.FC<Props> = props => {
         ]
     }
     return (
-    <Wrapper styled={{...zoomFieldStyle}} onClick={props.zoomOutHandler}>
+    <>
+        <Wrapper styled={{...zoomFieldStyle}} onClick={props.zoomOutHandler}></Wrapper>
         <Wrapper styled={{...contentStyle}}>
             <Wrapper styled={{position: 'absolute', top: '-30px', right: '-50px'}} onClick={props.zoomOutHandler}>
                 <Img styled={{width: '100%'}} src={close} />
@@ -115,7 +117,7 @@ const ZoomCard : React.FC<Props> = props => {
                 <Hash hash={props.member.hash} segment={props.member.segment}/>
             </HashWrapper>
         </Wrapper>
-    </Wrapper>
+    </>
 )}
 
 export default ZoomCard

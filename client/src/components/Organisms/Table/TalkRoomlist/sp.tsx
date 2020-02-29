@@ -51,6 +51,11 @@ const TalkSpRoomList: React.FC<Props> = props => {
     })
     const rooms  = props.talk.rooms
 
+    const fixBodyHandler = (zoom: boolean) => {
+        const overflow = zoom ? 'hidden' : 'auto'
+        document.body.setAttribute("style", `overflow : ${overflow};`)
+    }
+
     const InputCardProps = {
         InputSectionsProps: {
             inputs: [{
@@ -81,7 +86,7 @@ const TalkSpRoomList: React.FC<Props> = props => {
                 },
                 {
                     buttonTxt: '入力をキャンセル',
-                    clickHandler: () => cancelRock(),
+                    clickHandler: () => {cancelRock();fixBodyHandler(false);},
                     buttonStyle: {bgColor: '#42b72a'} as const,                  
                 }
             ],
@@ -139,6 +144,7 @@ const TalkSpRoomList: React.FC<Props> = props => {
         }
         if(isRock) {
             setRock(true);
+            fixBodyHandler(true);
         } else {
             props.getTalkRoom(roomParam)
         }
@@ -148,7 +154,7 @@ const TalkSpRoomList: React.FC<Props> = props => {
         <React.Fragment>
             {
                 isRock ? 
-                    <Wrapper styled={{...zoomFieldStyle}} onClick={() => cancelRock()}>
+                    <Wrapper styled={{...zoomFieldStyle}} onClick={() => {cancelRock();fixBodyHandler(false);}}>
                         <Wrapper styled={{}} onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()} >
                             <InputCard {...InputCardProps} />
                         </Wrapper>

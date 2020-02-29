@@ -57,6 +57,11 @@ const TableSpList: React.FC<Props> = (props) => {
         favorite: false,
     })
 
+    const fixBodyHandler = (zoom: boolean) => {
+        const overflow = zoom ? 'auto' : 'hidden'
+        document.body.setAttribute("style", `overflow : ${overflow};`)
+    }
+
     const checkFavoriteId = (memberId: string) => {
         const userFavoriteMembers = props.user.favoriteMembers
         let isFavorite = false;
@@ -89,7 +94,7 @@ const TableSpList: React.FC<Props> = (props) => {
     return (
         <>
             { zoom ? 
-                        <ZoomCard zoomOutHandler={() => zoomOutHandler(false)} member={state} image={zoomProps.src}
+                        <ZoomCard zoomOutHandler={() => {zoomOutHandler(false); fixBodyHandler(zoom);}} member={state} image={zoomProps.src}
                         iconClickHandler={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
                             iconClickHandler(event, state._id, zoomProps.favorite)
                         }}/> 
@@ -105,7 +110,7 @@ const TableSpList: React.FC<Props> = (props) => {
                         const isFavorite = checkFavoriteId(member._id)
                         const src = isFavorite? Heart : grayHeart
                         return(
-                            <ListItem key={index} onClick={() => {setState(member);setZoom(true);setZoomProps({favorite: isFavorite, src: src})}} styled={{display: 'inline-block'}}>
+                            <ListItem key={index} onClick={() => {setState(member);setZoomProps({favorite: isFavorite, src: src});setZoom(true);fixBodyHandler(zoom);}} styled={{display: 'inline-block'}}>
                                 <MembersCard {...{member, user: props.user}} favoriteImage={src} iconClickHandler={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => iconClickHandler(event, member._id, isFavorite)}/>
                             </ListItem>
                         )})

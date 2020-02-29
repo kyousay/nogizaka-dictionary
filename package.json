@@ -4,8 +4,8 @@
   "description": "It's dictionary of nogizaka46, created by React with Typescript, Node.js, MongoDB.",
   "main": "server.js",
   "scripts": {
+    "dev": "ts-node src/server.ts",
     "build": "tsc",
-    "dev": "nodemon src/server.ts",
     "start": "tsc && node dist/server.js"
   },
   "repository": {

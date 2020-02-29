@@ -26,7 +26,6 @@ function* loginAcount(action : ReturnType<typeof LoginAction.loginAcount>) {
     try {
         const api = loginUserFactory();
         const result = yield call(api, userData, '/login/authenticate');
-        console.log(result);
         alert(result.data.message);
         if(result.data.success) {
             yield localStorage.setItem('ticket',result.data.token);

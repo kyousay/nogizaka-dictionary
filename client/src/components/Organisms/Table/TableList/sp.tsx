@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import MembersCard from '../../../molecules/MembersCard'
-import ZoomCard from '../../../molecules/zoomCard'
+import ZoomCard from '../../../molecules/zoomCard/sp'
 import Wrapper from '../../../atoms/Wrapper'
 import Button from '../../../atoms/Button'
 import { Member, membersState } from '../../../../reducers/membersReducer'

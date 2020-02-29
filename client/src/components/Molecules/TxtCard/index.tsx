@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Wrapper, {ElementStyle as WrapperStyle} from '../../Atoms/Wrapper'
+import Wrapper, {ElementStyle as WrapperStyle} from '../../atoms/Wrapper'
 import TxtRowSections, {Props as TxtRowSectionProps} from '../TxtRowSections'
 import Buttons, {Props as ButtonsProps} from '../Buttons'
 

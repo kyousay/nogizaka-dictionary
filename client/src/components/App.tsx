@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components'
 import { Redirect, Route, Switch } from 'react-router'
 import { GlobalStyle } from '../style/BaseStyle'
-import Wrapper from './Atoms/Wrapper'
-import Top from '../cotainers/Pages/Top'
-import Login from '../cotainers/Pages/Login'
-import Admin from '../cotainers/Pages/Admin'
-import Talk from '../cotainers/Pages/Talk'
-import Chat from '../cotainers/Pages/Chat'
+import Wrapper from './atoms/Wrapper'
+import Top from '../cotainers/pages/Top'
+import Login from '../cotainers/pages/Login'
+import Admin from '../cotainers/pages/Admin'
+import Talk from '../cotainers/pages/Talk'
+import Chat from '../cotainers/pages/Chat'
 import ClipLoader from 'react-spinners/ClipLoader'
 import { userState } from '../reducers/userReducer';
 

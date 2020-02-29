@@ -1,6 +1,6 @@
 import React from 'react'
-import Wrapper from '../../../Atoms/Wrapper'
-import Message from '../../../Molecules/Message'
+import Wrapper from '../../../atoms/Wrapper'
+import Message from '../../../molecules/Message'
 import { RoomState } from '../../../../reducers/talkReducer'
 import styled from 'styled-components'
 import { userState } from '../../../../reducers/userReducer'

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import ChatHeader from '../../../../components/Organisms/Header/ChatHeader'
+import ChatHeader from '../../../../components/organisms/Header/ChatHeader'
 import * as talkAction from '../../../../actions/talk/talkActions'
 import { Dispatch } from 'redux'
 

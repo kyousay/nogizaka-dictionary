@@ -3,7 +3,7 @@ import { Dispatch } from 'redux'
 import { DataType } from '../../../../actions/login/loginActions'
 import { userState } from '../../../../reducers/userReducer'
 import * as userAction from '../../../../actions/login/loginActions'
-import LoginForm from '../../../../components/Organisms/Form/LoginForm'
+import LoginForm from '../../../../components/organisms/Form/LoginForm'
 
 const mapStateToProps = (user : userState) => user
 

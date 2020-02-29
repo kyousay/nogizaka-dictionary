@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import Wrapper from '../../Atoms/Wrapper'
-import Txt from '../../Atoms/Txt'
+import Wrapper from '../../atoms/Wrapper'
+import Txt from '../../atoms/Txt'
 
 const HashBox = styled(Wrapper)`
     border-radius: 3px

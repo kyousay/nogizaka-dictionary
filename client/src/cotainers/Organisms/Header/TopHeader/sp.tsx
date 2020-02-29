@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { State } from '../../../../reducers'
-import { userProfile } from '../../../../components/Organisms/Header/TopHeader/sp'
+import { userProfile } from '../../../../components/organisms/Header/TopHeader/sp'
 import { initialState } from '../../../../reducers/userReducer'
 import * as loginAction from '../../../../actions/login/loginActions'
 import * as userAction from '../../../../actions/user/userActions'
 import * as searchAction from '../../../../actions/search/searchActions'
-import TopSpHeader from '../../../../components/Organisms/Header/TopHeader/sp'
+import TopSpHeader from '../../../../components/organisms/Header/TopHeader/sp'
 
 const mapStateToProps = ({user} : State) => ({
         ...user   

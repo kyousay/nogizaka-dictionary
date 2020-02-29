@@ -1,7 +1,7 @@
 import React from 'react'
-import Wrapper from '../../Atoms/Wrapper'
-import Img from '../../Atoms/Img'
-import {Paragragh} from '../../Atoms/Paragragh'
+import Wrapper from '../../atoms/Wrapper'
+import Img from '../../atoms/Img'
+import {Paragragh} from '../../atoms/Paragragh'
 
 interface Props {
     description: string

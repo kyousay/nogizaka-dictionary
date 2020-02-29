@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import Input, {ElementStyle as InputStyle} from '../../Atoms/Input'
-import {Paragragh,ElementStyle as ParagraghStyle} from '../../Atoms/Paragragh'
-import Wrapper, {ElementStyle as WrapperStyle} from '../../Atoms/Wrapper'
+import Input, {ElementStyle as InputStyle} from '../../atoms/Input'
+import {Paragragh,ElementStyle as ParagraghStyle} from '../../atoms/Paragragh'
+import Wrapper, {ElementStyle as WrapperStyle} from '../../atoms/Wrapper'
 
 export interface Props {
     inputs: {

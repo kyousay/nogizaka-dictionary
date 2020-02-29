@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import AdminForm, {MemberState} from '../../../../components/Organisms/Form/AdminForm'
+import AdminForm, {MemberState} from '../../../../components/organisms/Form/AdminForm'
 import { MembersState } from '../../../../reducers/membersReducer'
 import * as Action from '../../../../actions/members/membersActions'
 

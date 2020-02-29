@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import TalkHeader, {RoomState} from '../../../../components/Organisms/Header/TalkHeader'
+import TalkHeader, {RoomState} from '../../../../components/organisms/Header/TalkHeader'
 import { Dispatch } from 'redux'
 import * as loginAction from '../../../../actions/login/loginActions'
 import * as talkAction from '../../../../actions/talk/talkActions'

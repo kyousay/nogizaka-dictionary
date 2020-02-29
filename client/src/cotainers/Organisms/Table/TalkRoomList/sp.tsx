@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import * as talkAction from '../../../../actions/talk/talkActions'
-import TalkSpRoomList from '../../../../components/Organisms/Table/TalkRoomlist/sp'
+import TalkSpRoomList from '../../../../components/organisms/Table/TalkRoomlist/sp'
 import { State } from '../../../../reducers'
 import { Dispatch } from 'redux'
 

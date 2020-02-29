@@ -1,12 +1,12 @@
 import React,{ useState } from 'react'
 import styled from 'styled-components'
-import Wrapper, {withSPStyle} from '../../../Atoms/Wrapper'
-import Heading from '../../../Atoms/Heading'
+import Wrapper, {withSPStyle} from '../../../atoms/Wrapper'
+import Heading from '../../../atoms/Heading'
 import { DataType } from '../../../../actions/login/loginActions'
-import {LineParagragh} from '../../../Atoms/Paragragh'
-import CancelButton from '../../../Atoms/Button/CancelButton'
-import Form from '../../../Molecules/Form/refactore'
-import TransitionButton from '../../../Atoms/Button/TransitionButton'
+import {LineParagragh} from '../../../atoms/Paragragh'
+// import CancelButton from '../../../Atoms/Button/CancelButton'
+import Form from '../../../molecules/Form/refactore'
+import TransitionButton from '../../../atoms/Button/TransitionButton'
 
 const outerWrapperStyle ={
     margin: "80px auto",

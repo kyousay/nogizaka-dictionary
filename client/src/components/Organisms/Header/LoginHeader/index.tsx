@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from '../../../../style/img/logo.jpg'
-import Img ,{withSPStyle} from '../../../Atoms/Img'
-import Wrapper from '../../../Atoms/Wrapper'
+import Img ,{withSPStyle} from '../../../atoms/Img'
+import Wrapper from '../../../atoms/Wrapper'
 
 const ImgWidthSP = withSPStyle(Img, {width:"55vw"})
 

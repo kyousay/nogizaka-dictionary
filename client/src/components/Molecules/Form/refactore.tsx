@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import Inputs, {Props as InputsProps} from '../Inputs'
-import FormBaseElement from '../../Atoms/FormElement'
-import Wrapper, {ElementStyle as WrapperStyle} from '../../Atoms/Wrapper'
-import ActionButton from '../../Atoms/Button/ActionButton'
-import { ButtonCustomProps } from '../../Atoms/Button'
+import FormBaseElement from '../../atoms/FormElement'
+import Wrapper, {ElementStyle as WrapperStyle} from '../../atoms/Wrapper'
+import ActionButton from '../../atoms/Button/ActionButton'
+import { ButtonCustomProps } from '../../atoms/Button'
 
 const FormElement = styled(FormBaseElement)`
     margin: 0 auto;

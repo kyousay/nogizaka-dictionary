@@ -1,6 +1,6 @@
 import React from 'react'
-import Input, {ElementStyle as InputStyle} from '../../Atoms/Input'
-import Wrapper, {ElementStyle as WrapperStyle} from '../../Atoms/Wrapper'
+import Input, {ElementStyle as InputStyle} from '../../atoms/Input'
+import Wrapper, {ElementStyle as WrapperStyle} from '../../atoms/Wrapper'
 
 interface Inputs{
     inputStyle: InputStyle

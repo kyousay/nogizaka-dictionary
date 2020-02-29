@@ -3,7 +3,7 @@ import { Dispatch } from 'redux'
 import * as Action from '../../../actions/login/loginActions'
 import * as MemberAction from '../../../actions/members/membersActions'
 import { userState } from '../../../reducers/userReducer'
-import Top from '../../../components/Pages/Top'
+import Top from '../../../components/pages/Top'
 
 const mapStateToProps = ({user} : {user:userState}) => ({
     user

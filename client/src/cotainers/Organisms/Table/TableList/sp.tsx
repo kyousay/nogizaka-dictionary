@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import TableSpList from '../../../../components/Organisms/Table/TableList/sp'
+import TableSpList from '../../../../components/organisms/Table/TableList/sp'
 import * as userAction from '../../../../actions/user/userActions'
 import * as memberAction from '../../../../actions/members/membersActions'
 import { State } from '../../../../reducers'

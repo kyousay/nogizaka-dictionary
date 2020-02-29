@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import socket from '../../../../websocket'
-import Form from '../../../Molecules/Form'
-import Wrapper from '../../../Atoms/Wrapper'
+import Form from '../../../molecules/Form'
+import Wrapper from '../../../atoms/Wrapper'
 import { userState } from '../../../../reducers/userReducer';
 import { RoomState } from '../../../../reducers/talkReducer';
 

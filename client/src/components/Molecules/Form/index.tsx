@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import Inputs, {Props as InputsProps} from '../Inputs'
-import FormBaseElement from '../../Atoms/FormElement'
+import FormBaseElement from '../../atoms/FormElement'
 import Buttons, {Props as ButtonsProps} from '../Buttons'
-import Wrapper, {ElementStyle as WrapperStyle} from '../../Atoms/Wrapper'
+import Wrapper, {ElementStyle as WrapperStyle} from '../../atoms/Wrapper'
 
 const FormElement = styled(FormBaseElement)`
     margin: 0 auto;

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
-import LoginHeader from '../../Organisms/Header/LoginHeader'
-import LoginForm from '../../../cotainers/Organisms/Form/LoginForm'
+import LoginHeader from '../../organisms/Header/LoginHeader'
+import LoginForm from '../../../cotainers/organisms/Form/LoginForm'
 import { Helmet } from 'react-helmet'
 import {userState} from '../../../reducers/userReducer'
 import useReactRouter from 'use-react-router'

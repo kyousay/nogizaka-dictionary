@@ -1,7 +1,7 @@
 import React from 'react'
-import Wrapper from '../../Atoms/Wrapper'
-import Txt from '../../Atoms/Txt'
-import { Paragragh } from '../../Atoms/Paragragh'
+import Wrapper from '../../atoms/Wrapper'
+import Txt from '../../atoms/Txt'
+import { Paragragh } from '../../atoms/Paragragh'
 import { chatState } from '../../../reducers/talkReducer'
 import styled from 'styled-components'
 

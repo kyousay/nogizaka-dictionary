@@ -10,9 +10,11 @@ const app = express();
 
 mongoose.Promise = global.Promise;
 
+const dbUrl = <string>process.env.MONGODB_URI
+
 //mongoose'sのfindOneAndUpdateはmongoDBのfindOneAndUpdateより圧倒的に前に出来上がったものなので、
 //何も指定していないと勝手に最新のmongoDBの方を使うので、ここで使わないように設定する
-mongoose.connect("mongodb://heroku_3vtkd4wf:p1sqtmo7636rf0t4695qpq1df0@ds019076.mlab.com:19076/heroku_3vtkd4wfq", {
+mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,

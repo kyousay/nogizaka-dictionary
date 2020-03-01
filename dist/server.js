@@ -12,9 +12,10 @@ var chatController_1 = __importDefault(require("./controllers/chatController"));
 var mongoose_1 = __importDefault(require("mongoose"));
 var app = express_1.default();
 mongoose_1.default.Promise = global.Promise;
+var dbUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/Dictionary';
 //mongoose'sのfindOneAndUpdateはmongoDBのfindOneAndUpdateより圧倒的に前に出来上がったものなので、
 //何も指定していないと勝手に最新のmongoDBの方を使うので、ここで使わないように設定する
-mongoose_1.default.connect("mongodb://localhost:27017/Dictionary", {
+mongoose_1.default.connect(dbUrl, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -26,7 +27,7 @@ db.once("open", function () {
 });
 app.set("port", process.env.PORT || 3001);
 app.use(cors_1.default());
-app.use(express_1.default.static(path_1.default.join(__dirname, "client/build")));
+app.use(express_1.default.static(path_1.default.join(process.cwd(), "client/build")));
 app.use(express_1.default.urlencoded({
     extended: false,
     limit: "10mb"

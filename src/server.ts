@@ -10,7 +10,7 @@ const app = express();
 
 mongoose.Promise = global.Promise;
 
-const dbUrl = <string>process.env.MONGODB_URI
+const dbUrl = <string>process.env.MONGODB_URI || 'mongodb://localhost:27017/Dictionary'
 
 //mongoose'sのfindOneAndUpdateはmongoDBのfindOneAndUpdateより圧倒的に前に出来上がったものなので、
 //何も指定していないと勝手に最新のmongoDBの方を使うので、ここで使わないように設定する

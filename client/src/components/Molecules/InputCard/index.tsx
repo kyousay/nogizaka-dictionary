@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import {ElementStyle as WrapperStyle} from '../../Atoms/Wrapper'
+import {ElementStyle as WrapperStyle} from '../../atoms/Wrapper'
 import InputSections, {Props as InputSectionsProps} from '../InputSectoins'
 import Buttons, {Props as ButtonsProps} from '../Buttons'
-import Wrapper from '../../Atoms/Wrapper'
+import Wrapper from '../../atoms/Wrapper'
 
 const ShadowWrapper = styled(Wrapper)`
     box-shadow: 0px 0px 5px -2px #000000;

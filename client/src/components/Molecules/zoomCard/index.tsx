@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import Img from '../../Atoms/Img'
-import {Paragragh} from '../../Atoms/Paragragh'
-import Wrapper from '../../Atoms/Wrapper'
-import Txt from '../../Atoms/Txt'
+import Img from '../../atoms/Img'
+import {Paragragh} from '../../atoms/Paragragh'
+import Wrapper from '../../atoms/Wrapper'
+import Txt from '../../atoms/Txt'
 import TxtRowSections from '../TxtRowSections'
 import dummy from '../../../style/img/anonymous.png'
 import { Member } from '../../../reducers/membersReducer'
@@ -31,6 +31,7 @@ const contentStyle = {
     bgColor: "#fff" as "#fff",
     transform: "translate(-50%,-50%)",
     padding: "20px",
+    z_index: '15'
 }
 
 const WeakTxt = styled(Txt)`
@@ -86,7 +87,8 @@ const ZoomCard : React.FC<Props> = props => {
         ]
     }
     return (
-    <Wrapper styled={{...zoomFieldStyle}} onClick={props.zoomOutHandler}>
+    <>
+        <Wrapper styled={{...zoomFieldStyle}} onClick={props.zoomOutHandler}></Wrapper>
         <Wrapper styled={{...contentStyle}}>
             <Wrapper styled={{position: 'absolute', top: '-30px', right: '-50px'}} onClick={props.zoomOutHandler}>
                 <Img styled={{width: '100%'}} src={close} />
@@ -115,7 +117,7 @@ const ZoomCard : React.FC<Props> = props => {
                 <Hash hash={props.member.hash} segment={props.member.segment}/>
             </HashWrapper>
         </Wrapper>
-    </Wrapper>
+    </>
 )}
 
 export default ZoomCard

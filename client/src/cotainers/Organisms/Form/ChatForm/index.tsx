@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import ChatForm from '../../../../components/Organisms/Form/ChatForm'
+import ChatForm from '../../../../components/organisms/Form/ChatForm'
 import * as talkAction from '../../../../actions/talk/talkActions'
 import { userState } from '../../../../reducers/userReducer'
 import { TalkState, chatState} from '../../../../reducers/talkReducer'

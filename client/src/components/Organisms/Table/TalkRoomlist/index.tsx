@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
-import Wrapper from '../../../Atoms/Wrapper'
-import Button from '../../../Atoms/Button'
-import TalkRoomCard from '../../../Molecules/TalkRoomCard'
+import Wrapper from '../../../atoms/Wrapper'
+import Button from '../../../atoms/Button'
+import TalkRoomCard from '../../../molecules/TalkRoomCard'
 import icon from '../../../../style/img/lock_icon.svg'
 import { TalkState, TalkRoomState } from '../../../../reducers/talkReducer'
 import { Link } from 'react-router-dom'
 import { RoomParam } from '../../../../actions/talk/talkActions'
-import InputCard from '../../../Molecules/InputCard'
+import InputCard from '../../../molecules/InputCard'
 
 
 const UnOrderdList = Wrapper.withComponent('ul')
@@ -48,6 +48,12 @@ const TalkRoomList: React.FC<Props> = props => {
         image: '',
         isRock: false,
     })
+
+    const fixBodyHandler = (zoom: boolean) => {
+        const overflow = zoom ? 'hidden' : 'auto'
+        document.body.setAttribute("style", `overflow : ${overflow};`)
+    }
+
     const rooms  = props.talk.rooms
 
     const InputCardProps = {
@@ -80,7 +86,7 @@ const TalkRoomList: React.FC<Props> = props => {
                 },
                 {
                     buttonTxt: '入力をキャンセル',
-                    clickHandler: () => cancelRock(),
+                    clickHandler: () => {cancelRock();fixBodyHandler(false);},
                     buttonStyle: {bgColor: '#42b72a'} as const,                  
                 }
             ],
@@ -138,6 +144,7 @@ const TalkRoomList: React.FC<Props> = props => {
         }
         if(isRock) {
             setRock(true);
+            fixBodyHandler(true);
         } else {
             props.getTalkRoom(roomParam)
         }
@@ -147,7 +154,7 @@ const TalkRoomList: React.FC<Props> = props => {
         <React.Fragment>
             {
                 isRock ? 
-                    <Wrapper styled={{...zoomFieldStyle}} onClick={() => cancelRock()}>
+                    <Wrapper styled={{...zoomFieldStyle}} onClick={() => {cancelRock();fixBodyHandler(false);}}>
                         <Wrapper styled={{}} onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()} >
                             <InputCard {...InputCardProps} />
                         </Wrapper>

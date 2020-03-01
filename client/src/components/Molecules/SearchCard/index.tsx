@@ -1,7 +1,7 @@
 import React from 'react'
-import Wrapper from '../../Atoms/Wrapper'
-import Input from '../../Atoms/Input'
-import Button from '../../Atoms/Button'
+import Wrapper from '../../atoms/Wrapper'
+import Input from '../../atoms/Input'
+import Button from '../../atoms/Button'
 import Selects, {Props as SelectsProps} from '../Selects'
 
 const inputStyle = {

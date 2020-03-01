@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import Wrapper ,{ElementStyle as WrapperStyle}from '../../Atoms/Wrapper'
-import Txt, {ElementStyle as ContentStyle} from '../../Atoms/Txt'
-import {Paragragh, ElementStyle as TitleStyle} from '../../Atoms/Paragragh'
+import Wrapper ,{ElementStyle as WrapperStyle}from '../../atoms/Wrapper'
+import Txt, {ElementStyle as ContentStyle} from '../../atoms/Txt'
+import {Paragragh, ElementStyle as TitleStyle} from '../../atoms/Paragragh'
 
 export interface Props  {
     title: string

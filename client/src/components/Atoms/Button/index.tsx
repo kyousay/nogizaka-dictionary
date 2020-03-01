@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import * as utilStyle from '../../../util/styles'
 
-export interface StyleProps {
+export type StyleProps = {
     [k : string] : string
 }
 
@@ -22,10 +22,10 @@ const Button = styled.button<ButtonProps>`
   background-color: ${props => props.styled.bgColor};
 `
 
-type ButtonFactoryProps = {
+export type ButtonCustomProps = {
   style?: StyleProps
   props?: React.ButtonHTMLAttributes<HTMLButtonElement>
-  children: React.ReactNode | string
+  txt: string
   clickHandler?: () => void
 }
 
@@ -38,11 +38,11 @@ export const ButtonFactory  = (constantStyle : StyleProps) => (
         ({
             style = initialStyle,
             props,
-            children,
+            txt,
             clickHandler,
-        } : ButtonFactoryProps) => (
+        } : ButtonCustomProps) => (
                 <Button styled={{...style, ...constantStyle}} 
-                onClick={clickHandler} {...props}>{children}</Button>
+                onClick={clickHandler} {...props}>{txt}</Button>
         )
 )
 

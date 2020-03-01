@@ -13,7 +13,12 @@ function* createAcount(action : ReturnType<typeof LoginAction.createAcount>){
         yield put(userAction.changeLoading(true))
         const result = yield call(api, userData, '/login/create')
         yield put(userAction.changeLoading(false))
-        yield alert(result.data);
+        alert(result.data.message);
+        if(result.data.success) {
+            yield localStorage.setItem('ticket',result.data.token);
+            yield put(LoginAction.setUserData({...result.data.user}))
+            yield put(LoginAction.changeUserIsLogin({isLogin:true}))
+        }
     }catch(error) {
         yield alert(error);
         yield put(userAction.changeLoading(false))
@@ -24,9 +29,10 @@ function* loginAcount(action : ReturnType<typeof LoginAction.loginAcount>) {
     const userData = action.payload;
 
     try {
-        const api = loginUserFactory();
+        const api = loginUserFactory()
+        yield put(userAction.changeLoading(true))
         const result = yield call(api, userData, '/login/authenticate');
-        console.log(result);
+        yield put(userAction.changeLoading(false))
         alert(result.data.message);
         if(result.data.success) {
             yield localStorage.setItem('ticket',result.data.token);

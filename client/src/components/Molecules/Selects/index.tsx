@@ -1,7 +1,7 @@
 import React from 'react'
-import Wrapper, {ElementStyle as WrapperStyle} from '../../Atoms/Wrapper'
-import Select, {ElementStyle as SelectStyle} from '../../Atoms/Select'
-import Option, {ElementStyle as OptionStyle} from '../../Atoms/Option'
+import Wrapper, {ElementStyle as WrapperStyle} from '../../atoms/Wrapper'
+import Select, {ElementStyle as SelectStyle} from '../../atoms/Select'
+import Option, {ElementStyle as OptionStyle} from '../../atoms/Option'
 
 export interface Props {
     options: {

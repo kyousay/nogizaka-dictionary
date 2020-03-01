@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import MembersCard from '../../../Molecules/MembersCard'
-import ZoomCard from '../../../Molecules/zoomCard'
-import Wrapper from '../../../Atoms/Wrapper'
-import Selects from '../../../Molecules/Selects'
-import Button from '../../../Atoms/Button'
+import MembersCard from '../../../molecules/MembersCard'
+import ZoomCard from '../../../molecules/zoomCard'
+import Wrapper from '../../../atoms/Wrapper'
+import Selects from '../../../molecules/Selects'
+import Button from '../../../atoms/Button'
 import { Member, membersState } from '../../../../reducers/membersReducer'
 import { userState } from '../../../../reducers/userReducer'
 import { Link } from 'react-router-dom'
@@ -50,9 +50,10 @@ const ListTable: React.FC<Props> = (props) => {
     const [selectValue, setSelectValue] = useState('members')
 
     const members : membersState = props.members
-    
-    const zoomOutHandler = (zoom: boolean) => {
-        setZoom(zoom)
+
+    const fixBodyHandler = (zoom: boolean) => {
+        const overflow = zoom ? 'auto' : 'hidden'
+        document.body.setAttribute("style", `overflow : ${overflow};`)
     }
 
     const [zoomProps, setZoomProps] = useState({
@@ -166,11 +167,12 @@ const ListTable: React.FC<Props> = (props) => {
     return (
         <>
             { zoom ? 
-                        <ZoomCard zoomOutHandler={() => zoomOutHandler(false)} member={state} image={zoomProps.src}
+                        <ZoomCard zoomOutHandler={() => {setZoom(false);fixBodyHandler(zoom)}} member={state} image={zoomProps.src}
                         iconClickHandler={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
                             iconClickHandler(event, state._id, zoomProps.favorite)
                             if(selectValue === 'favorite') {
-                                zoomOutHandler(false)
+                                setZoom(false)
+                                fixBodyHandler(zoom)
                         }
                         }}/> 
                     : 
@@ -188,7 +190,7 @@ const ListTable: React.FC<Props> = (props) => {
                         const isFavorite = checkFavoriteId(member._id)
                         const src = isFavorite? Heart : grayHeart
                         return(
-                            <ListItem key={index} onClick={() => {setState(member);setZoom(true);setZoomProps({favorite: isFavorite, src: src, selectValue})}} styled={{display: 'inline-block'}}>
+                            <ListItem key={index} onClick={() => {setState(member);setZoomProps({favorite: isFavorite, src: src, selectValue});setZoom(true);fixBodyHandler(zoom);}} styled={{display: 'inline-block'}}>
                                 <MembersCard {...{member, user: props.user}} favoriteImage={src} iconClickHandler={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => iconClickHandler(event, member._id, isFavorite)}/>
                             </ListItem>
                         )})

@@ -1,7 +1,7 @@
 import React from 'react'
-import Wrapper from '../../Atoms/Wrapper'
-import Img from '../../Atoms/Img'
-import {Paragragh} from '../../Atoms/Paragragh'
+import Wrapper from '../../atoms/Wrapper'
+import Img from '../../atoms/Img'
+import {Paragragh} from '../../atoms/Paragragh'
 
 interface Props {
     description: string
@@ -11,7 +11,7 @@ interface Props {
     font_size?: '1.2rem' | '1.4rem' | '1.8rem'
 }
 
-const ImgBox : React.FC<Props> = (props) => (
+const ImgBox : React.FC<Props> = props => (
     <Wrapper styled={{display: 'flex', justify_content: 'center', align_items: 'center', flex_direction: 'column'}} >
         <Img src={props.src} styled={{width: props.width}} />
         <Wrapper styled={{margin: props.margin}} >

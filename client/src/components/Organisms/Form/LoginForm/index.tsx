@@ -1,11 +1,12 @@
 import React,{ useState } from 'react'
 import styled from 'styled-components'
-import Wrapper, {withSPStyle} from '../../../Atoms/Wrapper'
-import Heading from '../../../Atoms/Heading'
+import Wrapper, {withSPStyle} from '../../../atoms/Wrapper'
+import Heading from '../../../atoms/Heading'
 import { DataType } from '../../../../actions/login/loginActions'
-import {LineParagragh} from '../../../Atoms/Paragragh'
-import Button from '../../../Atoms/Button'
-import Form from '../../../Molecules/Form'
+import {LineParagragh} from '../../../atoms/Paragragh'
+// import CancelButton from '../../../Atoms/Button/CancelButton'
+import Form from '../../../molecules/Form/refactore'
+import TransitionButton from '../../../atoms/Button/TransitionButton'
 
 const outerWrapperStyle ={
     margin: "80px auto",
@@ -98,14 +99,10 @@ const LoginForm: React.FC<props> = (props) => {
                 inputWrapperStyle: {margin: '10px'},
             }
         },
-        buttonsProps: {
-            buttons: [
-                {
-                    buttonWrapperStyle: {margin: '10px 0 0 0'},
-                    buttonStyle: {width:"280px",bgColor:"#bf87c1" as "#bf87c1",padding: '10px 0px'},
-                    buttonTxt: buttonText.main,
-                }
-            ]
+        button: {
+            buttonWrapperStyle: {margin: '10px 0 0 0'},
+            style: {width:"280px",bgColor:"#bf87c1" as "#bf87c1",padding: '10px 0px'},
+            txt: buttonText.main,
         },
         submitHandler: submitHandler,
     }
@@ -120,7 +117,7 @@ const LoginForm: React.FC<props> = (props) => {
                 <LineParagragh styled={{lineWidth:'100px', wrapperWidth: '280px',text_align: 'center',font_size: '1.2rem'}}>または</LineParagragh>
             </Wrapper>
             <Wrapper styled={{margin: '20px', display:'flex', justify_content:'center', align_items: 'center'}}>
-                <Button styled={{bgColor:"#42b72a",padding: "10px 28px"}} onClick={() => changeTabIndex()}>{buttonText.sub}</Button>
+                <TransitionButton style={{bgColor:"#42b72a",padding: "10px 28px"}} clickHandler={() => changeTabIndex()} txt={buttonText.sub} />
             </Wrapper>
         </OuterWrapper>
     )

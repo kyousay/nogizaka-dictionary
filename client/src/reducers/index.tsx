@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import MembersReducer, { MembersState } from './membersReducer'
+import membersReducer, { MembersState } from './membersReducer'
 import userReducer, {userState} from './userReducer'
 import talkReducer, {TalkState} from './talkReducer'
 
@@ -12,7 +12,7 @@ export interface State {
 }
 
 const rootReducer = combineReducers({
-    members: MembersReducer,
+    members: membersReducer,
     user: userReducer,
     talk: talkReducer,
 })

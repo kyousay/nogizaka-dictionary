@@ -1,14 +1,14 @@
 import React,{ useState } from 'react'
 import styled from 'styled-components'
-import InputCard from '../../../Molecules/InputCard'
-import Wrapper from '../../../Atoms/Wrapper'
-import Img from '../../../Atoms/Img'
+import InputCard from '../../../molecules/InputCard'
+import Wrapper from '../../../atoms/Wrapper'
+import Img from '../../../atoms/Img'
 import logo from '../../../../style/img/logo.jpg'
 import icon_close from '../../../../style/img/close_icon_black.svg'
 import icon_chat from '../../../../style/img/chat_icon.svg'
 import {persistor} from '../../../../store/index'
 import { userState } from '../../../../reducers/userReducer'
-import Heading from '../../../Atoms/Heading'
+import Heading from '../../../atoms/Heading'
 
 const ImgBoxWrapper = styled(Wrapper)`
     cursor: pointer;

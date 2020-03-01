@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import Inputs, {Props as InputsProps} from '../Inputs'
+import FormBaseElement from '../../atoms/FormElement'
 import Buttons, {Props as ButtonsProps} from '../Buttons'
-import Wrapper, {ElementStyle as WrapperStyle} from '../../Atoms/Wrapper'
+import Wrapper, {ElementStyle as WrapperStyle} from '../../atoms/Wrapper'
 
-const FormElement = styled.form`
+const FormElement = styled(FormBaseElement)`
     margin: 0 auto;
     text-align: center;
 `
@@ -16,8 +17,7 @@ export interface Props {
     submitHandler?: (e: React.FormEvent<HTMLFormElement>) => void
 }
 
-const Form: React.FC<Props> = (props) => {
-    return(
+const Form: React.FC<Props> = props => (
         <>
             <FormElement onSubmit={props.submitHandler}>
                 <Wrapper styled={{...props.wrapperStyle}}>
@@ -26,7 +26,6 @@ const Form: React.FC<Props> = (props) => {
                 </Wrapper>
             </FormElement>
         </>
-    )
-}
+)
 
 export default Form

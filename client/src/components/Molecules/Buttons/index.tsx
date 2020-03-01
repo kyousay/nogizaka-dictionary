@@ -1,6 +1,6 @@
 import React from 'react'
-import Button, {StyleProps as ButtonStyle} from '../../Atoms/Button'
-import Wrapper, {ElementStyle as WrapperStyle} from '../../Atoms/Wrapper'
+import Button, {StyleProps as ButtonStyle} from '../../atoms/Button'
+import Wrapper, {ElementStyle as WrapperStyle} from '../../atoms/Wrapper'
 
 export interface Props {
     buttons: {

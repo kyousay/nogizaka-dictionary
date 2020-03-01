@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import TableList from '../../../../components/Organisms/Table/TableList'
+import TableList from '../../../../components/organisms/Table/TableList'
 import * as userAction from '../../../../actions/user/userActions'
 import * as searchAction from '../../../../actions/search/searchActions'
 import * as memberAction from '../../../../actions/members/membersActions'

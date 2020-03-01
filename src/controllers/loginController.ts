@@ -33,7 +33,20 @@ export = {
     User.create(newUser)
       .then(user => {
         if (user) {
-          res.send("ユーザーが新規に登録されました。ログインしてください。");
+          const signedToken = jsonWebToken.sign(
+            {
+              data: user._id,
+              exp: new Date().setDate(new Date().getDate() + 1)
+            },
+            "effort_thanks_smile"
+          );
+          const userData = getUserData(user);
+          res.json({
+            success: true,
+            token: signedToken,
+            user: userData,
+            message: "ユーザーが新規に登録されました。ログインしてください。"
+          });
         }
       })
       .catch(error => {

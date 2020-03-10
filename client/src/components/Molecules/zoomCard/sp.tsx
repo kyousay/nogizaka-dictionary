@@ -23,6 +23,10 @@ const contentStyle = {
     z_index: '15'
 }
 
+const FixedContent = styled(Wrapper)`
+    overflow-Y: scroll;
+`
+
 const WeakTxt = styled(Txt)`
     display: inline-block;
     margin-left: 12px;
@@ -77,7 +81,7 @@ const ZoomCard : React.FC<Props> = props => {
     }
     return (
     <>
-        <Wrapper styled={{...contentStyle}}>
+        <FixedContent styled={{...contentStyle}}>
             <Wrapper styled={{position: 'absolute', top: '20px', right: '20px'}} onClick={props.zoomOutHandler}>
                 <Img styled={{width: '50px'}} src={close} />
             </Wrapper>
@@ -104,7 +108,7 @@ const ZoomCard : React.FC<Props> = props => {
             <HashWrapper styled={{wrap:"wrap", margin: '15px 0 0 0', max_height: '50px'}}>
                 <Hash hash={props.member.hash} segment={props.member.segment}/>
             </HashWrapper>
-        </Wrapper>
+        </FixedContent>
     </>
 )}
 
